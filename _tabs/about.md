@@ -4,5 +4,19 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-> Add Markdown syntax content to file `_tabs/about.md`{: .filepath } and it will show up on this page.
-{: .prompt-tip }
+## 👤 자기소개
+
+2012년 말부터 기획자로 일을 해왔다.<br>
+1년 가량 모바일 앱을 제작하고, 2014년부터는 게임 기획자로 일을 했다.<br>
+2026년 9월 30일 회사 생활을 마친다.
+
+그리고 홀로 게임 제작을 시작한다.<br>
+내가 가장 하고 싶었던 것을 혼자만의 방식으로 오롯이 사람들에게 전하기 위해서.
+
+## 📝 이 블로그는
+
+여기는 내가 공부한 것들, 시행착오를 겪은 것들을 간단하게 기록하겠다.
+
+## ✉️ 연락처
+
+- 이메일: <hlcho426@gmail.com>
