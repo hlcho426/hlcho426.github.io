@@ -3,7 +3,7 @@
 
 @use 'abstracts/variables' with (
   $theme: '{{ site.theme_mode }}',
-  $font-family-base: ('Cafe24Ohsquare', 'Source Sans Pro', sans-serif),
+  $font-family-base: ('Cafe24OhsquareAir', 'Source Sans Pro', sans-serif),
   $font-family-heading: ('Cafe24Ohsquare', Lato, sans-serif)
 );
 
@@ -16,7 +16,17 @@
 
 /* append your custom style below */
 
-/* 한글 글꼴: 카페24 오스퀘어(Ohsquare) */
+/* 한글 글꼴: 본문은 카페24 오스퀘어 에어(얇음), 제목은 카페24 오스퀘어(굵음) */
+@font-face {
+  font-family: 'Cafe24OhsquareAir';
+  src:
+    url('{{ "/assets/fonts/Cafe24OhsquareAir-v2.0.woff2" | relative_url }}') format('woff2'),
+    url('{{ "/assets/fonts/Cafe24OhsquareAir-v2.0.woff" | relative_url }}') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'Cafe24Ohsquare';
   src:
@@ -27,18 +37,26 @@
   font-display: swap;
 }
 
-/* 포인트 색: 다크 그린 */
-$accent: #081c05;
+/* 사이드바: 딥그린 텍스처 배경 + 흰 글자 */
+#sidebar {
+  --site-title-color: #ffffff;
+  --site-subtitle-color: rgb(255 255 255 / 75%);
+  --sidebar-muted-color: rgb(255 255 255 / 85%);
+  --sidebar-active-color: #ffffff;
+  --sidebar-hover-bg: rgb(255 255 255 / 12%);
+  --sidebar-btn-bg: transparent;
+  --sidebar-btn-color: #ffffff;
+  --sidebar-border-color: rgb(255 255 255 / 35%);
+  --avatar-border-color: rgb(255 255 255 / 60%);
 
-:root[data-bs-theme='light'] {
-  --link-color: #{$accent};
-  --link-underline-color: rgb(8 28 5 / 25%);
-  --heading-color: #{$accent};
-  --site-title-color: #{$accent};
-  --sidebar-active-color: #{$accent};
-  --sidebar-hover-bg: rgb(8 28 5 / 8%);
-  --toc-highlight: #{$accent};
-  --btn-share-hover-color: #{$accent};
-  --checkbox-checked-color: #{$accent};
-  --categories-icon-hover-color: #{$accent};
+  background:
+    linear-gradient(rgb(0 0 0 / 20%), rgb(0 0 0 / 20%)),
+    url('{{ "/assets/img/deepgreenbg.jpg" | relative_url }}')
+      center / cover no-repeat;
+
+  /* 라이트/다크 전환 메뉴는 흰 배경이라 원래 글자색으로 되돌림 */
+  .dropdown-menu {
+    --sidebar-muted-color: #545454;
+    --sidebar-btn-color: #8e8e8e;
+  }
 }
