@@ -1,0 +1,44 @@
+---
+---
+
+@use 'abstracts/variables' with (
+  $theme: '{{ site.theme_mode }}',
+  $font-family-base: ('Cafe24Ohsquare', 'Source Sans Pro', sans-serif),
+  $font-family-heading: ('Cafe24Ohsquare', Lato, sans-serif)
+);
+
+/* prettier-ignore */
+@use 'main
+{%- if jekyll.environment == 'production' -%}
+  .bundle
+{%- endif -%}
+';
+
+/* append your custom style below */
+
+/* 한글 글꼴: 카페24 오스퀘어(Ohsquare) */
+@font-face {
+  font-family: 'Cafe24Ohsquare';
+  src:
+    url('{{ "/assets/fonts/Cafe24Ohsquare-v2.0.woff2" | relative_url }}') format('woff2'),
+    url('{{ "/assets/fonts/Cafe24Ohsquare-v2.0.woff" | relative_url }}') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 포인트 색: 다크 그린 */
+$accent: #081c05;
+
+:root[data-bs-theme='light'] {
+  --link-color: #{$accent};
+  --link-underline-color: rgb(8 28 5 / 25%);
+  --heading-color: #{$accent};
+  --site-title-color: #{$accent};
+  --sidebar-active-color: #{$accent};
+  --sidebar-hover-bg: rgb(8 28 5 / 8%);
+  --toc-highlight: #{$accent};
+  --btn-share-hover-color: #{$accent};
+  --checkbox-checked-color: #{$accent};
+  --categories-icon-hover-color: #{$accent};
+}
