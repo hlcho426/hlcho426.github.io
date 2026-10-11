@@ -1,5 +1,5 @@
 ---
-title: 게임 디자인 연구 | Dramamancer, 생성하는 대사와 판정하는 사건을 분리한다
+title: Dramamancer, 생성하는 대사와 판정하는 사건을 분리한다
 date: 2026-10-11 08:00:00 +0900
 categories:
 - 게임 디자인 연구
