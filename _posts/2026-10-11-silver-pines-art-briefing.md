@@ -1,5 +1,5 @@
 ---
-title: "게임 개발 브리핑 | Silver Pines, 단순한 3D 공간과 손그림 1,800장으로 만든 공포"
+title: "Silver Pines, 단순한 3D 공간과 손그림 1,800장으로 만든 공포"
 date: 2026-10-11 10:20:00 +0900
 categories: [게임 개발 브리핑]
 tags: [Silver Pines, 아트 제작, 소규모 팀, 로토스코핑]

@@ -7,7 +7,7 @@
 - GitHub 연결 도구로 `hlcho426/hlcho426.github.io`의 원격 main과 모든 열린 PR을 확인한다. 초기 구현 PR #7이 아직 미병합이면 운영 생성을 중단하고 setup 미병합 상태만 기록한다.
 - 원격 main의 AGENTS, README 카테고리·글 쓰는 법, editorial.md, 이 문서와 config를 읽는다. 로컬 파일과 원격이 충돌하면 원격을 확인하고 덮어쓰지 않는다. 다른 프로젝트·사용자 기억·비공개 대화는 게시물 입력으로 사용하지 않는다.
 - `codex/briefing-{kind}-{KST YYYY-MM-DD}`의 기존 PR을 열린·닫힌·병합 상태 모두 확인한다. 같은 날짜의 PR이나 같은 유형의 미병합 PR이 있으면 새 PR을 만들지 않는다. 다른 유형의 열린 PR과 `_posts`의 URL·briefing_event·제목을 읽고 같은 원문·사건을 제외한다.
-- 기준은 Machinarium 2, Nocturne, RizomUV 2027, Silver Pines, Heart Machine의 다섯 공개 글이다. 제목 접두어는 category 이름에서 가져온다.
+- 기준은 Machinarium 2, Nocturne, RizomUV 2027, Silver Pines, Heart Machine의 다섯 공개 글이다. 게시물 제목은 README의 글 쓰는 법을 따라 내용만 쓰고 카테고리 접두어를 붙이지 않는다.
 
 ## 조사·작성·검사
 

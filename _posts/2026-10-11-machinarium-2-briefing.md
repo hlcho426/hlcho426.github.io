@@ -1,5 +1,5 @@
 ---
-title: "게임 개발 브리핑 | 17년 만에 돌아온 Machinarium 2, 두 로봇을 바꿔 가며 푼다"
+title: "17년 만에 돌아온 Machinarium 2, 두 로봇을 바꿔 가며 푼다"
 date: 2026-10-11 09:00:00 +0900
 categories: [게임 개발 브리핑]
 tags: [Machinarium 2, 게임 디자인, 퍼즐, 어드벤처]
