@@ -51,7 +51,7 @@ def publish(output, repo):
     command("git", "commit", "-m", f"Add {report['kind']} briefing for {report['date']}")
     command("git", "push", "origin", f"HEAD:refs/heads/{branch}")
     config = json.loads((HERE / "config.json").read_text(encoding="utf-8"))
-    title = f"{config['types'][report['kind']]['prefix']} | {report['date']} ({len(files)}편)"
+    title = f"{config['types'][report['kind']]['category']} | {report['date']} ({len(files)}편)"
     body = "공개 원문을 수집해 작성한 독립 게시물입니다. 사용자 검토·병합 후 공개됩니다.\n\n"
     body += "\n".join(f"- `{p['file']}` — [원문](<{p['source']}>) ({p['source_date']})" for p in report["posts"])
     run_url = f"https://github.com/{repo}/actions/runs/{os.environ.get('GITHUB_RUN_ID', '')}"

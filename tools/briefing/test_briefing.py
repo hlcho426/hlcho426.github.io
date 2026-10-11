@@ -38,6 +38,7 @@ class BriefingTests(unittest.TestCase):
                 p.write_text(render(f["article"], f["source"], kind, TODAY, CONFIG), encoding="utf-8")
                 meta = validate_post(p, ROOT)
                 self.assertEqual(meta["categories"], [CONFIG["types"][kind]["category"]])
+                self.assertEqual(meta["title"].split(" | ", 1)[0], meta["categories"][0])
                 self.assertNotIn("image", meta)
 
     def test_missing_evidence_rejected(self):
