@@ -216,7 +216,7 @@ def render(article, source, kind, today, config):
     spec = config["types"][kind]
     url = source["url"]
     normalize_url(url)  # Validate, but preserve the final working URL in public links.
-    meta = {"title": spec["category"] + " | " + article["title"],
+    meta = {"title": article["title"],
             "date": today.isoformat() + " 08:00:00 +0900", "categories": [spec["category"]],
             "tags": [spec["category"]], "briefing_type": kind,
             "briefing_event": article["event_key"], "briefing_sources": [url]}
@@ -244,7 +244,7 @@ def validate_post(path, root):
             raise ValueError("Post filename must be date + English slug")
         config = json.loads((HERE / "config.json").read_text(encoding="utf-8"))
         spec = config["types"][meta["briefing_type"]]
-        if meta["categories"] != [spec["category"]] or not meta["title"].startswith(meta["categories"][0] + " | "):
+        if meta["categories"] != [spec["category"]]:
             raise ValueError("Briefing type/category/title mismatch")
         if "image" in meta or any("## " + s not in body for s in SECTIONS):
             raise ValueError("Missing sections or unverified image")
