@@ -1,5 +1,5 @@
 ---
-title: 게임 개발 기술 | Claude Haiku 5.5, 반복 업무에 맞춘 모델을 고르는 기준
+title: Claude Haiku 5.5, 반복 업무에 맞춘 모델을 고르는 기준
 date: 2026-10-11 08:00:00 +0900
 categories:
 - 게임 개발 기술
