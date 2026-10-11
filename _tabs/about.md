@@ -20,3 +20,7 @@ order: 4
 ## ✉️ 연락처
 
 - 이메일: <hlcho426@gmail.com>
+
+---
+
+[개인정보처리방침](/privacy/)
