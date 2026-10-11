@@ -220,6 +220,7 @@ exclude:
   - "*.gemspec"
   - docs
   - tools
+  - output
   - README.md
   - AGENTS.md
   - CLAUDE.md
