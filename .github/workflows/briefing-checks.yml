@@ -32,7 +32,8 @@ jobs:
         env:
           JEKYLL_ENV: production
         run: |
-          bundle exec jekyll build --destination _site
+          # Fixtures use 08:00 KST; include them in tests even before that time.
+          bundle exec jekyll build --future --destination _site
           bundle exec htmlproofer _site --disable-external --ignore-urls '/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/'
           while IFS= read -r page; do
             test -s "_site${page}index.html"
