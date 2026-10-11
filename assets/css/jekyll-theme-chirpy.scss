@@ -136,12 +136,19 @@ $capture: 'img[src*="/assets/img/unitystudy/"]';
   border-radius: 6px;
 }
 
-/* 액자 색: 밝은 모드 / 다크 모드(직접 고른 경우와 시스템 설정을 따르는 경우 모두) */
+/* 액자 색. 다크 색은 블로그가 다크 모드를 쓸 때만 넣는다 (_config.yml의 theme_mode).
+   지금처럼 theme_mode: light면 시스템이 다크여도 페이지는 밝으니 액자도 밝게 둔다. */
 html {
   --capture-frame-bg: #eef4f1;
   --capture-frame-border: #cfdcd5;
 }
 
+{% if site.theme_mode == 'dark' %}
+html {
+  --capture-frame-bg: #26302c;
+  --capture-frame-border: #3b4a43;
+}
+{% elsif site.theme_mode != 'light' %}
 html[data-mode="dark"] {
   --capture-frame-bg: #26302c;
   --capture-frame-border: #3b4a43;
@@ -153,3 +160,4 @@ html[data-mode="dark"] {
     --capture-frame-border: #3b4a43;
   }
 }
+{% endif %}
