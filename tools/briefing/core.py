@@ -37,6 +37,11 @@ ARTICLE_SCHEMA = object_schema({
     "research_full_text": {"type": "boolean"},
     "ai_conditions": STRING, "ai_limits": STRING,
 })
+# Legacy kind/ai_* keys keep existing branches and duplicate checks compatible.
+# These fields are required only for the game-development technology stream.
+TECH_FIELDS = {"tech_workflow": 80, "tech_example": 100,
+               "tech_audience": 40, "tech_verdict": 60}
+ARTICLE_SCHEMA["properties"].update({field: STRING for field in TECH_FIELDS})
 CANDIDATES_SCHEMA = object_schema({"candidates": {"type": "array", "items": object_schema({
     "url": STRING, "title": STRING, "event_key": STRING,
 })}})
@@ -196,8 +201,12 @@ def validate_article(article, source, kind, today, config):
         raise ValueError("Insufficient analysis or verification scope")
     if not 2 <= len(article["applications"]) <= 4 or any(len(p) < 40 for p in article["applications"]):
         raise ValueError("Insufficient actionable applications")
-    if kind == "ai" and (len(article["ai_conditions"]) < 60 or len(article["ai_limits"]) < 60):
-        raise ValueError("Missing AI access conditions or limitations")
+    if kind == "ai":
+        if len(article["ai_conditions"]) < 60 or len(article["ai_limits"]) < 60:
+            raise ValueError("Missing technology access conditions or limitations")
+        for field, minimum in TECH_FIELDS.items():
+            if len(article.get(field, "")) < minimum:
+                raise ValueError("Missing technology explanation: " + field)
     if kind == "research":
         if not article["research_full_text"] or source.get("truncated") or len(source["text"]) < 5000:
             raise ValueError("Research full text is not available in model input")
@@ -225,9 +234,14 @@ def render(article, source, kind, today, config):
     body = article["lead"] + heading(SECTIONS[0])
     body += "\n\n".join("### " + p["heading"] + "\n\n" + p["text"] for p in article["paragraphs"])
     if kind == "ai":
+        body += "\n\n### 제작 작업은 어떻게 달라지나\n\n" + article["tech_workflow"]
+        body += "\n\n### 구체적인 작업 예시\n\n" + article["tech_example"]
         body += "\n\n### 실제 사용 조건\n\n" + article["ai_conditions"]
         body += "\n\n### 확인된 범위와 한계\n\n" + article["ai_limits"]
     body += heading(SECTIONS[1]) + "**분석:** " + article["importance"]
+    if kind == "ai":
+        body += "\n\n### 어떤 개발자에게 관련 있나\n\n" + article["tech_audience"]
+        body += "\n\n### 지금 도입할 만한가\n\n" + article["tech_verdict"]
     body += heading(SECTIONS[2]) + "\n\n".join("- " + p for p in article["applications"])
     source_title = re.sub(r"[\[\]\n\r{}<>`]", " ", source["title"])
     body += heading(SECTIONS[3]) + f"- [{source_title}](<{url}>) — **{article['source_date']}**, 원문 본문 확인.\n\n"

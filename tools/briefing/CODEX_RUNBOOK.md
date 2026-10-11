@@ -2,12 +2,14 @@
 
 예약 프롬프트의 game / ai / research 중 하나를 수행한다. 현재 Codex 도구와 구독 사용량을 사용한다. 유료 모델 API·API 키·추가 크레딧을 사용하지 않고 기존 ChatGPT 예약을 수정하지 않는다.
 
+ai는 게임 개발 기술 데일리의 기존 실행 식별자다. AI·엔진·IDE·내러티브 테스트·아트 파이프라인 등 게임 제작 문제에 관련 있는 기술을 다룬다. 주제·작업 관련성·검증 범위 순으로 선정하고 편집 지침의 작업 흐름·예시·관련 독자·도입 판단을 작성한다. 기존 ai 브랜치와 중복 검사 키는 유지한다.
+
 ## 시작과 중복
 
 - GitHub 연결 도구로 `hlcho426/hlcho426.github.io`의 원격 main과 모든 열린 PR을 확인한다. 초기 구현 PR #7이 아직 미병합이면 운영 생성을 중단하고 setup 미병합 상태만 기록한다.
 - 원격 main의 AGENTS, README 카테고리·글 쓰는 법, editorial.md, 이 문서와 config를 읽는다. 로컬 파일과 원격이 충돌하면 원격을 확인하고 덮어쓰지 않는다. 다른 프로젝트·사용자 기억·비공개 대화는 게시물 입력으로 사용하지 않는다.
 - `codex/briefing-{kind}-{KST YYYY-MM-DD}`의 기존 PR을 열린·닫힌·병합 상태 모두 확인한다. 같은 날짜의 PR이나 같은 유형의 미병합 PR이 있으면 새 PR을 만들지 않는다. 다른 유형의 열린 PR과 `_posts`의 URL·briefing_event·제목을 읽고 같은 원문·사건을 제외한다.
-- 기준은 Machinarium 2, Nocturne, RizomUV 2027, Silver Pines, Heart Machine의 다섯 공개 글이다. 게시물 제목은 README의 글 쓰는 법을 따라 내용만 쓰고 카테고리 접두어를 붙이지 않는다.
+- 기준은 Machinarium 2, Nocturne, RizomUV 2027, Silver Pines, Heart Machine의 공개 글이다. 기술 데일리는 보완된 Haiku와 RizomUV 글의 용어·작업 예시·도입 판단도 참고한다. 게시물 제목은 README의 글 쓰는 법을 따라 내용만 쓰고 카테고리 접두어를 붙이지 않는다.
 
 ## 조사·작성·검사
 
