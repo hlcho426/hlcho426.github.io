@@ -43,6 +43,6 @@ image: "https://drive.google.com/uc?export=view&id=1pdxriGarlXkWYNquY9F8pyGAcxpI
 - [Amanita Design의 공식 발표 — “WE’RE MAKING MACHINARIUM 2” (2026년 10월 8일)](https://store.steampowered.com/news/app/1619280/view/676260062267705046)
 - [Machinarium 2 공식 Steam 페이지](https://store.steampowered.com/app/1619280/Machinarium_2/) — 게임 설정, 조작, 제작 방향, 플랫폼 및 출시일 상태
 - [Amanita Design 공식 게임 페이지](https://amanita-design.net/games/machinarium2.html)
-- [Amanita Design 영상 사용 정책](https://amanita-design.net/videopolicy.html) — 프레스킷 키 아트는 공식 Machinarium 2 프레스킷에서 가져왔으며, 이미지 출처를 캡션에 표시했다.
+- [Machinarium 2 공식 프레스킷](https://drive.google.com/drive/folders/1jktlHU5pA9ppdu8W7e6YbkF9txntdQsM) — 대표 이미지는 Amanita Design 공식 게임 페이지에서 연결한 프레스킷의 16:9 키 아트이며, 캡션에 출처를 표시했다.
 
 **확인 범위:** 발표와 게임 정보는 개발사의 발표문 및 Steam의 공식 페이지를 기준으로 정리했다. 디자인 관련 평가는 위에 표시한 해석과 적용 아이디어이며, 게임은 출시 전이라 플레이 감각과 실제 퍼즐의 완성도는 검증되지 않았다.
