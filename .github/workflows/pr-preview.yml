@@ -20,6 +20,13 @@ jobs:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Check briefing metadata
+        run: |
+          pip install -r tools/briefing/requirements.txt
+          python tools/briefing/check.py
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.4'
@@ -45,6 +52,11 @@ jobs:
             test -s "_site/posts/${slug}-briefing/index.html"
             grep -q 'briefing-heading' "_site/posts/${slug}-briefing/index.html"
           done
+          python tools/briefing/check.py --pages > _site/briefing-preview-pages.txt
+          while IFS= read -r page; do
+            test -s "_site${page}index.html"
+            grep -q 'briefing-heading' "_site${page}index.html"
+          done < _site/briefing-preview-pages.txt
       - uses: actions/upload-artifact@v4
         with:
           name: jekyll-preview-${{ github.event.pull_request.number }}
@@ -85,6 +97,10 @@ jobs:
             curl --fail --retry 3 "$preview_url/posts/${slug}-briefing/" -o "/tmp/${slug}.html"
             grep -q 'briefing-heading' "/tmp/${slug}.html"
           done
+          while IFS= read -r page; do
+            curl --fail --retry 3 "$preview_url$page" -o /tmp/generated-briefing.html
+            grep -q 'briefing-heading' /tmp/generated-briefing.html
+          done < preview-site/briefing-preview-pages.txt
           curl --fail --retry 3 "$preview_url/assets/css/jekyll-theme-chirpy.css" -o /tmp/preview.css
           grep -q 'briefing-heading' /tmp/preview.css
           for asset in nocturne-development.svg rizomuv-logo.png silver-pines-press.jpg heart-machine-union.svg; do
@@ -100,7 +116,7 @@ jobs:
           EXPIRES: ${{ steps.tunnel.outputs.expires }}
         with:
           script: |
-            const body = `<!-- jekyll-pr-preview -->\n### Jekyll 미리보기\n\n[실제 Chirpy 레이아웃 열기](${process.env.PREVIEW_URL})\n\n외부에서 접근 가능한 **임시 공개 주소**입니다. 운영 GitHub Pages 배포는 하지 않았습니다. 홈, 네 게시물, CSS의 HTTP 응답과 섹션 표시를 확인했습니다.\n\n예상 종료: **${process.env.EXPIRES}** (게시 후 약 45분). 종료 후 이 워크플로의 **Re-run all jobs**를 선택하면 새 주소가 이 댓글에 반영됩니다. PR을 업데이트해도 재실행됩니다. 빌드 산출물은 Actions에 7일간 보관됩니다.\n\n검증한 커밋: ${context.payload.pull_request.head.sha}\n실행: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const body = `<!-- jekyll-pr-preview -->\n### Jekyll 미리보기\n\n[실제 Chirpy 레이아웃 열기](${process.env.PREVIEW_URL})\n\n외부에서 접근 가능한 **임시 공개 주소**입니다. 운영 GitHub Pages 배포는 하지 않았습니다. 홈, 기존 기준 게시물과 자동 생성 브리핑, CSS의 HTTP 응답과 섹션 표시를 확인했습니다.\n\n예상 종료: **${process.env.EXPIRES}** (게시 후 약 45분). 종료 후 이 워크플로의 **Re-run all jobs**를 선택하면 새 주소가 이 댓글에 반영됩니다. PR을 업데이트해도 재실행됩니다. 빌드 산출물은 Actions에 7일간 보관됩니다.\n\n검증한 커밋: ${context.payload.pull_request.head.sha}\n실행: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
             const comments = await github.paginate(github.rest.issues.listComments, {...context.repo, issue_number: context.issue.number});
             const previous = comments.find(c => c.user.type === 'Bot' && c.body.includes('<!-- jekyll-pr-preview -->'));
             if (previous) {

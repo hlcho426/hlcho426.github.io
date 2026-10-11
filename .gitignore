@@ -30,3 +30,8 @@ assets/js/dist
 *~
 .DS_Store
 Thumbs.db
+
+# Briefing local test dependencies and reports
+tools/briefing/.deps/
+__pycache__/
+output/briefing/
