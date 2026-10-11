@@ -60,3 +60,16 @@
     --sidebar-btn-color: #8e8e8e;
   }
 }
+
+
+/* 게임 개발 브리핑: 본문 섹션 제목을 글 제목과 구분 */
+.content > h2.briefing-heading {
+  color: #28634f;
+  border-bottom: 2px solid #28634f;
+  padding-bottom: 0.35rem;
+}
+
+html[data-mode="dark"] .content > h2.briefing-heading {
+  color: #9bd1b1;
+  border-color: #5c8e70;
+}
