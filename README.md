@@ -74,16 +74,9 @@ series_title: "기초 Day 1: 스크립트와 변수"
 - 시리즈 전체에 붙일 안내(누가 썼는지 등)는 `_data/series.yml`에 시리즈 이름별 `note`로 적는다. 목차 상자 맨 위에 모든 글마다 나온다.
 - 글마다 `description:`(한 줄 요약)을 꼭 적는다. 없으면 본문 첫 부분인 목차 상자 글자가 검색 요약과 홈 카드 미리보기에 대신 쓰인다.
 
-### 글쓴이 표시
+### AI가 정리한 글
 
-내가 쓰지 않은 글은 글쓴이를 밝힌다. `_data/authors.yml`에 있는 아이디를 front matter에 적는다.
-
-```yaml
-author: claude                 # AI가 쓴 글
-authors: [hlcho426, claude]    # 내 이야기를 AI가 글로 옮긴 글
-```
-
-아무것도 안 쓰면 `_config.yml`의 `social.name`이 글쓴이로 나온다.
+글쓴이는 나(`_config.yml`의 `social.name`)로 두고, AI가 정리했다는 사실은 본문 맨 위에 밝힌다. 시리즈 글이면 `_data/series.yml`의 `note`가 목차 상자 맨 위에 나오니 거기에 적는다. 본문의 "나"는 블로그 주인인 나이므로, AI가 한 일을 내가 한 것처럼 쓰지 않는다.
 
 ## 정기 브리핑 자동화
 
@@ -98,7 +91,6 @@ Codex 앱의 로컬 예약 작업으로 게임 개발·게임 개발 기술 데�
 | `_includes/sidebar.html` | Chirpy v7.6.0 사이드바 복사본. 카테고리 탭 아래에 카테고리 목록 추가 |
 | `_includes/series.html` | 시리즈 글 목차 상자 (위 "시리즈 글" 참고) |
 | `_data/series.yml` | 시리즈별 안내 문구 (목차 상자에 표시) |
-| `_data/authors.yml` | 글쓴이 목록 (위 "글쓴이 표시" 참고) |
 | `_data/sidebar_categories.yml` | 사이드바 카테고리 순서 |
 | `_data/contact.yml` | 사이드바 아래 아이콘 (트위터 숨김) |
 | `_tabs/about.md` | 정보 페이지 |

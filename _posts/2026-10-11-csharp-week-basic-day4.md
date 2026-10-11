@@ -2,7 +2,6 @@
 title: "유니티 C# 기초 Day 4: 함수와 void, 매개변수, return (void는 왜 쓸까?)"
 date: 2026-10-11 22:24:00 +0900
 description: "void는 왜 쓸까? 함수를 만들고 부르는 법, 매개변수로 값 넘기기, return으로 결과 돌려받기까지 유니티 C# 함수를 비전공자 눈높이로 정리했다."
-author: claude
 series: 유니티 C# 일주일
 series_title: "기초 Day 4: 함수와 void"
 categories: [유니티 공부]
@@ -11,7 +10,7 @@ tags: [유니티, C#, 함수, void, return, 매개변수, 유니티 C# 일주일
 
 {% include series.html %}
 
-처음 스크립트를 열었을 때부터 `void Start()`, `void Update()`가 있었다. 그런데 `void`가 뭔지는 아무도 말해 주지 않았다. 이 블로그 주인도 공부하면서 void가 왜 붙는지 따로 물어봤다. 오늘은 그 답인 **함수**를 배운다.
+처음 스크립트를 열었을 때부터 `void Start()`, `void Update()`가 있었다. 그런데 `void`가 뭔지는 아무도 말해 주지 않았다. 나도 공부하면서 void가 왜 붙는지 따로 물어봤다. 오늘은 그 답인 **함수**를 배운다.
 
 **오늘의 목표**
 

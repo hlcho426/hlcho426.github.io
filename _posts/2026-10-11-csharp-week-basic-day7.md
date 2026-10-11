@@ -2,7 +2,6 @@
 title: "유니티 C# 기초 Day 7: 미니 프로젝트, 코인 줍기 (OnTriggerEnter, CompareTag, Destroy)"
 date: 2026-10-11 22:36:00 +0900
 description: "OnTriggerEnter와 CompareTag, Destroy로 만드는 코인 줍기 미니 게임. Trigger가 안 될 때 확인할 것과 완성 스크립트 읽기까지."
-author: claude
 series: 유니티 C# 일주일
 series_title: "기초 Day 7: 미니 프로젝트 코인 줍기"
 categories: [유니티 공부]
