@@ -1,6 +1,7 @@
 ---
 title: "유니티 C# 기초 Day 6: 키 입력으로 캐릭터 움직이기 (GetKey, GetAxis, AddForce 점프)"
 date: 2026-10-11 22:32:00 +0900
+description: "GetKeyDown과 GetKey의 차이, GetAxis로 방향키 이동, Rigidbody.AddForce로 점프하고 무한 점프 막기. Unity 6 입력 설정 주의점도 정리했다."
 series: 유니티 C# 일주일
 series_title: "기초 Day 6: 입력과 이동, 점프"
 categories: [유니티 공부]
