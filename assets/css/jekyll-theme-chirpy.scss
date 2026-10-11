@@ -74,3 +74,9 @@ html[data-mode="dark"] .content > h2.briefing-heading {
   color: #9bd1b1;
   border-color: #5c8e70;
 }
+
+/* 공식 가로형 로고는 글과 목록에서 잘리지 않게 원래 비율로 표시 */
+img[src*="/assets/img/briefing/rizomuv-logo.png"] {
+  object-fit: contain !important;
+  background-color: #fff;
+}
