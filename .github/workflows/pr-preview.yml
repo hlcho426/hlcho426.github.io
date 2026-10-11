@@ -1,0 +1,109 @@
+name: Jekyll PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: jekyll-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+      - name: Preview configuration
+        run: |
+          cat > /tmp/preview.yml <<'YAML'
+          url: ""
+          baseurl: ""
+          pwa:
+            enabled: false
+          comments:
+            provider: ""
+          YAML
+      - name: Build the actual Chirpy layout
+        env:
+          JEKYLL_ENV: production
+        run: bundle exec jekyll build --config _config.yml,/tmp/preview.yml --destination _site
+      - name: Check internal links and generated briefing pages
+        run: |
+          bundle exec htmlproofer _site --disable-external --ignore-urls '/^http:\/\/127.0.0.1/,/^http:\/\/0.0.0.0/,/^http:\/\/localhost/'
+          for slug in nocturne-development rizomuv-2027 silver-pines-art heart-machine-union; do
+            test -s "_site/posts/${slug}-briefing/index.html"
+            grep -q 'briefing-heading' "_site/posts/${slug}-briefing/index.html"
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jekyll-preview-${{ github.event.pull_request.number }}
+          path: _site
+          retention-days: 7
+
+  preview:
+    needs: build
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: jekyll-preview-${{ github.event.pull_request.number }}
+          path: preview-site
+      - name: Start temporary public preview and verify pages
+        id: tunnel
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 https://github.com/cloudflare/cloudflared/releases/download/2026.10.0/cloudflared-linux-amd64 -o /tmp/cloudflared
+          chmod +x /tmp/cloudflared
+          python3 -m http.server 8080 --bind 127.0.0.1 --directory preview-site > /tmp/preview-server.log 2>&1 &
+          /tmp/cloudflared tunnel --no-autoupdate --url http://127.0.0.1:8080 > /tmp/tunnel.log 2>&1 &
+          for attempt in $(seq 1 60); do
+            preview_url=$(grep -oE 'https://[a-z0-9-]+\.trycloudflare\.com' /tmp/tunnel.log | head -1 || true)
+            if [ -n "$preview_url" ]; then break; fi
+            sleep 2
+          done
+          test -n "$preview_url"
+          curl --fail --retry 12 --retry-delay 5 --retry-all-errors "$preview_url/" -o /tmp/preview-home.html
+          for slug in nocturne-development rizomuv-2027 silver-pines-art heart-machine-union; do
+            curl --fail --retry 3 "$preview_url/posts/${slug}-briefing/" -o "/tmp/${slug}.html"
+            grep -q 'briefing-heading' "/tmp/${slug}.html"
+          done
+          curl --fail --retry 3 "$preview_url/assets/css/jekyll-theme-chirpy.css" -o /tmp/preview.css
+          grep -q 'briefing-heading' /tmp/preview.css
+          echo "url=$preview_url" >> "$GITHUB_OUTPUT"
+          echo "expires=$(date -u -d '+45 minutes' '+%Y-%m-%d %H:%M UTC')" >> "$GITHUB_OUTPUT"
+      - name: Publish verified link in the PR
+        uses: actions/github-script@v7
+        env:
+          PREVIEW_URL: ${{ steps.tunnel.outputs.url }}
+          EXPIRES: ${{ steps.tunnel.outputs.expires }}
+        with:
+          script: |
+            const body = `<!-- jekyll-pr-preview -->\n### Jekyll 미리보기\n\n[실제 Chirpy 레이아웃 열기](${process.env.PREVIEW_URL})\n\n외부에서 접근 가능한 **임시 공개 주소**입니다. 운영 GitHub Pages 배포는 하지 않았습니다. 홈, 네 게시물, CSS의 HTTP 응답과 섹션 표시를 확인했습니다.\n\n예상 종료: **${process.env.EXPIRES}** (게시 후 약 45분). 종료 후 이 워크플로의 **Re-run all jobs**를 선택하면 새 주소가 이 댓글에 반영됩니다. PR을 업데이트해도 재실행됩니다. 빌드 산출물은 Actions에 7일간 보관됩니다.\n\n검증한 커밋: ${context.payload.pull_request.head.sha}\n실행: https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const comments = await github.paginate(github.rest.issues.listComments, {...context.repo, issue_number: context.issue.number});
+            const previous = comments.find(c => c.user.type === 'Bot' && c.body.includes('<!-- jekyll-pr-preview -->'));
+            if (previous) {
+              await github.rest.issues.updateComment({...context.repo, comment_id: previous.id, body});
+            } else {
+              await github.rest.issues.createComment({...context.repo, issue_number: context.issue.number, body});
+            }
+            await core.summary.addHeading('Verified public Jekyll preview').addLink('Open preview', process.env.PREVIEW_URL).addRaw(`\n\nExpires around ${process.env.EXPIRES}. Public temporary URL; no production deployment.\n`).write();
+      - name: Keep preview available for 45 minutes
+        run: sleep 2700
