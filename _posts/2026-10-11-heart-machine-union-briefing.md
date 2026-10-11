@@ -1,5 +1,5 @@
 ---
-title: "게임 개발 브리핑 | Heart Machine의 노조 인정, 첫 계약은 별도의 단계다"
+title: "Heart Machine의 노조 인정, 첫 계약은 별도의 단계다"
 date: 2026-10-11 10:30:00 +0900
 categories: [게임 개발 브리핑]
 tags: [Heart Machine, 게임 업계, 노동, 팀 운영]
