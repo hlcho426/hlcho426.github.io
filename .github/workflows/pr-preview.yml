@@ -32,7 +32,7 @@ jobs:
           pwa:
             enabled: false
           comments:
-            provider: ""
+            provider:
           YAML
       - name: Build the actual Chirpy layout
         env:
