@@ -10,6 +10,42 @@ TEST_TMP.mkdir(parents=True, exist_ok=True)
 
 
 class SubmissionBoundaryTests(unittest.TestCase):
+    def test_readme_sync_updates_clean_file_with_get_only(self):
+        with tempfile.TemporaryDirectory(dir=TEST_TMP) as temp, patch.object(submit, 'ROOT', Path(temp)):
+            path = Path(temp) / 'README.md'
+            path.write_text('old\n', encoding='utf-8')
+            with patch.object(submit, 'api', return_value={'object': {'sha': 'same'}}) as api, \
+                patch.object(submit, 'content', return_value='new\n'), \
+                patch.object(submit.subprocess, 'run') as run:
+                run.return_value.stdout = 'old\n'
+                self.assertEqual(submit.sync_readme()['status'], 'readme_synchronized')
+                self.assertEqual(path.read_text(), 'new\n')
+                self.assertTrue(all(len(c.args) == 1 for c in api.call_args_list))
+
+    def test_readme_sync_preserves_user_edits(self):
+        with tempfile.TemporaryDirectory(dir=TEST_TMP) as temp, patch.object(submit, 'ROOT', Path(temp)):
+            path = Path(temp) / 'README.md'
+            path.write_text('user edit\n', encoding='utf-8')
+            with patch.object(submit, 'api', return_value={'object': {'sha': 'same'}}), \
+                patch.object(submit, 'content', return_value='new\n'), \
+                patch.object(submit.subprocess, 'run') as run:
+                run.return_value.stdout = 'old\n'
+                with self.assertRaisesRegex(ValueError, 'local edits'):
+                    submit.sync_readme()
+                self.assertEqual(path.read_text(), 'user edit\n')
+
+    def test_readme_sync_aborts_if_main_changes(self):
+        with tempfile.TemporaryDirectory(dir=TEST_TMP) as temp, patch.object(submit, 'ROOT', Path(temp)):
+            path = Path(temp) / 'README.md'
+            path.write_text('old\n', encoding='utf-8')
+            with patch.object(submit, 'api', side_effect=[{'object': {'sha': 'before'}}, {'object': {'sha': 'after'}}]), \
+                patch.object(submit, 'content', return_value='new\n'), \
+                patch.object(submit.subprocess, 'run') as run:
+                run.return_value.stdout = 'old\n'
+                with self.assertRaisesRegex(ValueError, 'main changed'):
+                    submit.sync_readme()
+                self.assertEqual(path.read_text(), 'old\n')
+
     def test_api_destination_is_fixed(self):
         with patch.object(submit, 'gh_json', return_value={}) as call:
             submit.api('git/trees', {'tree': []})
