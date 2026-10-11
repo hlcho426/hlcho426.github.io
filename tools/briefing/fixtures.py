@@ -16,5 +16,8 @@ def fixture(kind, today):
     source = {"url": f"https://example.org/synthetic-{kind}", "title": "합성 시험 원문 (실제 기사 아님)",
               "text": today.isoformat() + "\n" + (evidence + "\n") * 100,
               "document_date": today.isoformat(), "truncated": False, "sha256": "synthetic"}
+    if kind == "ai":
+        article.update({"tech_workflow": paragraph, "tech_example": "설명용 합성 예시: " + paragraph,
+                        "tech_audience": paragraph, "tech_verdict": "합성 시험의 판단: " + paragraph})
     return {"url": source["url"], "title": source["title"], "event_key": article["event_key"],
             "source": source, "article": article}

@@ -83,8 +83,26 @@ class BriefingTests(unittest.TestCase):
 
     def test_ai_conditions_required(self):
         self.article["ai_conditions"] = "알 수 없음"
-        with self.assertRaisesRegex(ValueError, "AI access"):
+        with self.assertRaisesRegex(ValueError, "technology access"):
             self.validate("ai")
+
+    def test_technology_explanations_required(self):
+        from core import TECH_FIELDS
+        for field in TECH_FIELDS:
+            with self.subTest(field=field):
+                article = fixture("ai", TODAY)["article"]
+                article.pop(field)
+                with self.assertRaisesRegex(ValueError, field):
+                    validate_article(article, self.source, "ai", TODAY, CONFIG)
+
+    def test_non_ai_tool_can_use_technology_stream(self):
+        f = fixture("ai", TODAY)
+        f["article"]["title"] = "엔진 대화 테스트 도구의 합성 검증 자료"
+        validate_article(f["article"], f["source"], "ai", TODAY, CONFIG)
+        post = render(f["article"], f["source"], "ai", TODAY, CONFIG)
+        self.assertIn("구체적인 작업 예시", post)
+        self.assertIn("지금 도입할 만한가", post)
+        self.assertNotIn("실제로 설치했다", post)
 
     def test_path_traversal_slug_rejected(self):
         self.article["slug"] = "../../unsafe"
