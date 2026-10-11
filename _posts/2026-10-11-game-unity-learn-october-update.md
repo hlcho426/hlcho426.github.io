@@ -1,5 +1,5 @@
 ---
-title: 게임 개발 브리핑 | Unity Learn, 짧은 영상과 글을 나눠 학습 경로를 넓힌다
+title: Unity Learn, 짧은 영상과 글을 나눠 학습 경로를 넓힌다
 date: 2026-10-11 08:00:00 +0900
 categories:
 - 게임 개발 브리핑
