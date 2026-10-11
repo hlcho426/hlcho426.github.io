@@ -1,8 +1,5 @@
 {
-  "model": "gpt-6.1-sol",
   "max_candidates": 8,
-  "max_search_calls": 3,
-  "semantic_review": true,
   "max_source_chars": 30000,
   "max_research_chars": 90000,
   "daily_lookback_days": 7,

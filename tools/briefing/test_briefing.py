@@ -1,20 +1,18 @@
 import copy
 import json
 import os
-import shutil
 import sys
 import tempfile
 import unittest
 from datetime import date
 from pathlib import Path
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from core import (HERE, categories, fetch_source, frontmatter, known_posts, normalize_url,
                   public_url, render, validate_article, validate_post)
 from fixtures import fixture
-from run import OpenAI, generate, preflight
-from publish import publish
+from run import generate, preflight
 
 ROOT = HERE.parents[1]
 CONFIG = json.loads((HERE / "config.json").read_text(encoding="utf-8"))
@@ -141,15 +139,7 @@ class BriefingTests(unittest.TestCase):
         urls, _ = known_posts(ROOT)
         self.assertIn(normalize_url("https://store.steampowered.com/app/1619280/Machinarium_2/"), urls)
 
-    def test_paid_client_requires_explicit_gate(self):
-        with patch.dict(os.environ, {"BRIEFING_PAID_ENABLED": "false"}):
-            with self.assertRaisesRegex(ValueError, "disabled"): OpenAI(CONFIG)
-
-    def test_paid_client_requires_key(self):
-        with patch.dict(os.environ, {"BRIEFING_PAID_ENABLED": "true"}, clear=True):
-            with self.assertRaisesRegex(ValueError, "missing"): OpenAI(CONFIG)
-
-    def test_pending_type_pr_blocks_before_paid_api(self):
+    def test_pending_type_pr_blocks_before_research(self):
         with patch("run.gh", return_value=json.dumps([{"number": 42, "headRefName": "codex/briefing-ai-2026-10-10", "url": "https://example.org/pr/42"}])):
             pending, _, _ = preflight("owner/repo", "ai", TODAY)
             self.assertEqual(pending, "https://example.org/pr/42")
@@ -170,74 +160,64 @@ class BriefingTests(unittest.TestCase):
         with patch("run.gh", side_effect=RuntimeError("API unavailable")):
             with self.assertRaises(RuntimeError): preflight("o/r", "game", TODAY)
 
-    def test_offline_generation_never_calls_api_or_github(self):
-        with tempfile.TemporaryDirectory() as tmp, patch("run.OpenAI", side_effect=AssertionError("API called")), patch("run.gh", side_effect=AssertionError("GitHub called")):
+    def test_fixture_generation_never_calls_network_or_github(self):
+        with tempfile.TemporaryDirectory() as tmp, patch("urllib.request.urlopen", side_effect=AssertionError("Network called")), patch("run.gh", side_effect=AssertionError("GitHub called")):
             for kind in ("game", "ai", "research"):
                 report = generate(kind, ROOT, Path(tmp) / kind, TODAY)
                 self.assertEqual(len(report["posts"]), 1)
-                self.assertEqual(report["usage"], [])
+                self.assertEqual(report["model_api_calls"], 0)
 
-    def test_live_collector_writer_and_review_contract(self):
-        client = MagicMock()
-        client.usage = []
-        client.call.side_effect = [
-            {"candidates": [{"url": self.source["url"], "title": "Test", "event_key": "synthetic-game"}]},
-            self.article, {"approved": True, "reason": "Supported"}]
-        with tempfile.TemporaryDirectory() as tmp, patch("run.preflight", return_value=(None, set(), set())), patch("run.OpenAI", return_value=client), patch("run.fetch_source", return_value=self.source):
-            report = generate("game", ROOT, Path(tmp), TODAY, "live", "o/r")
+    def write_codex_input(self, output, source=None, article=None, source_file="sources/article.json"):
+        cache = output / "sources" / "article.json"
+        cache.parent.mkdir(parents=True)
+        cache.write_text(json.dumps(source or self.source), encoding="utf-8")
+        draft = output / "draft.json"
+        draft.write_text(json.dumps([{"source_file": source_file, "article": article or self.article}]), encoding="utf-8")
+        return draft
+
+    def test_codex_input_renders_without_network(self):
+        with tempfile.TemporaryDirectory() as tmp, patch("urllib.request.urlopen", side_effect=AssertionError("API called")), patch("run.gh", side_effect=AssertionError("GitHub called")):
+            out = Path(tmp)
+            draft = self.write_codex_input(out)
+            report = generate("game", ROOT, out, TODAY, "codex", input_file=draft)
             self.assertEqual(len(report["posts"]), 1)
-            self.assertEqual(client.call.call_count, 3)
+            self.assertEqual(report["api_cost_usd"], 0)
 
-    def test_source_collection_failure_records_error_and_no_post(self):
-        client = MagicMock()
-        client.usage = []
-        client.call.return_value = {"candidates": [{"url": self.source["url"], "title": "Test", "event_key": "synthetic-game"}]}
-        with tempfile.TemporaryDirectory() as tmp, patch("run.preflight", return_value=(None, set(), set())), patch("run.OpenAI", return_value=client), patch("run.fetch_source", side_effect=ValueError("Source unavailable")):
-            with self.assertRaisesRegex(ValueError, "All candidates rejected"):
-                generate("game", ROOT, Path(tmp), TODAY, "live", "o/r")
-            report = json.loads((Path(tmp) / "report.json").read_text(encoding="utf-8"))
-            self.assertEqual(report["posts"], [])
-            self.assertIn("Source unavailable", report["skipped"][0]["reason"])
-            self.assertEqual(client.call.call_count, 1)
+    def test_codex_mode_requires_authored_input(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            with self.assertRaisesRegex(ValueError, "requires --input"):
+                generate("game", ROOT, Path(tmp), TODAY, "codex")
 
-    def test_semantic_rejection_blocks_post(self):
-        client = MagicMock()
-        client.usage = []
-        client.call.side_effect = [
-            {"candidates": [{"url": self.source["url"], "title": "Test", "event_key": "synthetic-game"}]},
-            self.article, {"approved": False, "reason": "Unsupported productivity claim"}]
-        with tempfile.TemporaryDirectory() as tmp, patch("run.preflight", return_value=(None, set(), set())), patch("run.OpenAI", return_value=client), patch("run.fetch_source", return_value=self.source):
-            with self.assertRaisesRegex(ValueError, "All candidates rejected"):
-                generate("game", ROOT, Path(tmp), TODAY, "live", "o/r")
-            self.assertFalse((Path(tmp) / "_posts").exists())
-
-    def test_fixture_cannot_be_published(self):
+    def test_invalid_codex_evidence_blocks_output(self):
         with tempfile.TemporaryDirectory() as tmp:
             out = Path(tmp)
-            generate("game", ROOT, out, TODAY)
-            with self.assertRaisesRegex(ValueError, "cannot be published"): publish(out, "o/r")
+            self.article["paragraphs"][0]["evidence"] = "This unsupported quote is absent from source"
+            draft = self.write_codex_input(out)
+            with self.assertRaisesRegex(ValueError, "All candidates rejected"):
+                generate("game", ROOT, out, TODAY, "codex", input_file=draft)
+            report = json.loads((out / "report.json").read_text(encoding="utf-8"))
+            self.assertEqual(report["posts"], [])
+            self.assertIn("Evidence quote", report["skipped"][0]["reason"])
 
-    def test_publisher_uses_only_review_branch_and_one_pr(self):
+    def test_source_cache_cannot_read_outside_output(self):
         with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            out = root / "output"
-            report = generate("game", ROOT, out, TODAY)
-            report["mode"] = "live"  # Simulated writer output; every Git/GitHub mutation is mocked.
-            (out / "report.json").write_text(json.dumps(report), encoding="utf-8")
-            (root / "_posts").mkdir()
-            name = report["posts"][0]["file"]
-            shutil.copyfile(out / "_posts" / name, root / "_posts" / name)
-            shutil.copyfile(ROOT / "README.md", root / "README.md")
-            here = root / "tools" / "briefing"
-            here.mkdir(parents=True)
-            shutil.copyfile(HERE / "config.json", here / "config.json")
-            with patch("publish.HERE", here), patch("publish.preflight", return_value=(None, set(), set())), patch("publish.command") as commands, patch("publish.subprocess.check_output", return_value=f"_posts/{name}\n"), patch("publish.gh", side_effect=["[]", "https://example.org/pr/test"]) as github:
-                publish(out, "o/r")
-                pushes = [c.args for c in commands.call_args_list if c.args[:2] == ("git", "push")]
-                self.assertEqual(pushes, [("git", "push", "origin", "HEAD:refs/heads/codex/briefing-game-2026-10-11")])
-                prs = [c.args for c in github.call_args_list if c.args[:2] == ("pr", "create")]
-                self.assertEqual(len(prs), 1)
-                self.assertNotIn("merge", " ".join(str(c.args) for c in github.call_args_list))
+            out = Path(tmp)
+            draft = self.write_codex_input(out, source_file="../private.json")
+            with self.assertRaisesRegex(ValueError, "All candidates rejected"):
+                generate("game", ROOT, out, TODAY, "codex", input_file=draft)
+            report = json.loads((out / "report.json").read_text(encoding="utf-8"))
+            self.assertIn("inside this run", report["skipped"][0]["reason"])
+
+    def test_pending_pr_skips_before_reading_draft(self):
+        with tempfile.TemporaryDirectory() as tmp, patch("run.preflight", return_value=("https://example.org/pr", set(), set())):
+            report = generate("game", ROOT, Path(tmp), TODAY, "codex", "o/r", Path("nonexistent.json"))
+            self.assertEqual(report["posts"], [])
+            self.assertIn("pending_pr", report)
+
+    def test_paid_generator_and_github_schedule_removed(self):
+        self.assertFalse((ROOT / ".github/workflows/briefings.yml").exists())
+        self.assertFalse((HERE / "publish.py").exists())
+        self.assertNotIn("api.openai.com", (HERE / "run.py").read_text(encoding="utf-8"))
 
     def test_bad_category_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
