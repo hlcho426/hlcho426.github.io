@@ -80,3 +80,23 @@ img[src*="/assets/img/briefing/rizomuv-logo.png"] {
   object-fit: contain !important;
   background-color: #fff;
 }
+
+/* 사이드바 카테고리 하위 목록: 들여쓰고 조금 작게 */
+#sidebar ul li.nav-item.sidebar-category {
+  margin-top: 0;
+
+  a.nav-link {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+    padding-left: 1.75rem;
+    font-weight: normal;
+
+    i {
+      margin-right: 0.75rem;
+    }
+
+    span {
+      font-size: 85%;
+    }
+  }
+}

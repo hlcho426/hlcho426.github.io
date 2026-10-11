@@ -1,39 +1,67 @@
-# Chirpy Starter
+# 잉여인간의 개발일기
 
-[![Gem Version](https://img.shields.io/gem/v/jekyll-theme-chirpy)][gem]&nbsp;
-[![GitHub license](https://img.shields.io/github/license/cotes2020/chirpy-starter.svg?color=blue)][mit]
+퇴사하고 홀로 게임 개발을 시작한 기록. → <https://hlcho426.github.io>
 
-A minimal, ready-to-use template for creating a blog with the [**Chirpy**][chirpy] Jekyll theme. Get up and running in minutes with all critical files pre-configured.
+[Chirpy](https://github.com/cotes2020/jekyll-theme-chirpy) 테마(Jekyll)로 만들었고, `main`에 push하면 GitHub Actions가 빌드해서 배포한다.
+이 파일은 블로그에는 나오지 않는다. (`_config.yml`의 `exclude`에 들어 있음)
 
-## Why This Starter Exists
+## 카테고리 규칙
 
-When installing Chirpy through [RubyGems.org][gem], Jekyll can only read a subset of theme files (`_data`, `_layouts`, `_includes`, `_sass`, `assets`) and limited `_config.yml` options from the gem. As a result, users cannot enjoy the full out-of-the-box experience that Chirpy offers.
+글 하나에 카테고리는 **하나만** 붙인다.
 
-To unlock all features, the following files must be present in your Jekyll site:
+| 카테고리 | 무엇을 쓰나 |
+|---|---|
+| 게임 개발 브리핑 | 매일 주요 게임 개발 소식 5개 |
+| 게임 개발 기술 | 유니티, AI, 아트 파이프라인 등 개발 기술 조사와 정리 |
+| 게임 디자인 연구 | 논문과 개발 사례 심층 분석 |
+| 유니티 공부 | 직접 해 본 프로그래밍 공부, 유니티 기능 공부 |
+| 개발 일지 | 직접 만드는 게임의 제작 기록 |
+| 일상 | 그 밖의 이야기 |
 
-```shell
-.
-├── _config.yml
-├── _plugins
-├── _tabs
-└── index.html
+헷갈릴 때 기준:
+
+- **게임 개발 기술 vs 유니티 공부**: 남이 만든 기술이나 사례를 *조사해서 정리*하면 기술, 내가 *직접 따라 해 보며 배우면* 유니티 공부.
+- **게임 개발 브리핑 vs 개발 일지**: 바깥 소식이면 브리핑, 내 게임 이야기면 개발 일지.
+
+### 카테고리를 쓰는 법
+
+글의 front matter에 위 표의 이름을 **띄어쓰기까지 똑같이** 적는다. 한 글자라도 다르면 다른 카테고리가 된다.
+
+```yaml
+categories: [유니티 공부]
 ```
 
-This starter bundles those files from the latest **Chirpy** release along with a [CD][CD] workflow, so you can start writing immediately.
+### 카테고리를 추가하거나 순서를 바꿀 때
 
-## Usage
+- 사이드바 순서는 `_data/sidebar_categories.yml`의 순서를 따른다.
+- 사이드바에는 **글이 하나 이상 있는 카테고리만** 나온다. 빈 카테고리는 페이지가 없어서 링크가 깨지기 때문이다.
+- 이름을 바꾸면 `_data/sidebar_categories.yml`과 이미 쓴 글들의 `categories:`도 같이 바꿔야 한다.
 
-Check out the [theme's docs](https://github.com/cotes2020/jekyll-theme-chirpy/wiki).
+## 글 쓰는 법
 
-## Contributing
+`_posts/YYYY-MM-DD-영문-제목.md` 파일을 만든다.
 
-This repository is automatically updated with new releases from the theme repository. If you encounter any issues or want to contribute to its improvement, please visit the [theme repository][chirpy] to provide feedback.
+```markdown
+---
+title: 글 제목
+date: 2026-10-11 20:00:00 +0900
+categories: [개발 일지]
+tags: [유니티, 프로토타입]
+---
 
-## License
+본문
+```
 
-This work is published under [MIT][mit] License.
+- 한 줄만 내리기: 문장 끝에 `<br>`
+- 문단 나누기: 빈 줄 하나
 
-[gem]: https://rubygems.org/gems/jekyll-theme-chirpy
-[chirpy]: https://github.com/cotes2020/jekyll-theme-chirpy/
-[CD]: https://en.wikipedia.org/wiki/Continuous_deployment
-[mit]: https://github.com/cotes2020/chirpy-starter/blob/master/LICENSE
+## 커스터마이즈한 곳
+
+| 파일 | 내용 |
+|---|---|
+| `assets/css/jekyll-theme-chirpy.scss` | 글꼴(카페24 오스퀘어 / 에어), 사이드바 배경과 글자색, 사이드바 카테고리 스타일 |
+| `assets/fonts/` | 웹폰트 파일 |
+| `_includes/sidebar.html` | Chirpy v7.6.0 사이드바 복사본. 카테고리 탭 아래에 카테고리 목록 추가 |
+| `_data/sidebar_categories.yml` | 사이드바 카테고리 순서 |
+| `_data/contact.yml` | 사이드바 아래 아이콘 (트위터 숨김) |
+| `_tabs/about.md` | 정보 페이지 |
