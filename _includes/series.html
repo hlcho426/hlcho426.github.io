@@ -3,6 +3,7 @@
   - 글 front matter에 `series: 시리즈 이름`을 적고, 본문 맨 위에 이 파일을 include 하는 한 줄을 넣는다. (README "시리즈 글" 참고)
   - 같은 series 이름의 글을 날짜순으로 모아 몇 번째 글인지, 이전·다음 글, 전체 목차를 보여 준다.
   - 목록에 보일 짧은 이름은 `series_title`로 따로 적을 수 있다. 없으면 글 제목을 쓴다.
+  - 시리즈 안내 문구(누가 썼는지 등)는 _data/series.yml의 note에서 가져온다.
 {%- endcomment -%}
 {%- if page.series -%}
   {%- assign series_posts = site.posts | where: "series", page.series | sort: "date" -%}
@@ -15,6 +16,10 @@
     {%- assign next_index = series_index | plus: 1 -%}
 <blockquote class="prompt-info">
   <p><strong>{{ page.series }}</strong> 시리즈 · {{ series_index | plus: 1 }} / {{ series_posts.size }}</p>
+    {%- assign series_note = site.data.series[page.series].note -%}
+    {%- if series_note %}
+  <p><small>{{ series_note }}</small></p>
+    {%- endif %}
   <p>
     {%- if prev_index >= 0 -%}
       {%- assign prev = series_posts[prev_index] -%}
