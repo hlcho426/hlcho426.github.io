@@ -38,6 +38,11 @@ class BriefingTests(unittest.TestCase):
                 self.assertEqual(meta["categories"], [CONFIG["types"][kind]["category"]])
                 self.assertEqual(meta["title"], f["article"]["title"])
                 self.assertNotIn("image", meta)
+                self.assertTrue(meta["description"])
+                self.assertLessEqual(len(meta["description"]), 160)
+                self.assertEqual(meta["description"], " ".join(f["article"]["lead"].split())[:160])
+                _, body = frontmatter(p.read_text(encoding="utf-8"))
+                self.assertTrue(body.strip().startswith("*이 글은 공개 원문을 바탕으로 Codex"))
 
     def test_missing_evidence_rejected(self):
         self.article["paragraphs"][0]["evidence"] = "This quote does not occur in the original source"

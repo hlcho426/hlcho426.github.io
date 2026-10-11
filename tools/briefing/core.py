@@ -226,12 +226,13 @@ def render(article, source, kind, today, config):
     url = source["url"]
     normalize_url(url)  # Validate, but preserve the final working URL in public links.
     meta = {"title": article["title"],
+            "description": " ".join(article["lead"].split())[:160],
             "date": today.isoformat() + " 08:00:00 +0900", "categories": [spec["category"]],
             "tags": [spec["category"]], "briefing_type": kind,
             "briefing_event": article["event_key"], "briefing_sources": [url]}
     def heading(value):
         return f"\n\n## {value}\n{{:.briefing-heading}}\n\n"
-    body = article["lead"] + heading(SECTIONS[0])
+    body = "*이 글은 공개 원문을 바탕으로 Codex가 조사하고 정리했습니다.*\n\n" + article["lead"] + heading(SECTIONS[0])
     body += "\n\n".join("### " + p["heading"] + "\n\n" + p["text"] for p in article["paragraphs"])
     if kind == "ai":
         body += "\n\n### 제작 작업은 어떻게 달라지나\n\n" + article["tech_workflow"]

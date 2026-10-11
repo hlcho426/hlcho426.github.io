@@ -45,6 +45,26 @@ def content(path, sha):
     return base64.b64decode(data['content']).decode('utf-8')
 
 
+def sync_readme():
+    """Refresh only clean README from reviewed main; no remote or Git writes."""
+    main = api('git/ref/heads/main')['object']['sha']
+    remote = content('README.md', main).replace('\r\n', '\n')
+    path = ROOT / 'README.md'
+    local = path.read_text(encoding='utf-8').replace('\r\n', '\n')
+    if local == remote:
+        return {'status': 'readme_current', 'main': main}
+    tracked = subprocess.run(['git', 'show', 'HEAD:README.md'], cwd=ROOT,
+                             capture_output=True, text=True, encoding='utf-8', check=True).stdout
+    if local != tracked.replace('\r\n', '\n'):
+        raise ValueError('README has local edits; preserve them and request synchronization')
+    if api('git/ref/heads/main')['object']['sha'] != main:
+        raise ValueError('main changed during README synchronization; retry')
+    if path.read_text(encoding='utf-8').replace('\r\n', '\n') != local:
+        raise ValueError('README changed locally during synchronization; preserve it')
+    path.write_text(remote, encoding='utf-8')
+    return {'status': 'readme_synchronized', 'main': main}
+
+
 def load_candidates(kind, stamp, directory):
     config = json.loads((HERE / 'config.json').read_text(encoding='utf-8'))
     batch = json.loads((directory / 'drafts.json').read_text(encoding='utf-8'))
@@ -192,14 +212,16 @@ if __name__ == '__main__':
     parser.add_argument('--kind', choices=('game', 'ai', 'research'), required=True)
     parser.add_argument('--check-only', action='store_true', help='Read-only remote preflight; no GitHub writes')
     parser.add_argument('--finish', action='store_true', help='Mark only today\'s type PR ready after CI and preview verification')
+    parser.add_argument('--sync-readme', action='store_true', help='Refresh only an unedited local README from main; no GitHub writes')
     args = parser.parse_args()
     try:
-        if args.finish and args.check_only:
-            raise ValueError('Choose either finish or check-only')
-        report = finish(args.kind) if args.finish else submit(args.kind, args.check_only)
+        if sum((args.finish, args.check_only, args.sync_readme)) > 1:
+            raise ValueError('Choose only one operation')
+        report = sync_readme() if args.sync_readme else (finish(args.kind) if args.finish else submit(args.kind, args.check_only))
     except Exception as error:
         report = {'status': 'failed', 'error': str(error)[:500], 'ci': 'not verified'}
     target = ROOT / 'output' / 'briefing' / args.kind / datetime.now(KST).date().isoformat() / 'submit-report.json'
+    target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(report, ensure_ascii=False, indent=2), encoding='utf-8')
     print(json.dumps(report, ensure_ascii=True))
     sys.exit(1 if report['status'] == 'failed' else 0)

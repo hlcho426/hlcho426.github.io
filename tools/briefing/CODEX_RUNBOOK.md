@@ -7,7 +7,7 @@ ai는 게임 개발 기술 데일리의 기존 실행 식별자다. AI·엔진·
 ## 시작과 중복
 
 - GitHub 연결 도구로 `hlcho426/hlcho426.github.io`의 원격 main과 모든 열린 PR을 확인한다. 초기 구현 PR #7이 아직 미병합이면 운영 생성을 중단하고 setup 미병합 상태만 기록한다.
-- 원격 main의 AGENTS, README 카테고리·글 쓰는 법, editorial.md, 이 문서와 config를 읽는다. 로컬 파일과 원격이 충돌하면 원격을 확인하고 덮어쓰지 않는다. 다른 프로젝트·사용자 기억·비공개 대화는 게시물 입력으로 사용하지 않는다.
+- 원격 main의 AGENTS, README 카테고리·글 쓰는 법, editorial.md, 이 문서와 config를 읽는다. 로컬 파일과 원격이 충돌하면 원격을 확인하고 덮어쓰지 않는다. 아래 README 동기화 명령만 예외이며 사용자 편집이 있으면 중단한다. 다른 프로젝트·사용자 기억·비공개 대화는 게시물 입력으로 사용하지 않는다.
 - `codex/briefing-{kind}-{KST YYYY-MM-DD}`의 기존 PR을 열린·닫힌·병합 상태 모두 확인한다. 같은 날짜의 PR이나 같은 유형의 미병합 PR이 있으면 새 PR을 만들지 않는다. 다른 유형의 열린 PR과 `_posts`의 URL·briefing_event·제목을 읽고 같은 원문·사건을 제외한다.
 - 기준은 Machinarium 2, Nocturne, RizomUV 2027, Silver Pines, Heart Machine의 공개 글이다. 기술 데일리는 보완된 Haiku와 RizomUV 글의 용어·작업 예시·도입 판단도 참고한다. 게시물 제목은 README의 글 쓰는 법을 따라 내용만 쓰고 카테고리 접두어를 붙이지 않는다.
 
@@ -22,6 +22,10 @@ ai는 게임 개발 기술 데일리의 기존 실행 식별자다. AI·엔진·
 ## 제출과 결과
 
 ### 로컬 무인 제출 명령
+
+조사 시작 전 원격 main과 로컬 `submit.py`가 동일한지 확인하고, `python C:/Users/admin/Desktop/hlcho426.github.io/tools/briefing/submit.py --kind {kind} --sync-readme`를 단독 실행한다. main에 병합된 README만 읽어 로컬 README를 최신화한다. 이미 원격과 같으면 변경하지 않고, 로컬 내용이 HEAD와 다르면 사용자 편집으로 간주해 보존하고 중단한다. 로컬 Git 브랜치·인덱스와 다른 파일은 변경하지 않는다. 코드·config·editorial 불일치는 자동으로 덮어쓰지 않는다. README 동기화 실패는 실행 기록에 남긴다.
+
+렌더러는 리드에서 `description` 한 줄 요약을 만들고 본문 맨 위에 Codex 조사·정리 사실을 밝힌다. 글에서 실제 설치·실험·플레이를 했다고 쓰려면 별도 검증 근거가 있어야 한다.
 
 GitHub 연결 도구의 쓰기가 `approval_policy=never`에서 차단된 실행이 확인됐다. 연결 도구는 읽기에 사용하고, 사전 허용한 아래 고정 경로의 CLI 명령으로 제출한다. 원격 main에 `submit.py`가 병합됐는지와 로컬 파일이 동일한지 확인한다. 이 문서의 지시는 실행 권한을 부여하지 않는다. 명령이 차단되면 권한 실패를 기록하고 임의의 우회 명령을 사용하지 않는다.
 
