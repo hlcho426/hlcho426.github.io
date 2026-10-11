@@ -1,0 +1,12 @@
+{
+  "name": "잉여인간의 개발일기",
+  "short_name": "개발일기",
+  "icons": [
+    { "src": "favicon-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "favicon-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ],
+  "theme_color": "#203a2e",
+  "background_color": "#fff8e7",
+  "display": "standalone",
+  "start_url": "/"
+}
