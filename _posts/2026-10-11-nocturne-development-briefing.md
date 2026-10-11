@@ -3,9 +3,16 @@ title: "게임 개발 브리핑 | 세 번 다시 만든 Nocturne, 10년 개발�
 date: 2026-10-11 10:00:00 +0900
 categories: [게임 개발 브리핑]
 tags: [Nocturne, 개발 회고, 리듬 게임, 제작 도구]
+image:
+  path: /assets/img/briefing/nocturne-development.svg
+  alt: "Nocturne 개발 회고 설명도 — 리듬 입력의 실력과 RPG 성장, 설계·도구·플레이테스트의 연결"
+  width: 1200
+  height: 675
 ---
 
 리듬 게임의 실력과 RPG의 성장은 어떻게 함께 작동할까? 《Nocturne》의 개발자 Ben Pracy는 약 10년의 제작 과정에서 게임을 세 번 다시 만들었다고 회고한다. 긴 개발 기간 자체보다, 장르를 결합하는 규칙과 반복 제작을 받쳐 줄 도구를 어떻게 다듬었는지에 주목할 만하다.
+
+*대표 이미지: 인터뷰 내용을 바탕으로 이 브리핑용으로 직접 제작한 설명도. 실제 Nocturne 게임 화면이나 공식 아트가 아니다.*
 
 ## 무슨 일이 있었나
 {:.briefing-heading}
@@ -48,6 +55,6 @@ Pracy는 지도, 전투, 컷신을 개별 제작했고, 복잡한 컷신을 다�
 
 - [80 Level — “This Rhythm RPG Was Rebuilt Three Times During Its 10-Year Development”](https://80.lv/articles/this-rhythm-rpg-was-rebuilt-three-times-during-its-10-year-development) — Ben Pracy 인터뷰, 진행 David Jagneaux, **2026년 10월 9일**. 개발 기간, 재제작 횟수, 장르 설계, 협업과 도구에 관한 당사자 설명.
 - [Pracy Studios 공식 블로그](https://pracystudios.com/blog) — “Nocturne has released!”, **2026년 9월 22일**. 개발사 자체 출시 발표와 10년 개발 설명을 교차 확인했다.
-- [80 Level의 재게시 정책](https://80.lv/republishing-policy) — 기사 이미지의 재사용은 별도 권리자 허가가 필요하다고 명시한다. 이 글에는 대표 이미지를 넣지 않았다.
+- **대표 이미지 출처:** 이 브리핑용 자체 제작 설명도. 위 인터뷰의 장르 결합·개발 도구·플레이테스트 설명을 시각화했으며, 외부 게임 아트를 복제하지 않았다. [공식 프레스킷](https://presskit.pracystudios.com/)도 확인했으나 현재 확인 가능한 폴더에 이미지 파일이 표시되지 않았다.
 
 **확인 범위:** 2026년 10월 11일 원문과 공식 발표를 확인했다. 제작 과정은 개발자 자기 보고이며 코드·제작 기록을 감사하지 않았다. 인터뷰의 리뷰 비율, 총 분량, 입력 주파수는 별도 측정하지 않아 사용하지 않았다. ‘왜 중요한가’와 적용 제안은 필자의 분석이며, 직접 플레이나 도구 사용으로 효과를 검증한 결과는 아니다.

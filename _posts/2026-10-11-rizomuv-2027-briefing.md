@@ -3,9 +3,16 @@ title: "게임 개발 브리핑 | RizomUV 2027, UV 수정부터 반복 작업의
 date: 2026-10-11 10:10:00 +0900
 categories: [게임 개발 브리핑]
 tags: [RizomUV, UV, 개발 도구, 아트 파이프라인]
+image:
+  path: /assets/img/briefing/rizomuv-logo.png
+  alt: "Rizom-Lab이 제공하는 RizomUV 공식 가로형 로고"
+  width: 2048
+  height: 512
 ---
 
 UV 작업에서 시간이 드는 곳은 펼치기 계산만이 아니다. 명령 찾기, 결과 확인, 다른 도구와 파일을 주고받는 과정도 반복된다. RizomUV 2027의 공식 발표는 이 흐름을 작업 공간 개선, 즉시 갱신, 스크립트 자동화로 연결한다.
+
+*대표 이미지: RizomUV 공식 로고, 출처 Rizom-Lab의 Writing and Branding Guidelines. 로고 원본을 비율·색상 변경 없이 사용했으며, 공식 제휴나 후원을 의미하지 않는다.*
 
 ## 무슨 일이 있었나
 {:.briefing-heading}
@@ -53,6 +60,6 @@ UV 제약, 핀, 브러시 맵, 대칭 평면을 FBX에 저장하는 기능과 gl
 {:.briefing-heading}
 
 - [Rizom-Lab — “RizomUV 2027 Release Features”](https://www.rizomuv.com/feature/rizomuv-2027-release-features/) — 공식 기능 발표. 본문에서 확인한 **제공 시작일은 2026년 10월 8일**이며, 페이지 게시일은 별도 확인되지 않았다.
-- [Rizom-Lab 웹사이트 이용 약관](https://www.rizomuv.com/website-terms-of-use/) — 사이트 콘텐츠의 권리 안내. 발표 이미지에 대한 별도 재사용 허가를 확인하지 못해 대표 이미지는 생략했다.
+- [Rizom-Lab — Writing and Branding Guidelines](https://www.rizomuv.com/writing-and-branding-guidelines/) — 대표 이미지 출처 및 이용 조건. 공식 지침이 정지 이미지에서의 로고 사용을 허용하며, 비율·색상 변경, 다른 로고와 결합, 제휴·후원 오인을 금지한다. 이 글에서는 제공된 [가로형 로고 원본](https://www.rizomuv.com/wp-content/uploads/2025/04/RizomUV-Rectangle-Dark-2.png)을 사용했다. 로고 권리는 Rizom-Lab에 있다.
 
 **확인 범위:** 2026년 10월 11일 공식 페이지의 기능 설명과 제공 시작일을 확인했다. 속도 향상 배율·가격은 사용하지 않았고, 소프트웨어 설치·벤치마크·형식 왕복 테스트는 수행하지 않았다. ‘왜 중요한가’와 적용 제안은 필자의 분석이다.

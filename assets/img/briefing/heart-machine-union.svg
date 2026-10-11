@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Heart Machine: recognition and the first contract are separate stages</title>
+<desc id="desc">Original editorial diagram. CWA announced voluntary recognition on March 9, 2026. Current first-contract status is not verified.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#102e34"/><stop offset="1" stop-color="#163e47"/></linearGradient></defs><rect width="1200" height="675" fill="url(#bg)"/>
+<g fill="none" stroke="#ffffff" stroke-opacity=".055"><circle cx="1100" cy="90" r="350"/><circle cx="1100" cy="90" r="290"/><circle cx="1100" cy="90" r="230"/></g>
+<g font-family="Arial, sans-serif"><text x="70" y="75" fill="#9ad4c2" font-size="19" letter-spacing="4">GAME INDUSTRY / LABOR</text><text x="67" y="157" fill="#fff" font-size="67" font-weight="700">HEART MACHINE</text><text x="71" y="203" fill="#bad8d7" font-size="25">Voluntary recognition announced by CWA · 9 March 2026</text>
+<path d="M235 350H965" stroke="#496d71" stroke-width="5"/><path d="M235 350H600" stroke="#8bddb8" stroke-width="5"/>
+<circle cx="235" cy="350" r="57" fill="#235b58" stroke="#8bddb8" stroke-width="3"/><path d="M211 350l16 16 32-35" fill="none" stroke="#bcf0d7" stroke-width="5" stroke-linecap="round"/>
+<circle cx="600" cy="350" r="57" fill="#235b58" stroke="#8bddb8" stroke-width="3"/><path d="M576 350l16 16 32-35" fill="none" stroke="#bcf0d7" stroke-width="5" stroke-linecap="round"/>
+<circle cx="965" cy="350" r="57" fill="#183c45" stroke="#91aeb5" stroke-width="3" stroke-dasharray="9 7"/><text x="965" y="370" text-anchor="middle" fill="#bad0d6" font-size="56">?</text>
+<g text-anchor="middle"><text x="235" y="454" fill="#fff" font-size="27" font-weight="700">REQUEST</text><text x="235" y="492" fill="#bbd9d6" font-size="22">February 2026</text><text x="600" y="454" fill="#fff" font-size="27" font-weight="700">RECOGNITION</text><text x="600" y="492" fill="#bbd9d6" font-size="22">Officially announced</text><text x="965" y="454" fill="#d5e0e3" font-size="27" font-weight="700">FIRST CONTRACT</text><text x="965" y="492" fill="#bbd9d6" font-size="22">Status not verified</text></g>
+<rect x="70" y="554" width="1060" height="58" rx="12" fill="#ffffff" fill-opacity=".06"/><text x="600" y="591" text-anchor="middle" fill="#d7e9e6" font-size="23">Recognition is a milestone. Contract terms require separate evidence.</text>
+<text x="70" y="647" fill="#8fb7ba" font-size="15">Original editorial diagram · Based on the CWA announcement</text></g></svg>

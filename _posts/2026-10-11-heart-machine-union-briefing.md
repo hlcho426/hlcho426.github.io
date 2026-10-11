@@ -3,9 +3,16 @@ title: "게임 개발 브리핑 | Heart Machine의 노조 인정, 첫 계약은 
 date: 2026-10-11 10:30:00 +0900
 categories: [게임 개발 브리핑]
 tags: [Heart Machine, 게임 업계, 노동, 팀 운영]
+image:
+  path: /assets/img/briefing/heart-machine-union.svg
+  alt: "Heart Machine 노조의 요청·인정·첫 계약을 구분한 설명도. 첫 계약의 현재 상태는 미확인"
+  width: 1200
+  height: 675
 ---
 
 게임 스튜디오가 노조를 인정했다는 발표는 어디까지 의미할까? CWA는 2026년 3월 9일 Heart Machine 개발자들의 노조가 회사의 자발적 인정을 받았다고 발표했다. 이 사례에서는 대표성을 인정하는 단계와 실제 근로 조건을 정하는 첫 계약을 구분해 읽을 필요가 있다.
+
+*대표 이미지: CWA 발표를 바탕으로 이 브리핑용으로 직접 제작한 단계 설명도. 첫 계약의 현재 상태는 확인하지 않았으며, 실제 직원 사진이나 공식 노조 홍보물이 아니다.*
 
 ## 무슨 일이 있었나
 {:.briefing-heading}
@@ -50,4 +57,6 @@ Heart Machine은 《Hyper Light Drifter》와 《Solar Ash》를 제작한 스�
 
 - [CWA — “Video Game Developers at Heart Machine Secure Voluntary Union Recognition with CWA”](https://cwa-union.org/news/releases/video-game-developers-heart-machine-secure-voluntary-union-recognition-cwa) — **2026년 3월 9일**, 조직 당사자의 공식 보도자료. 대표 범위, 2월 요청과 자발적 인정, 첫 계약을 향한 당사자 발언을 확인했다.
 
-**확인 범위:** 2026년 10월 11일 위 공식 발표를 확인했다. 발표 당시의 인정 사례를 다루며 최신 계약 상태·임금·인원·제작 성과는 확인하지 않았다. 재사용 허가가 확인된 대표 이미지가 없어 생략했다. ‘왜 중요한가’와 적용 제안은 필자의 분석이며 노동 조건 개선의 실증 결과가 아니다.
+- **대표 이미지 출처:** 이 브리핑용 자체 제작 설명도. 요청·인정·계약을 구분하기 위한 편집 이미지이며, CWA 발표에서 확인한 단계만 완료로 표시했다. 외부 사진이나 로고를 사용하지 않았다.
+
+**확인 범위:** 2026년 10월 11일 위 공식 발표를 확인했다. 발표 당시의 인정 사례를 다루며 최신 계약 상태·임금·인원·제작 성과는 확인하지 않았다. ‘왜 중요한가’와 적용 제안은 필자의 분석이며 노동 조건 개선의 실증 결과가 아니다.

@@ -3,9 +3,16 @@ title: "게임 개발 브리핑 | Silver Pines, 단순한 3D 공간과 손그림
 date: 2026-10-11 10:20:00 +0900
 categories: [게임 개발 브리핑]
 tags: [Silver Pines, 아트 제작, 소규모 팀, 로토스코핑]
+image:
+  path: /assets/img/briefing/silver-pines-press.jpg
+  alt: "Silver Pines 공식 보도용 스크린샷 — 비 내리는 페리 사무소 앞의 두 캐릭터와 손그림 질감의 배경"
+  width: 1920
+  height: 1080
 ---
 
 소규모 팀의 독특한 아트는 모든 자산을 같은 방식으로 만드는 데서 나오지 않을 수 있다. 《Silver Pines》 제작진은 환경을 단순한 3D와 사진 기반 텍스처로 구성하면서, 주인공에는 1,800장을 넘는 손그림 프레임을 들였다. 2026년 10월 8일 공개된 인터뷰는 어디를 단순화하고 어디에 시간을 썼는지 보여준다.
+
+*대표 이미지: Silver Pines 공식 보도용 스크린샷. 출처 Team17의 Silver Pines Press Kit 2026, `Screenshots/Screen 7.jpg`. 게임 이미지 권리는 Wych Elm / Team17 등 해당 권리자에게 있다.*
 
 ## 무슨 일이 있었나
 {:.briefing-heading}
@@ -49,6 +56,6 @@ Larsson에 따르면 주인공 한 명에만 **1,800장을 넘는 손그림 프�
 {:.briefing-heading}
 
 - [80 Level — “How Silver Pines Used Rotoscoping to Create Its Unsettling Horror”](https://80.lv/articles/how-silver-pines-used-rotoscoping-to-create-its-unsettling-horror) — Linus Larsson 인터뷰, 진행 David Jagneaux, **2026년 10월 8일**. 레벨 인력, Unity·ProBuilder, 텍스처, 모형 단계와 애니메이션 제작의 당사자 설명.
-- [80 Level의 재게시 정책](https://80.lv/republishing-policy) — 기사 이미지 허가는 별도로 받아야 한다. 원문의 화면·사진에 대한 재사용 허가를 확인하지 못해 대표 이미지는 생략했다.
+- [Team17 공식 Press Kit Archive](https://www.team17.com/press-kit-archive) — 대표 이미지 출처. 배급사가 보도용으로 제공하는 [Silver Pines Press Kit 2026](https://www.team17.com/hubfs/Press%20Kits/Silver%20Pines%20Press%20Kit%202026.zip)의 스크린샷을 원본 그대로 사용했다. 80 Level에 게재된 이미지의 재사용 허가와는 별개의 공식 보도 자료다. 이미지는 시각 스타일을 보여주기 위한 것이며 직접 플레이의 증거로 사용하지 않았다.
 
 **확인 범위:** 2026년 10월 11일 인터뷰 본문과 게시일을 확인했다. 인력과 프레임 수는 개발자 설명이며 제작 파일·근무 시간을 검증하지 않았다. 출시 상태나 판매 성과는 이 글의 확인 대상에 포함하지 않았다. ‘왜 중요한가’와 적용 제안은 필자의 분석이며, 직접 플레이로 공포감이나 동선의 완성도를 검증하지 않았다.

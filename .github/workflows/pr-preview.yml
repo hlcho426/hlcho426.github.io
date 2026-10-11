@@ -87,6 +87,10 @@ jobs:
           done
           curl --fail --retry 3 "$preview_url/assets/css/jekyll-theme-chirpy.css" -o /tmp/preview.css
           grep -q 'briefing-heading' /tmp/preview.css
+          for asset in nocturne-development.svg rizomuv-logo.png silver-pines-press.jpg heart-machine-union.svg; do
+            curl --fail --retry 3 "$preview_url/assets/img/briefing/$asset" -o "/tmp/$asset"
+            test -s "/tmp/$asset"
+          done
           echo "url=$preview_url" >> "$GITHUB_OUTPUT"
           echo "expires=$(date -u -d '+45 minutes' '+%Y-%m-%d %H:%M UTC')" >> "$GITHUB_OUTPUT"
       - name: Publish verified link in the PR

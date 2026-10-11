@@ -15,7 +15,14 @@ Double Fine 후보는 교체했다. [NLRB 사건 20-RC-386546](https://www.nlrb.
 
 ## 이미지
 
-네 글 모두 대표 이미지 생략. [80 Level 정책](https://80.lv/republishing-policy)은 텍스트에 대한 허가가 이미지까지 확장되지 않으며 별도 권리자 허가가 필요하다고 명시한다. [Rizom-Lab 이용 약관](https://www.rizomuv.com/website-terms-of-use/)과 CWA 발표에서도 사용할 이미지의 재게시 허가를 확인하지 못했다. 출처 표시만으로 허가를 대신하지 않는다.
+네 글 모두 대표 이미지와 대체 텍스트·출처 캡션을 추가했다. 처음에는 이미지를 생략했으나 공식 보도 자료와 별도 브랜드 지침을 확인해 보완했다.
+
+- Silver Pines: [Team17 Press Kit Archive](https://www.team17.com/press-kit-archive)가 보도용으로 제공하는 [2026 프레스킷](https://www.team17.com/hubfs/Press%20Kits/Silver%20Pines%20Press%20Kit%202026.zip)의 `Screenshots/Screen 7.jpg`. 원본 그대로 사용. 권리자는 Wych Elm / Team17 등 해당 권리자이며 블로그의 일반 본문 라이선스가 이 이미지까지 확장되지 않는다.
+- RizomUV: [공식 브랜드 지침](https://www.rizomuv.com/writing-and-branding-guidelines/)이 정지 이미지의 로고 사용을 허용. 제공된 `RizomUV-Rectangle-Dark-2.png`를 변경 없이 사용하고 제휴·후원을 암시하지 않는다. 로고 권리는 Rizom-Lab에 남는다.
+- Nocturne: 공식 프레스킷의 이미지 폴더에 현재 파일이 표시되지 않아 자체 제작 설명도를 사용. 게임 스크린샷·공식 아트가 아님을 명시.
+- Heart Machine: 인정과 첫 계약의 단계를 구분하는 자체 제작 설명도. 실제 직원 사진·공식 홍보물이 아님을 명시하고 계약 상태는 미확인으로 표시.
+
+[80 Level 정책](https://80.lv/republishing-policy)의 이미지 허가 제한과 개발사·배급사 자료의 이용 조건은 별개로 평가했다. 네 대표 자산은 저장소의 `assets/img/briefing/`에 저장해 외부 이미지 링크에 의존하지 않는다.
 
 ## PR 미리보기
 

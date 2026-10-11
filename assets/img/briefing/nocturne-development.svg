@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+<title id="title">Nocturne development: rhythm skill meets RPG growth</title>
+<desc id="desc">Original editorial diagram of genre integration, tooling and playtesting. This is not a screenshot from the game.</desc>
+<defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#17182f"/><stop offset="1" stop-color="#33224e"/></linearGradient><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity=".045"/></pattern></defs>
+<rect width="1200" height="675" fill="url(#bg)"/><rect width="1200" height="675" fill="url(#grid)"/>
+<g font-family="Arial, sans-serif"><text x="70" y="75" fill="#c3abf2" font-size="19" letter-spacing="4">DEVELOPMENT RETROSPECTIVE</text><text x="66" y="159" fill="#fff" font-size="76" font-weight="700">NOCTURNE</text><text x="71" y="204" fill="#d6ccdf" font-size="25">A decade of iteration. Three major rebuilds.</text>
+<rect x="70" y="268" width="465" height="205" rx="20" fill="#11182d" stroke="#7dccd6" stroke-opacity=".6"/><text x="105" y="315" fill="#7dccd6" font-size="20" letter-spacing="3">RHYTHM</text><text x="105" y="352" fill="#fff" font-size="30" font-weight="700">Player skill</text>
+<g stroke="#344658" stroke-width="2"><path d="M107 385H495M107 414H495M107 443H495"/></g><g fill="#7dccd6"><rect x="148" y="377" width="16" height="16" rx="3"/><rect x="221" y="406" width="16" height="16" rx="3"/><rect x="294" y="435" width="16" height="16" rx="3"/><rect x="367" y="377" width="16" height="16" rx="3"/><rect x="440" y="406" width="16" height="16" rx="3"/></g>
+<rect x="665" y="268" width="465" height="205" rx="20" fill="#221b34" stroke="#d8a878" stroke-opacity=".6"/><text x="700" y="315" fill="#eac08c" font-size="20" letter-spacing="3">RPG</text><text x="700" y="352" fill="#fff" font-size="30" font-weight="700">Character growth</text>
+<g fill="#eac08c"><rect x="708" y="423" width="65" height="24" rx="4"/><rect x="798" y="403" width="65" height="44" rx="4"/><rect x="888" y="383" width="65" height="64" rx="4"/><rect x="978" y="363" width="65" height="84" rx="4"/></g>
+<path d="M535 365H665" stroke="#bd9dde" stroke-width="3"/><circle cx="600" cy="365" r="28" fill="#403258" stroke="#bd9dde" stroke-width="2"/><path d="M588 365H612M600 353V377" stroke="#fff" stroke-width="3"/>
+<path d="M305 473V509H895V473M600 509V540" fill="none" stroke="#746487" stroke-width="2"/>
+<rect x="260" y="540" width="680" height="67" rx="33" fill="#ffffff" fill-opacity=".08"/><text x="600" y="582" text-anchor="middle" fill="#ede5f7" font-size="23" letter-spacing="3">DESIGN  /  TOOLING  /  PLAYTEST</text>
+<text x="70" y="647" fill="#b9abc8" font-size="15">Original editorial diagram · Not game footage</text></g></svg>
