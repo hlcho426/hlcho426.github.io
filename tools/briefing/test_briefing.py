@@ -1,6 +1,7 @@
 import copy
 import json
 import os
+import shutil
 import sys
 import tempfile
 import unittest
@@ -106,6 +107,11 @@ class BriefingTests(unittest.TestCase):
         self.assertEqual(normalize_url("http://www.example.org/news/?utm_source=x#here"),
                          normalize_url("https://example.org/news"))
 
+    def test_render_preserves_working_source_host(self):
+        self.source["url"] = "https://www.example.org/article"
+        text = render(self.article, self.source, "game", TODAY, CONFIG)
+        self.assertIn("](<https://www.example.org/article>)", text)
+
     def test_arxiv_version_dedup(self):
         self.assertEqual(normalize_url("https://arxiv.org/pdf/2601.12345v2.pdf"),
                          normalize_url("https://arxiv.org/abs/2601.12345"))
@@ -209,6 +215,28 @@ class BriefingTests(unittest.TestCase):
             out = Path(tmp)
             generate("game", ROOT, out, TODAY)
             with self.assertRaisesRegex(ValueError, "cannot be published"): publish(out, "o/r")
+
+    def test_publisher_uses_only_review_branch_and_one_pr(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            out = root / "output"
+            report = generate("game", ROOT, out, TODAY)
+            report["mode"] = "live"  # Simulated writer output; every Git/GitHub mutation is mocked.
+            (out / "report.json").write_text(json.dumps(report), encoding="utf-8")
+            (root / "_posts").mkdir()
+            name = report["posts"][0]["file"]
+            shutil.copyfile(out / "_posts" / name, root / "_posts" / name)
+            shutil.copyfile(ROOT / "README.md", root / "README.md")
+            here = root / "tools" / "briefing"
+            here.mkdir(parents=True)
+            shutil.copyfile(HERE / "config.json", here / "config.json")
+            with patch("publish.HERE", here), patch("publish.preflight", return_value=(None, set(), set())), patch("publish.command") as commands, patch("publish.subprocess.check_output", return_value=f"_posts/{name}\n"), patch("publish.gh", side_effect=["[]", "https://example.org/pr/test"]) as github:
+                publish(out, "o/r")
+                pushes = [c.args for c in commands.call_args_list if c.args[:2] == ("git", "push")]
+                self.assertEqual(pushes, [("git", "push", "origin", "HEAD:refs/heads/codex/briefing-game-2026-10-11")])
+                prs = [c.args for c in github.call_args_list if c.args[:2] == ("pr", "create")]
+                self.assertEqual(len(prs), 1)
+                self.assertNotIn("merge", " ".join(str(c.args) for c in github.call_args_list))
 
     def test_bad_category_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:

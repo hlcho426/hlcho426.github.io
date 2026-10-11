@@ -214,7 +214,8 @@ def validate_article(article, source, kind, today, config):
 
 def render(article, source, kind, today, config):
     spec = config["types"][kind]
-    url = normalize_url(source["url"])
+    url = source["url"]
+    normalize_url(url)  # Validate, but preserve the final working URL in public links.
     meta = {"title": spec["prefix"] + " | " + article["title"],
             "date": today.isoformat() + " 08:00:00 +0900", "categories": [spec["category"]],
             "tags": [spec["prefix"]], "briefing_type": kind,

@@ -35,7 +35,7 @@ def publish(output, repo):
         from core import event_key
         if normalize_url(post["source"]) in urls or event_key(meta["briefing_event"]) in events:
             raise ValueError("Source/event appeared in another PR since generation; rerun")
-        files.append(str(path.relative_to(root)))
+        files.append(path.relative_to(root).as_posix())
     branch = f"codex/briefing-{report['kind']}-{report['date']}"
     # Never overwrite a leftover branch after a partially failed run.
     existing = gh("api", f"repos/{repo}/git/matching-refs/heads/{branch}")

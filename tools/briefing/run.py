@@ -79,11 +79,11 @@ class OpenAI:
                 result = json.load(response)
         except urllib.error.HTTPError as error:
             raise RuntimeError(f"OpenAI HTTP {error.code}; inspect provider dashboard") from None
-        if result.get("status") != "completed":
-            raise ValueError("Model response was incomplete or refused")
         self.usage.append({"response_id": result.get("id"), "model": result.get("model"),
                            "usage": result.get("usage"),
                            "search_calls": sum(o.get("type") == "web_search_call" for o in result.get("output", []))})
+        if result.get("status") != "completed":
+            raise ValueError("Model response was incomplete or refused")
         text = "".join(c.get("text", "") for o in result.get("output", [])
                        if o.get("type") == "message" for c in o.get("content", [])
                        if c.get("type") == "output_text")
@@ -184,7 +184,7 @@ def generate(kind, root, output, today, mode="fixture", repo=None):
                     raise ValueError("Post file already exists")
                 path.write_text(render(article, source, kind, today, config), encoding="utf-8")
                 validate_post(path, root)
-                report["posts"].append({"file": name, "source": normalize_url(source["url"]),
+                report["posts"].append({"file": name, "source": source["url"],
                                         "event_key": article["event_key"], "source_sha256": source.get("sha256"),
                                         "source_date": article["source_date"],
                                         "evidence_checked": len(article["paragraphs"])})
