@@ -100,3 +100,56 @@ img[src*="/assets/img/briefing/rizomuv-logo.png"] {
     }
   }
 }
+
+/* 유니티 공부 캡처 이미지(assets/img/unitystudy/): 이미지와 아래 캡션을 초록 액자 하나로 감싸 본문과 구분
+   - 이미지(a.img-link)가 액자 윗부분, 바로 뒤 캡션(_..._ → em)이 액자 아랫부분이 되어 이어 붙는다
+   - 캡션이 없으면 이미지만 액자로 감싼다 */
+$capture: 'img[src*="/assets/img/unitystudy/"]';
+
+.content a.img-link:has(> #{$capture}) {
+  display: block;
+  margin: 1.75rem 0;
+  padding: 10px;
+  background: var(--capture-frame-bg);
+  border: 1px solid var(--capture-frame-border);
+  border-radius: 12px;
+
+  &:has(+ em) {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: 0;
+    border-radius: 12px 12px 0 0;
+  }
+
+  & + em {
+    margin: 0 0 1.75rem;
+    padding: 0.6rem 10px 0.75rem;
+    background: var(--capture-frame-bg);
+    border: 1px solid var(--capture-frame-border);
+    border-top: 0;
+    border-radius: 0 0 12px 12px;
+  }
+}
+
+.content #{$capture} {
+  margin: 0 auto;
+  border-radius: 6px;
+}
+
+/* 액자 색: 밝은 모드 / 다크 모드(직접 고른 경우와 시스템 설정을 따르는 경우 모두) */
+html {
+  --capture-frame-bg: #eef4f1;
+  --capture-frame-border: #cfdcd5;
+}
+
+html[data-mode="dark"] {
+  --capture-frame-bg: #26302c;
+  --capture-frame-border: #3b4a43;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode]) {
+    --capture-frame-bg: #26302c;
+    --capture-frame-border: #3b4a43;
+  }
+}

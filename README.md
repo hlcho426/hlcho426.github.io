@@ -86,7 +86,7 @@ Codex 앱의 로컬 예약 작업으로 게임 개발·게임 개발 기술 데�
 
 | 파일 | 내용 |
 |---|---|
-| `assets/css/jekyll-theme-chirpy.scss` | 글꼴(카페24 오스퀘어 / 에어), 사이드바 배경과 글자색, 사이드바 카테고리 스타일 |
+| `assets/css/jekyll-theme-chirpy.scss` | 글꼴(카페24 오스퀘어 / 에어), 사이드바 배경과 글자색, 사이드바 카테고리 스타일, 유니티 공부 캡처 이미지(`assets/img/unitystudy/`) 액자 |
 | `assets/fonts/` | 웹폰트 파일 |
 | `_includes/sidebar.html` | Chirpy v7.6.0 사이드바 복사본. 카테고리 탭 아래에 카테고리 목록 추가 |
 | `_includes/series.html` | 시리즈 글 목차 상자 (위 "시리즈 글" 참고) |
