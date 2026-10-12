@@ -2,9 +2,10 @@
 title: Claude Haiku 5.5, 반복 업무에 맞춘 모델을 고르는 기준
 date: 2026-10-11 08:00:00 +0900
 categories:
-- 게임 개발 기술
+- 레퍼런스 조사
+- 개발 도구
 tags:
-- 게임 개발 기술
+- 개발 도구
 briefing_type: ai
 briefing_event: anthropic-claude-haiku-5-5-launch-20261007
 briefing_sources:

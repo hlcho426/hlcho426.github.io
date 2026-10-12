@@ -173,9 +173,12 @@ def frontmatter(text):
 
 
 def categories(root):
+    """Allowed front matter category lists from the README table; a '-' sub-category means top level only."""
     readme = (root / "README.md").read_text(encoding="utf-8")
     table = readme.split("## 카테고리 규칙", 1)[1].split("헷갈릴 때", 1)[0]
-    return {m.strip() for m in re.findall(r"^\| ([^|]+) \|", table, re.M) if m.strip() != "카테고리"}
+    rows = re.findall(r"^\| ([^|]+) \| ([^|]+) \|", table, re.M)
+    return [[top.strip()] + ([sub.strip()] if sub.strip() != "-" else [])
+            for top, sub in rows if top.strip() != "큰 카테고리"]
 
 
 def validate_article(article, source, kind, today, config):
@@ -246,7 +249,8 @@ def render(article, source, kind, today, config):
     normalize_url(url)  # Validate, but preserve the final working URL in public links.
     meta = {"title": article["title"],
             "description": " ".join(article["lead"].split())[:160],
-            "date": today.isoformat() + " 08:00:00 +0900", "categories": [spec["category"]],
+            "date": today.isoformat() + " 08:00:00 +0900",
+            "categories": [spec["parent_category"], spec["category"]],
             "tags": [spec["category"]], "briefing_type": kind,
             "briefing_event": article["event_key"], "briefing_sources": [url]}
     def heading(value):
@@ -295,14 +299,14 @@ def render(article, source, kind, today, config):
 
 def validate_post(path, root):
     meta, body = frontmatter(path.read_text(encoding="utf-8"))
-    if meta.get("categories") not in [[c] for c in categories(root)]:
+    if meta.get("categories") not in categories(root):
         raise ValueError("Category does not match README")
     if meta.get("briefing_type"):
         if not re.fullmatch(r"\d{4}-\d{2}-\d{2}-[a-z0-9-]+\.md", path.name):
             raise ValueError("Post filename must be date + English slug")
         config = json.loads((HERE / "config.json").read_text(encoding="utf-8"))
         spec = config["types"][meta["briefing_type"]]
-        if meta["categories"] != [spec["category"]]:
+        if meta["categories"] != [spec["parent_category"], spec["category"]]:
             raise ValueError("Briefing type/category/title mismatch")
         sections = RESEARCH_SECTIONS if meta.get("briefing_format") == "research-v2" else SECTIONS
         if meta.get("briefing_format") == "research-v2" and meta["briefing_type"] != "research":

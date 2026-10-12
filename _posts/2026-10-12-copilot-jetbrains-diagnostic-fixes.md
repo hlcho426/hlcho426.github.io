@@ -2,7 +2,8 @@
 title: Copilot for JetBrains, 진단에서 수정 요청까지의 단계를 줄인다
 date: 2026-10-12 00:31:47 +0900
 categories:
-- 게임 개발 기술
+- 레퍼런스 조사
+- 개발 도구
 tags:
 - Copilot
 - JetBrains

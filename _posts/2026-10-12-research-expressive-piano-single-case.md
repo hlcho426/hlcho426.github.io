@@ -1,7 +1,7 @@
 ---
 title: "연주로 감정을 표현한다는 것 — 피아니스트 한 명의 뇌파 연구를 읽는 법"
 date: 2026-10-12 00:49:20 +0900
-categories: [게임 디자인 연구]
+categories: [레퍼런스 조사, 기획 연구]
 tags: [음악, 감정 표현, 연구 방법]
 briefing_type: research
 briefing_event: doi-10-3389-fcogn-2026-1945714-expressive-piano

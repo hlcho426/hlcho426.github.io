@@ -1,7 +1,7 @@
 ---
 title: "RizomUV 2027, UV 수정부터 반복 작업의 자동화까지 잇는다"
 date: 2026-10-11 10:10:00 +0900
-categories: [게임 개발 기술]
+categories: [레퍼런스 조사, 개발 도구]
 tags: [RizomUV, UV, 개발 도구, 아트 파이프라인]
 image:
   path: /assets/img/briefing/rizomuv-logo.png

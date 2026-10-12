@@ -35,7 +35,8 @@ class BriefingTests(unittest.TestCase):
                 p = Path(tmp) / f"{TODAY}-{kind}-test.md"
                 p.write_text(render(f["article"], f["source"], kind, TODAY, CONFIG), encoding="utf-8")
                 meta = validate_post(p, ROOT)
-                self.assertEqual(meta["categories"], [CONFIG["types"][kind]["category"]])
+                spec = CONFIG["types"][kind]
+                self.assertEqual(meta["categories"], [spec["parent_category"], spec["category"]])
                 self.assertEqual(meta["title"], f["article"]["title"])
                 self.assertNotIn("image", meta)
                 self.assertTrue(meta["description"])
@@ -126,7 +127,7 @@ class BriefingTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "Missing sections"):
                 validate_post(p, ROOT)
             legacy = render(self.article, self.source, "game", TODAY, CONFIG)
-            legacy = legacy.replace("briefing_type: game", "briefing_type: research").replace("게임 개발 브리핑", "게임 디자인 연구")
+            legacy = legacy.replace("briefing_type: game", "briefing_type: research").replace("업계 뉴스", "기획 연구")
             p.write_text(legacy, encoding="utf-8")
             validate_post(p, ROOT)
 
@@ -289,8 +290,16 @@ class BriefingTests(unittest.TestCase):
     def test_bad_category_rejected(self):
         with tempfile.TemporaryDirectory() as tmp:
             p = Path(tmp) / f"{TODAY}-game-test.md"
-            p.write_text(render(self.article, self.source, "game", TODAY, CONFIG).replace("게임 개발 브리핑\n", "새 카테고리\n"), encoding="utf-8")
+            p.write_text(render(self.article, self.source, "game", TODAY, CONFIG).replace("업계 뉴스\n", "새 카테고리\n"), encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "Category"): validate_post(p, ROOT)
+
+    def test_readme_two_level_categories(self):
+        allowed = categories(ROOT)
+        for spec in CONFIG["types"].values():
+            self.assertIn([spec["parent_category"], spec["category"]], allowed)
+        self.assertIn(["게임 제작 공부", "유니티"], allowed)
+        self.assertIn(["일상"], allowed)
+        self.assertNotIn(["업계 뉴스"], allowed)
 
     def test_maximum_counts_match_user_request(self):
         self.assertEqual([CONFIG["types"][k]["max_posts"] for k in ("game", "ai", "research")], [5, 5, 3])

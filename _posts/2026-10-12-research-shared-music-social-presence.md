@@ -1,7 +1,7 @@
 ---
 title: "함께 음악을 들으면 더 가까워질까 — 동행감과 협동 성과가 갈린 실험"
 date: 2026-10-12 00:49:10 +0900
-categories: [게임 디자인 연구]
+categories: [레퍼런스 조사, 기획 연구]
 tags: [음악, 플레이어 경험, 사회적 존재감]
 briefing_type: research
 briefing_event: doi-10-1007-s10339-026-01395-9-shared-listening

@@ -1,7 +1,7 @@
 ---
 title: "세 번 다시 만든 Nocturne, 10년 개발에서 남은 것은 도구와 검증"
 date: 2026-10-11 10:00:00 +0900
-categories: [게임 개발 브리핑]
+categories: [레퍼런스 조사, 업계 뉴스]
 tags: [Nocturne, 개발 회고, 리듬 게임, 제작 도구]
 image:
   path: /assets/img/briefing/nocturne-development.svg

@@ -1,7 +1,7 @@
 ---
 title: "결말을 바꿀 수 없어도 행동은 의미가 있을까 — Vellum of Lies의 참여 설계"
 date: 2026-10-12 00:49:00 +0900
-categories: [게임 디자인 연구]
+categories: [레퍼런스 조사, 기획 연구]
 tags: [내러티브, 플레이어 경험, 인터랙션]
 briefing_type: research
 briefing_event: doi-10-3390-mti10090096-vellum-lies

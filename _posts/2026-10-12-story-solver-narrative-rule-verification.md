@@ -2,7 +2,8 @@
 title: Story Solver, 대화의 문장보다 이야기 규칙의 도달 가능성을 검사한다
 date: 2026-10-12 00:31:47 +0900
 categories:
-- 게임 개발 기술
+- 레퍼런스 조사
+- 개발 도구
 tags:
 - Yarn Spinner
 - 내러티브

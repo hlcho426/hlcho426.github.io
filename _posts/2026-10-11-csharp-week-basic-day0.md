@@ -4,7 +4,7 @@ date: 2026-10-11 22:08:00 +0900
 description: "Unity Hub로 Unity 6를 설치하고 프로젝트를 만든 뒤, 큐브에 첫 C# 스크립트를 붙여 콘솔에 글자를 띄우기까지. 비전공자를 위한 유니티 첫걸음."
 series: 유니티 C# 일주일
 series_title: "기초 Day 0: 유니티 설치와 첫 스크립트"
-categories: [유니티 공부]
+categories: [게임 제작 공부, 유니티]
 tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
 image:
   path: /assets/img/unitystudy/csharp_image.png

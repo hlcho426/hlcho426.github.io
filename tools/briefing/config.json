@@ -5,8 +5,8 @@
   "daily_lookback_days": 7,
   "research_lookback_days": 365,
   "types": {
-    "game": {"category": "게임 개발 브리핑", "max_posts": 5, "topic": "게임 개발 사례, 게임 디자인, 제작 도구, 산업 이슈"},
-    "ai": {"category": "게임 개발 기술", "max_posts": 5, "topic": "게임 제작의 구체적인 문제를 해결하는 AI·엔진·IDE·내러티브 테스트·아트 파이프라인 도구와 기술, 검증 방법 및 생산성 사례; 작업 흐름·예시·사용 조건·도입 판단 필수"},
-    "research": {"category": "게임 디자인 연구", "max_posts": 3, "topic": "플레이어 경험 설계, 내러티브 인터랙션, 게임 시스템, 감정 표현의 논문·보고서·심층 분석; 공개 전문 우선"}
+    "game": {"parent_category": "레퍼런스 조사", "category": "업계 뉴스", "max_posts": 5, "topic": "게임 개발 사례, 게임 디자인, 제작 도구, 산업 이슈"},
+    "ai": {"parent_category": "레퍼런스 조사", "category": "개발 도구", "max_posts": 5, "topic": "게임 제작의 구체적인 문제를 해결하는 AI·엔진·IDE·내러티브 테스트·아트 파이프라인 도구와 기술, 검증 방법 및 생산성 사례; 작업 흐름·예시·사용 조건·도입 판단 필수"},
+    "research": {"parent_category": "레퍼런스 조사", "category": "기획 연구", "max_posts": 3, "topic": "플레이어 경험 설계, 내러티브 인터랙션, 게임 시스템, 감정 표현의 논문·보고서·심층 분석; 공개 전문 우선"}
   }
 }

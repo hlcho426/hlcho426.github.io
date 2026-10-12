@@ -2,7 +2,8 @@
 title: Yarn Spinner, 대화 테스트 파일과 연출 명령을 준비하는 3.3 개발 소식
 date: 2026-10-12 00:31:47 +0900
 categories:
-- 게임 개발 기술
+- 레퍼런스 조사
+- 개발 도구
 tags:
 - Yarn Spinner
 - Unity

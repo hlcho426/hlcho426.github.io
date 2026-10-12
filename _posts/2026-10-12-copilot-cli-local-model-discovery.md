@@ -2,7 +2,8 @@
 title: Copilot CLI, 로컬 모델을 발견하는 기능과 오프라인 설정을 구분하자
 date: 2026-10-12 00:31:47 +0900
 categories:
-- 게임 개발 기술
+- 레퍼런스 조사
+- 개발 도구
 tags:
 - Copilot
 - 로컬 모델

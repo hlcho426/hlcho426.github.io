@@ -2,9 +2,10 @@
 title: Unity 7의 CoreCLR 전환, 재로딩 방식과 체감 속도를 따로 확인하자
 date: 2026-10-12 01:40:56 +0900
 categories:
-- 게임 개발 기술
+- 레퍼런스 조사
+- 개발 도구
 tags:
-- 게임 개발 기술
+- 개발 도구
 briefing_type: ai
 briefing_event: unity-coreclr-october2026-alpha-reload
 briefing_sources:
