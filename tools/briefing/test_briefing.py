@@ -82,9 +82,53 @@ class BriefingTests(unittest.TestCase):
                 validate_article(f["article"], f["source"], "research", TODAY, CONFIG)
 
     def test_research_structure_required(self):
-        self.article["paragraphs"][2]["heading"] = "일반 요약"
-        with self.assertRaisesRegex(ValueError, "research question"):
-            self.validate("research")
+        f = fixture("research", TODAY)
+        f["article"]["paragraphs"][2].pop("research_section")
+        with self.assertRaisesRegex(ValueError, "research purpose"):
+            validate_article(f["article"], f["source"], "research", TODAY, CONFIG)
+
+    def test_research_bibliography_requires_source_title_and_authors(self):
+        for field in ("title", "authors"):
+            f = fixture("research", TODAY)
+            f["article"]["research_info"][field] = ["Invented Author"] if field == "authors" else "Invented research title"
+            with self.assertRaisesRegex(ValueError, "source evidence"):
+                validate_article(f["article"], f["source"], "research", TODAY, CONFIG)
+
+    def test_research_requires_bibliography_and_explicit_limits(self):
+        f = fixture("research", TODAY)
+        f["article"].pop("research_info")
+        with self.assertRaisesRegex(ValueError, "bibliography"):
+            validate_article(f["article"], f["source"], "research", TODAY, CONFIG)
+        f = fixture("research", TODAY)
+        f["article"]["paragraphs"][-1]["heading"] = "발견의 의미"
+        with self.assertRaisesRegex(ValueError, "explicit research limitations"):
+            validate_article(f["article"], f["source"], "research", TODAY, CONFIG)
+
+    def test_research_has_ordered_paper_sections_without_news_headings(self):
+        from core import RESEARCH_SECTIONS
+        f = fixture("research", TODAY)
+        f["article"]["paragraphs"].reverse()
+        post = render(f["article"], f["source"], "research", TODAY, CONFIG)
+        meta, body = frontmatter(post)
+        self.assertEqual(meta["briefing_format"], "research-v2")
+        self.assertEqual([line[3:] for line in body.splitlines() if line.startswith("## ")], list(RESEARCH_SECTIONS))
+        self.assertNotIn("무슨 일이 있었나", body)
+        self.assertNotIn("왜 중요한가", body)
+        self.assertIn("Synthetic Test Author", body)
+        self.assertIn("저작권·이용 조건", body)
+
+    def test_research_new_format_rejects_missing_section_but_legacy_posts_remain_valid(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            f = fixture("research", TODAY)
+            p = Path(tmp) / f"{TODAY}-research-test.md"
+            text = render(f["article"], f["source"], "research", TODAY, CONFIG)
+            p.write_text(text.replace("## 연구 방법", "## 다른 제목"), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "Missing sections"):
+                validate_post(p, ROOT)
+            legacy = render(self.article, self.source, "game", TODAY, CONFIG)
+            legacy = legacy.replace("briefing_type: game", "briefing_type: research").replace("게임 개발 브리핑", "게임 디자인 연구")
+            p.write_text(legacy, encoding="utf-8")
+            validate_post(p, ROOT)
 
     def test_ai_conditions_required(self):
         self.article["ai_conditions"] = "알 수 없음"

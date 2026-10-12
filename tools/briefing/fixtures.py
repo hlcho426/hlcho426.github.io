@@ -19,5 +19,14 @@ def fixture(kind, today):
     if kind == "ai":
         article.update({"tech_workflow": paragraph, "tech_example": "설명용 합성 예시: " + paragraph,
                         "tech_audience": paragraph, "tech_verdict": "합성 시험의 판단: " + paragraph})
+    if kind == "research":
+        article["research_info"] = {"title": "Synthetic offline research fixture", "authors": ["Synthetic Test Author"],
+                                    "venue": "합성 시험 자료", "publication_type": "합성 자료: 실제 논문 아님",
+                                    "rights_note": "합성 자료: 실제 원문의 저작권·라이선스 안내가 아님"}
+        source["text"] += "\nSynthetic offline research fixture\nSynthetic Test Author"
+        for p, group in zip(article["paragraphs"], ("purpose", "methods", "results", "findings_limits")):
+            p["research_section"] = group
+        article["paragraphs"].insert(-1, {"heading": "시험 자료의 발견과 의미", "text": paragraph,
+                                         "evidence": evidence, "research_section": "findings_limits"})
     return {"url": source["url"], "title": source["title"], "event_key": article["event_key"],
             "source": source, "article": article}

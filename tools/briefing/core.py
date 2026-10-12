@@ -19,6 +19,10 @@ import yaml
 KST = timezone(timedelta(hours=9))
 HERE = Path(__file__).resolve().parent
 SECTIONS = ("무슨 일이 있었나", "왜 중요한가", "개발에 적용할 점", "원문과 확인 자료")
+RESEARCH_SECTIONS = ("연구 정보", "연구 목적과 질문", "연구 방법", "연구 결과",
+                     "연구 발견과 한계", "게임 설계에 적용할 점", "원문과 확인 범위")
+RESEARCH_GROUPS = {"purpose": RESEARCH_SECTIONS[1], "methods": RESEARCH_SECTIONS[2],
+                   "results": RESEARCH_SECTIONS[3], "findings_limits": RESEARCH_SECTIONS[4]}
 
 
 def object_schema(properties):
@@ -28,6 +32,7 @@ def object_schema(properties):
 
 STRING = {"type": "string"}
 PARAGRAPH = object_schema({"heading": STRING, "text": STRING, "evidence": STRING})
+PARAGRAPH["properties"]["research_section"] = {"enum": list(RESEARCH_GROUPS)}
 ARTICLE_SCHEMA = object_schema({
     "publishable": {"type": "boolean"}, "reason": STRING,
     "title": STRING, "slug": STRING, "event_key": STRING,
@@ -42,6 +47,10 @@ ARTICLE_SCHEMA = object_schema({
 TECH_FIELDS = {"tech_workflow": 80, "tech_example": 100,
                "tech_audience": 40, "tech_verdict": 60}
 ARTICLE_SCHEMA["properties"].update({field: STRING for field in TECH_FIELDS})
+ARTICLE_SCHEMA["properties"]["research_info"] = object_schema({
+    "title": STRING, "authors": {"type": "array", "items": STRING, "minItems": 1},
+    "venue": STRING, "publication_type": STRING, "rights_note": STRING,
+})
 CANDIDATES_SCHEMA = object_schema({"candidates": {"type": "array", "items": object_schema({
     "url": STRING, "title": STRING, "event_key": STRING,
 })}})
@@ -210,9 +219,19 @@ def validate_article(article, source, kind, today, config):
     if kind == "research":
         if not article["research_full_text"] or source.get("truncated") or len(source["text"]) < 5000:
             raise ValueError("Research full text is not available in model input")
-        headings = " ".join(p["heading"] for p in article["paragraphs"])
-        if not all(word in headings for word in ("질문", "방법", "발견", "한계")):
-            raise ValueError("Missing research question, method, findings or limitations")
+        info = article.get("research_info")
+        if not info or any(not str(value).strip() for value in info.values()):
+            raise ValueError("Missing research bibliography")
+        if flat(info["title"]) not in text or any(not flat(author) or flat(author) not in text for author in info["authors"]):
+            raise ValueError("Research title or author lacks collected source evidence")
+        groups = {p.get("research_section") for p in article["paragraphs"]}
+        if not set(RESEARCH_GROUPS).issubset(groups) or None in groups:
+            raise ValueError("Missing research purpose, methods, results or findings_limits section")
+        limits = [p for p in article["paragraphs"] if p["research_section"] == "findings_limits"]
+        if len(limits) < 2 or not any("발견" in p["heading"] or "의미" in p["heading"] for p in limits):
+            raise ValueError("Missing separate research findings and limitations paragraphs")
+        if not any("한계" in p["heading"] for p in limits):
+            raise ValueError("Missing explicit research limitations")
     all_prose = json.dumps(article, ensure_ascii=False)
     if re.search(r"<\s*script|\{%|\{\{|C:[\\/]|OPENAI_API_KEY|ghp_|github_pat_", all_prose, re.I):
         raise ValueError("Unsafe markup or private information marker")
@@ -232,7 +251,32 @@ def render(article, source, kind, today, config):
             "briefing_event": article["event_key"], "briefing_sources": [url]}
     def heading(value):
         return f"\n\n## {value}\n{{:.briefing-heading}}\n\n"
-    body = "*이 글은 공개 원문을 바탕으로 Codex가 조사하고 정리했습니다.*\n\n" + article["lead"] + heading(SECTIONS[0])
+    body = "*이 글은 공개 원문을 바탕으로 Codex가 조사하고 정리했습니다.*\n\n" + article["lead"]
+    source_title = re.sub(r"[\[\]\n\r{}<>`]", " ", source["title"])
+    if kind == "research":
+        meta["briefing_format"] = "research-v2"
+        info = article["research_info"]
+        def inline(value):
+            # Bibliography is prose, not a route for additional links or headings.
+            return re.sub(r'([\\`*_[\]{}()!|#])', r'\\\1', " ".join(value.split()))
+        body += heading(RESEARCH_SECTIONS[0])
+        body += (f"- **연구 제목:** {inline(info['title'])}\n"
+                 f"- **연구 저자:** {', '.join(inline(a) for a in info['authors'])}\n"
+                 f"- **발표 정보:** {inline(info['venue'])} · {article['source_date']}\n"
+                 f"- **자료 유형:** {inline(info['publication_type'])}\n"
+                 f"- **연구 원문:** [{source_title}](<{url}>)\n"
+                 f"- **저작권·이용 조건:** {inline(info['rights_note'])}")
+        for group, label in RESEARCH_GROUPS.items():
+            body += heading(label)
+            body += "\n\n".join("### " + p["heading"] + "\n\n" + p["text"]
+                                  for p in article["paragraphs"] if p["research_section"] == group)
+        body += heading(RESEARCH_SECTIONS[5]) + "**설계 적용에 관한 해석:** " + article["importance"]
+        body += "\n\n" + "\n\n".join("- " + p for p in article["applications"])
+        body += heading(RESEARCH_SECTIONS[6])
+        body += f"- [{source_title}](<{url}>) — **{article['source_date']}**, 원문 전문 확인.\n\n"
+        body += f"**확인 범위:** {today.isoformat()} 원문을 수집했다. " + article["scope"] + "\n"
+        return "---\n" + yaml.safe_dump(meta, allow_unicode=True, sort_keys=False).strip() + "\n---\n\n" + body
+    body += heading(SECTIONS[0])
     body += "\n\n".join("### " + p["heading"] + "\n\n" + p["text"] for p in article["paragraphs"])
     if kind == "ai":
         body += "\n\n### 제작 작업은 어떻게 달라지나\n\n" + article["tech_workflow"]
@@ -244,7 +288,6 @@ def render(article, source, kind, today, config):
         body += "\n\n### 어떤 개발자에게 관련 있나\n\n" + article["tech_audience"]
         body += "\n\n### 지금 도입할 만한가\n\n" + article["tech_verdict"]
     body += heading(SECTIONS[2]) + "\n\n".join("- " + p for p in article["applications"])
-    source_title = re.sub(r"[\[\]\n\r{}<>`]", " ", source["title"])
     body += heading(SECTIONS[3]) + f"- [{source_title}](<{url}>) — **{article['source_date']}**, 원문 본문 확인.\n\n"
     body += f"**확인 범위:** {today.isoformat()} 원문을 수집했다. " + article["scope"] + "\n"
     return "---\n" + yaml.safe_dump(meta, allow_unicode=True, sort_keys=False).strip() + "\n---\n\n" + body
@@ -261,9 +304,12 @@ def validate_post(path, root):
         spec = config["types"][meta["briefing_type"]]
         if meta["categories"] != [spec["category"]]:
             raise ValueError("Briefing type/category/title mismatch")
-        if "image" in meta or any("## " + s not in body for s in SECTIONS):
+        sections = RESEARCH_SECTIONS if meta.get("briefing_format") == "research-v2" else SECTIONS
+        if meta.get("briefing_format") == "research-v2" and meta["briefing_type"] != "research":
+            raise ValueError("Research format requires research type")
+        if "image" in meta or any("## " + s not in body for s in sections):
             raise ValueError("Missing sections or unverified image")
-        if body.count("{:.briefing-heading}") != 4 or "**확인 범위:**" not in body:
+        if body.count("{:.briefing-heading}") != len(sections) or "**확인 범위:**" not in body:
             raise ValueError("Missing section style or verification scope")
         stamp = str(meta["date"])
         if "+0900" not in stamp and "+09:00" not in stamp:
