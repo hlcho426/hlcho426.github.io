@@ -101,6 +101,52 @@ img[src*="/assets/img/briefing/rizomuv-logo.png"] {
   }
 }
 
+/* 큰 카테고리 페이지(_layouts/category.html): 작은 카테고리 제목 줄 아래에 최근 글 카드 */
+#post-list.category-groups {
+  margin-top: 1.5rem;
+
+  .category-group:not(:first-child) {
+    margin-top: 2.75rem;
+  }
+
+  .category-group-title {
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    margin: 0 0 1rem;
+    padding: 0 0.25rem 0.6rem;
+    border-bottom: 1px solid var(--main-border-color);
+    font-size: 1.2rem;
+
+    a {
+      color: var(--heading-color);
+      text-decoration: none;
+      border-bottom: none;
+    }
+
+    .fa-folder {
+      margin-right: 0.35rem;
+      font-size: 1rem;
+      color: var(--text-muted-color);
+    }
+
+    > span {
+      font-size: 0.95rem;
+    }
+
+    .category-group-more {
+      margin-left: auto;
+      font-size: 0.85rem;
+      color: var(--link-color);
+      white-space: nowrap;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
 /* 유니티 캡처 이미지(assets/img/unitystudy/): 이미지와 아래 캡션을 초록 액자 하나로 감싸 본문과 구분
    - 이미지(a.img-link)가 액자 윗부분, 바로 뒤 캡션(_..._ → em)이 액자 아랫부분이 되어 이어 붙는다
    - 캡션이 없으면 이미지만 액자로 감싼다 */

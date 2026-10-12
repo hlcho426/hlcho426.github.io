@@ -95,10 +95,13 @@ Codex 앱의 로컬 예약 작업으로 업계 뉴스·개발 도구 데일리�
 
 | 파일 | 내용 |
 |---|---|
-| `assets/css/jekyll-theme-chirpy.scss` | 글꼴(카페24 오스퀘어 / 에어), 사이드바 배경과 글자색, 사이드바 작은 카테고리 스타일, 유니티 캡처 이미지(`assets/img/unitystudy/`) 액자, 강의 글의 '직접 해 보기'·'앱에서 연습하기' 소제목 상자 |
+| `assets/css/jekyll-theme-chirpy.scss` | 글꼴(카페24 오스퀘어 / 에어), 사이드바 배경과 글자색, 사이드바 작은 카테고리 스타일, 큰 카테고리 페이지의 작은 카테고리 제목 줄, 유니티 캡처 이미지(`assets/img/unitystudy/`) 액자, 강의 글의 '직접 해 보기'·'앱에서 연습하기' 소제목 상자 |
 | `_includes/metadata-hook.html` | Chirpy가 모든 페이지 `<head>`에 넣는 자리. 애드센스 코드, 실습 소제목 아래 본문을 묶어 세로줄을 그리는 스크립트 |
 | `assets/fonts/` | 웹폰트 파일 |
 | `_includes/sidebar.html` | Chirpy v7.6.0 사이드바 복사본. 카테고리 탭 자리에 큰 카테고리와 그 아래 작은 카테고리를 펼치고, 태그·아카이브 탭은 숨김(페이지는 남아 있음) |
+| `_layouts/category.html` | Chirpy v7.6.0 카테고리 페이지 복사본. 작은 카테고리가 있는 큰 카테고리는 작은 카테고리별 최근 글 3편을 카드로 보여 줌 |
+| `_includes/post-card.html` | 카테고리 페이지의 글 카드 (홈 화면 카드와 같은 모양) |
+| `_includes/sub-categories.html` | 큰 카테고리 아래 작은 카테고리 순서 계산 (사이드바와 카테고리 페이지가 같이 씀) |
 | `_includes/series.html` | 시리즈 글 목차 상자 (위 "시리즈 글" 참고) |
 | `_data/series.yml` | 시리즈별 안내 문구 (목차 상자에 표시) |
 | `_data/sidebar_categories.yml` | 사이드바 카테고리 순서와 큰 카테고리 아이콘 |

@@ -1,0 +1,58 @@
+---
+layout: page
+# Chirpy v7.6.0 _layouts/category.html 복사본
+# - 작은 카테고리가 있는 큰 카테고리(예: 레퍼런스 조사)는 작은 카테고리별로 최근 글을 카드로 보여 준다
+# - 나머지(작은 카테고리 페이지, 일상처럼 작은 카테고리가 없는 큰 카테고리)는 원래처럼 글 제목 목록을 보여 준다
+---
+
+{% include lang.html %}
+{% include sub-categories.html top=page.title %}
+{% assign group_limit = 3 %}
+
+<div id="page-category">
+  <h1 class="ps-lg-2">
+    <i class="far fa-folder-open fa-fw text-muted"></i>
+    {{ page.title }}
+    <span class="lead text-muted ps-2">{{ page.posts | size }}</span>
+  </h1>
+
+  {% if sub_categories.size == 0 %}
+    <ul class="content ps-0">
+      {% for post in page.posts %}
+        <li class="d-flex justify-content-between px-md-3">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          <span class="dash flex-grow-1"></span>
+          {% include datetime.html date=post.date class='text-muted small text-nowrap' lang=lang %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>
+
+{% if sub_categories.size > 0 %}
+  <div id="post-list" class="category-groups">
+    {% for sub in sub_categories %}
+      {% assign sub_posts = page.posts | where_exp: 'item', 'item.categories contains sub' %}
+      {% capture sub_url %}/categories/{{ sub | slugify | url_encode }}/{% endcapture %}
+
+      <section class="category-group">
+        <h2 class="category-group-title">
+          <a href="{{ sub_url | relative_url }}">
+            <i class="far fa-folder fa-fw"></i>
+            {{ sub }}
+          </a>
+          <span class="text-muted">{{ sub_posts | size }}</span>
+          {% if sub_posts.size > group_limit %}
+            <a class="category-group-more" href="{{ sub_url | relative_url }}">
+              모두 보기<i class="fas fa-angle-right ms-1"></i>
+            </a>
+          {% endif %}
+        </h2>
+
+        {% for post in sub_posts limit: group_limit %}
+          {% include post-card.html %}
+        {% endfor %}
+      </section>
+    {% endfor %}
+  </div>
+{% endif %}

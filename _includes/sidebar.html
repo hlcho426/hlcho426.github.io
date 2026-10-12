@@ -36,18 +36,12 @@
         <!-- 카테고리 탭 자리에 큰 카테고리를 놓고, 그 아래에 작은 카테고리를 펼치기 -->
         {% if tab.layout == 'categories' %}
           {% assign sb_tops = '' | split: '' %}
-          {% assign sb_pairs = '' | split: '' %}
           {% for post in site.posts %}
             {% if post.categories.size > 0 %}
               {% assign sb_tops = sb_tops | push: post.categories[0] %}
             {% endif %}
-            {% if post.categories.size > 1 %}
-              {% capture sb_pair %}{{ post.categories[0] }}::{{ post.categories[1] }}{% endcapture %}
-              {% assign sb_pairs = sb_pairs | push: sb_pair %}
-            {% endif %}
           {% endfor %}
           {% assign sb_tops = sb_tops | uniq %}
-          {% assign sb_pairs = sb_pairs | uniq %}
           {% assign sb_groups = site.data.sidebar_categories %}
           {% assign sb_names = sb_groups | map: 'name' %}
 
@@ -77,30 +71,9 @@
               </a>
             </li>
 
-            <!-- 작은 카테고리도 같은 방식: children 순서를 먼저, 나머지는 가나다순 -->
-            {% assign sb_subs = '' | split: '' %}
-            {% for sb_pair in sb_pairs %}
-              {% assign sb_parts = sb_pair | split: '::' %}
-              {% if sb_parts[0] == top %}
-                {% assign sb_subs = sb_subs | push: sb_parts[1] %}
-              {% endif %}
-            {% endfor %}
-            {% assign sb_sub_ordered = '' | split: '' %}
-            {% for sb_name in sb_group.children %}
-              {% if sb_subs contains sb_name %}
-                {% assign sb_sub_ordered = sb_sub_ordered | push: sb_name %}
-              {% endif %}
-            {% endfor %}
-            {% assign sb_rest = '' | split: '' %}
-            {% for sb_name in sb_subs %}
-              {% unless sb_group.children contains sb_name %}
-                {% assign sb_rest = sb_rest | push: sb_name %}
-              {% endunless %}
-            {% endfor %}
-            {% assign sb_rest = sb_rest | sort %}
-            {% assign sb_sub_ordered = sb_sub_ordered | concat: sb_rest %}
-
-            {% for sub in sb_sub_ordered %}
+            <!-- 작은 카테고리도 같은 방식으로 정렬 (카테고리 페이지와 같은 순서) -->
+            {% include sub-categories.html top=top %}
+            {% for sub in sub_categories %}
               {% capture category_url %}/categories/{{ sub | slugify | url_encode }}/{% endcapture %}
               <li class="nav-item sidebar-category{% if page.layout == 'category' and page.title == sub %}{{ " active" }}{% endif %}">
                 <a href="{{ category_url | relative_url }}" class="nav-link">
