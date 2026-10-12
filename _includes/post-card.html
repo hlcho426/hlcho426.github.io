@@ -1,0 +1,53 @@
+{% comment %}
+  글 카드 하나 (Chirpy v7.6.0 _layouts/home.html의 카드 부분 복사본)
+  - 카테고리 페이지는 테마의 이미지 후처리(refactor-content.html)를 거치지 않으므로, 후처리를 거친 홈 화면과 같은 이미지 HTML을 직접 쓴다
+  - 카테고리 페이지 안이라 카테고리 표시는 빼고 날짜만 보여 준다
+  - 쓰는 곳: _layouts/category.html (바깥에서 post와 lang이 정해져 있어야 한다)
+{% endcomment %}
+<article class="card-wrapper card">
+  <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
+    {% assign card_body_col = '12' %}
+
+    {% if post.image %}
+      {% assign src = post.image.path | default: post.image %}
+
+      {% if post.media_subpath %}
+        {% unless src contains '://' %}
+          {% assign src = post.media_subpath
+            | append: '/'
+            | append: src
+            | replace: '///', '/'
+            | replace: '//', '/'
+          %}
+        {% endunless %}
+      {% endif %}
+
+      {% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
+
+      <div class="col-md-5">
+        <div class="preview-img">
+          <img src="{{ src | relative_url }}" alt="{{ alt }}" loading="lazy">
+        </div>
+      </div>
+
+      {% assign card_body_col = '7' %}
+    {% endif %}
+
+    <div class="col-md-{{ card_body_col }}">
+      <div class="card-body d-flex flex-column">
+        <h3 class="card-title my-2 mt-md-0">{{ post.title }}</h3>
+
+        <div class="card-text content mt-0 mb-3">
+          <p>{% include post-summary.html %}</p>
+        </div>
+
+        <div class="post-meta flex-grow-1 d-flex align-items-end">
+          <div class="me-auto">
+            <i class="far fa-calendar fa-fw me-1"></i>
+            {% include datetime.html date=post.date lang=lang %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+</article>

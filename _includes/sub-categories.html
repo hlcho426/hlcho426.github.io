@@ -1,0 +1,29 @@
+{% comment %}
+  큰 카테고리(include.top) 아래 작은 카테고리 이름을 순서대로 sub_categories에 담는다.
+  - _data/sidebar_categories.yml의 children 순서를 먼저, 거기 없는 이름은 가나다순으로 뒤에
+  - 글이 하나도 없는 작은 카테고리는 빠진다 (빈 카테고리는 페이지가 없어서 링크가 깨지기 때문)
+  - 쓰는 곳: _includes/sidebar.html, _layouts/category.html
+{% endcomment %}
+{% assign sc_found = '' | split: '' %}
+{% for sc_post in site.posts %}
+  {% if sc_post.categories.size > 1 and sc_post.categories[0] == include.top %}
+    {% assign sc_found = sc_found | push: sc_post.categories[1] %}
+  {% endif %}
+{% endfor %}
+{% assign sc_found = sc_found | uniq %}
+{% assign sc_group = site.data.sidebar_categories | where: 'name', include.top | first %}
+
+{% assign sub_categories = '' | split: '' %}
+{% for sc_name in sc_group.children %}
+  {% if sc_found contains sc_name %}
+    {% assign sub_categories = sub_categories | push: sc_name %}
+  {% endif %}
+{% endfor %}
+{% assign sc_rest = '' | split: '' %}
+{% for sc_name in sc_found %}
+  {% unless sc_group.children contains sc_name %}
+    {% assign sc_rest = sc_rest | push: sc_name %}
+  {% endunless %}
+{% endfor %}
+{% assign sc_rest = sc_rest | sort %}
+{% assign sub_categories = sub_categories | concat: sc_rest %}
