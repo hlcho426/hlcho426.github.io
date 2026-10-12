@@ -1,11 +1,15 @@
 ---
-title: "유니티 C# 기초 Day 1: 스크립트와 변수 (Start, Update, int, float, public)"
+title: "<유니티 C#> 기초 Day 1: 스크립트와 변수 (Start, Update, int, float, public)"
 date: 2026-10-11 22:12:00 +0900
 description: "유니티 스크립트의 Start와 Update, 변수와 자료형(int, float, bool, string), 계산과 public까지. 비전공자 눈높이로 한 줄씩 읽는 유니티 C# 기초."
 series: 유니티 C# 일주일
 series_title: "기초 Day 1: 스크립트와 변수"
 categories: [유니티 공부]
-tags: [유니티, C#, 변수, 자료형, Start, Update, 유니티 C# 일주일]
+tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
+image:
+  path: /assets/img/unitystudy/csharp_image.png
+  width: 1200
+  height: 675
 ---
 
 {% include series.html %}
@@ -20,6 +24,7 @@ tags: [유니티, C#, 변수, 자료형, Start, Update, 유니티 C# 일주일]
 - `public`을 붙여 인스펙터에서 값을 바꿀 수 있다
 
 ## 1. 스크립트의 뼈대 읽기
+{:.briefing-heading}
 
 새 스크립트를 만들면 늘 이 모양이다.
 
@@ -85,6 +90,7 @@ void Start()
 문장 끝의 `;`(세미콜론)은 "이 명령 끝"이라는 마침표다. 하나라도 빠지면 빨간 에러가 뜨고 게임이 실행되지 않는다. 초보 에러 1순위다.
 
 ## 2. 변수: 값을 담는 상자
+{:.briefing-heading}
 
 게임에는 기억해야 할 값이 많다. 체력, 속도, 점수, 닉네임. 이런 값을 담아 두는 이름 붙은 상자가 **변수**다.
 
@@ -125,6 +131,7 @@ hp = hp - 30;
 수학 시간에 `hp = hp - 30`을 보면 말이 안 된다. 하지만 코드에서 `=`는 **오른쪽을 계산해서 왼쪽 상자에 넣어라**라는 뜻이다. 그래서 두 번째 줄은 "지금 hp에서 30을 뺀 값을 다시 hp에 넣어라"이고, hp는 70이 된다. "같은가?"를 묻는 건 `==`이다. 이건 기초 Day 2의 if에서 나온다.
 
 ## 3. 계산하기
+{:.briefing-heading}
 
 게임 코드에서 정말 자주 쓰는 줄임 표현이 있다.
 
@@ -164,6 +171,7 @@ Debug.Log("HP: " + hp);   // HP: 70
 글자에 `+`로 숫자를 붙이면 숫자가 글자로 바뀌어 이어 붙는다. UI에 체력을 표시할 때 이렇게 쓴다.
 
 ## 4. public: 인스펙터에서 값 바꾸기
+{:.briefing-heading}
 
 ```csharp
 public class Player : MonoBehaviour
@@ -181,6 +189,7 @@ public class Player : MonoBehaviour
 {: .prompt-tip }
 
 ## 직접 해 보기
+{:.briefing-heading}
 
 Day 0에서 만든 `Player` 스크립트를 이렇게 바꾸고 실행해 보자.
 
@@ -218,6 +227,7 @@ Sun의 체력: 100
 이제 Inspector에서 Hp를 50으로, Nickname을 내 이름으로 바꾸고 다시 실행해 보자. 코드는 그대로인데 결과가 바뀐다.
 
 ## 자주 헷갈리는 것
+{:.briefing-heading}
 
 **Q. float에는 왜 f를 붙여야 해?**<br>
 C#은 `3.5`처럼 쓴 소수를 기본으로 `double`이라는 더 큰 소수 자료형으로 본다. 큰 상자에 든 값을 작은 `float` 상자에 그냥 넣을 수는 없어서 에러가 난다. 뒤에 `f`를 붙이면 "처음부터 float 값이야"라는 뜻이 된다. `float speed = 3.5;`는 에러, `float speed = 3.5f;`는 정상이다.
@@ -229,12 +239,14 @@ C#은 `3.5`처럼 쓴 소수를 기본으로 `double`이라는 더 큰 소수 �
 규칙만 지키면 된다. 숫자로 시작할 수 없고, 띄어쓰기를 넣을 수 없다. 그리고 C#은 **대소문자를 구분해서** `hp`와 `Hp`는 다른 변수다. 관례상 변수는 `moveSpeed`처럼 소문자로 시작해서 단어마다 대문자로 쓰고(camelCase), 클래스는 `PlayerMove`처럼 대문자로 시작한다(PascalCase).
 
 ## 현업에서는
+{:.briefing-heading}
 
 - **숫자를 코드에 박지 않는다.** `transform.position += ... * 5f`처럼 숫자를 코드 한가운데 쓰면 나중에 찾기도 바꾸기도 어렵다. 의미 있는 이름의 변수로 빼서 Inspector에 꺼내 두면, 기획자도 코드를 안 열고 수치를 조정할 수 있다.
 - **글자를 이어 붙일 때는 문자열 보간을 많이 쓴다.** `$"HP: {hp} / {maxHp}"`처럼 따옴표 앞에 `$`를 붙이고 중괄호 안에 변수를 넣는다. `+`를 여러 번 쓰는 것보다 읽기 쉽다.
 - **`Update` 안의 `Debug.Log`는 확인이 끝나면 지운다.** 매 프레임 로그를 찍으면 콘솔도 보기 어렵고 게임도 느려진다.
 
 ## 앱에서 연습하기
+{:.briefing-heading}
 
 이 글은 앱의 **기초 Day 1**과 같은 내용이다. 레슨마다 바로 열린다.
 
@@ -243,6 +255,7 @@ C#은 `3.5`처럼 쓴 소수를 기본으로 `double`이라는 더 큰 소수 �
 - [계산하고, 인스펙터에 꺼내기](https://hlcho426.github.io/unity-csharp-week/#d1l3): 연산자와 public
 
 ## 정리
+{:.briefing-heading}
 
 - 스크립트 = 게임 오브젝트에 붙이는 C# 클래스. 파일 이름과 클래스 이름이 같아야 한다
 - `Start`는 시작할 때 한 번, `Update`는 매 프레임

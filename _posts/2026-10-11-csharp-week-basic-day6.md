@@ -1,11 +1,15 @@
 ---
-title: "유니티 C# 기초 Day 6: 키 입력으로 캐릭터 움직이기 (GetKey, GetAxis, AddForce 점프)"
+title: "<유니티 C#> 기초 Day 6: 키 입력으로 캐릭터 움직이기 (GetKey, GetAxis, AddForce 점프)"
 date: 2026-10-11 22:32:00 +0900
 description: "GetKeyDown과 GetKey의 차이, GetAxis로 방향키 이동, Rigidbody.AddForce로 점프하고 무한 점프 막기. Unity 6 입력 설정 주의점도 정리했다."
 series: 유니티 C# 일주일
 series_title: "기초 Day 6: 입력과 이동, 점프"
 categories: [유니티 공부]
-tags: [유니티, C#, Input, GetKeyDown, GetAxis, Rigidbody, AddForce, 유니티 C# 일주일]
+tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
+image:
+  path: /assets/img/unitystudy/csharp_image.png
+  width: 1200
+  height: 675
 ---
 
 {% include series.html %}
@@ -23,6 +27,7 @@ tags: [유니티, C#, Input, GetKeyDown, GetAxis, Rigidbody, AddForce, 유니티
 {: .prompt-warning }
 
 ## 1. 키 입력 세 가지
+{:.briefing-heading}
 
 ```csharp
 void Update()
@@ -51,6 +56,7 @@ void Update()
 점프를 `GetKey`로 만들면 스페이스를 누르고 있는 동안 매 프레임 점프해서 로켓처럼 날아간다. "한 번"은 `GetKeyDown`이다.
 
 ## 2. 방향키로 이동: GetAxis
+{:.briefing-heading}
 
 방향키 네 개를 하나씩 `GetKey`로 검사하지 않아도 된다.
 
@@ -84,6 +90,7 @@ h는 x(좌우)에, v는 z(앞뒤)에 넣었다. y는 0이다. 땅 위를 걷는 
 아무 키도 안 누르면 h, v가 0이라 dir도 (0, 0, 0)이고, 0에 무엇을 곱해도 0이라 제자리다.
 
 ## 3. 점프: Rigidbody에 힘 주기
+{:.briefing-heading}
 
 점프는 위로 올라갔다가 중력으로 떨어져야 한다. 이걸 직접 계산하는 대신 유니티의 물리 엔진에 맡긴다. **Rigidbody** 컴포넌트를 붙이면 그 오브젝트에 중력과 물리가 적용된다.
 
@@ -134,6 +141,7 @@ void OnCollisionEnter(Collision collision)
 Day 2의 `&&`가 여기서 나온다. "스페이스를 눌렀고 **그리고** 땅에 있으면". `OnCollisionEnter`는 무언가와 부딪힌 순간 유니티가 불러 주는 함수다. 지금은 "아무거나 부딪히면 착지"로 간단히 했다. 바닥에만 반응하게 만드는 방법은 Day 7에서 배운다.
 
 ## 직접 해 보기
+{:.briefing-heading}
 
 1. Hierarchy에서 **3D Object → Plane**을 만든다. 바닥이 된다.
 2. 큐브를 바닥보다 조금 위(Position Y = 1)에 둔다.
@@ -186,6 +194,7 @@ public class PlayerController : MonoBehaviour
 - 왼쪽 Shift를 누르는 동안 두 배로 빨라지게 만들어 보기. 힌트: `GetKey(KeyCode.LeftShift)`와 if
 
 ## 자주 헷갈리는 것
+{:.briefing-heading}
 
 **Q. 대각선으로 가면 더 빨라.**<br>
 맞다. →와 ↑를 같이 누르면 dir이 (1, 0, 1)이 되는데, 이 방향의 길이는 1이 아니라 약 1.41이다. 그래서 대각선이 41% 빠르다. `dir = Vector3.ClampMagnitude(dir, 1f);`를 이동 전에 한 줄 넣으면 길이가 1을 넘지 않게 잘라 준다.
@@ -200,6 +209,7 @@ Game 창을 클릭해서 게임 화면에 포커스가 가 있는지 확인한�
 큐브에 Rigidbody를 안 붙였다. `GetComponent<Rigidbody>()`가 아무것도 못 찾아서 rb가 비어 있는 상태로 AddForce를 부른 것이다.
 
 ## 현업에서는
+{:.briefing-heading}
 
 - **입력은 Update, 물리는 FixedUpdate.** 물리 계산은 FixedUpdate라는 다른 함수에서 일정한 간격으로 하는 게 정석이다. 다만 `GetKeyDown`은 FixedUpdate에서 검사하면 가끔 놓쳐서, 입력은 Update에서 bool로 기억해 두고 FixedUpdate에서 처리한다. 한 번 팍 주는 점프는 Update에서 해도 대부분 괜찮다. 자세한 건 다지기 Day 4 "유니티 실행 순서"에서 다룬다.
 - **Rigidbody가 있으면 속도로 움직인다.** 위 코드는 배우기 쉽게 Transform으로 옮겼지만, 물리가 붙은 캐릭터는 보통 Rigidbody의 속도를 바꿔서 움직인다. 벽에 박혔을 때 덜덜 떨리거나 뚫고 지나가는 문제가 줄어든다.
@@ -213,6 +223,7 @@ Game 창을 클릭해서 게임 화면에 포커스가 가 있는지 확인한�
 - **새 프로젝트라면 새 Input System을 쓴다.** 키 대신 "점프", "이동" 같은 행동으로 입력을 받고, 키보드·게임패드·키 바꾸기를 한 번에 처리한다. 기존 `Input`으로 원리를 익히고 실전 Day 6에서 옮겨 간다.
 
 ## 앱에서 연습하기
+{:.briefing-heading}
 
 이 글은 앱의 **기초 Day 6**과 같은 내용이다.
 
@@ -221,6 +232,7 @@ Game 창을 클릭해서 게임 화면에 포커스가 가 있는지 확인한�
 - [점프: 물리에 힘 주기](https://hlcho426.github.io/unity-csharp-week/#d6l3): Rigidbody.AddForce
 
 ## 정리
+{:.briefing-heading}
 
 - `GetKeyDown` 누른 순간 한 번, `GetKey` 누르고 있는 동안 계속, `GetKeyUp` 뗀 순간 한 번
 - 입력 검사는 Update 안에서

@@ -1,11 +1,15 @@
 ---
-title: "유니티 C# 기초 Day 2: 조건문 if, else와 논리 연산자 (조건에 따라 다르게 움직이기)"
+title: "<유니티 C#> 기초 Day 2: 조건문 if, else와 논리 연산자 (조건에 따라 다르게 움직이기)"
 date: 2026-10-11 22:16:00 +0900
 description: "if, else, else if와 비교 연산자, &&와 ||로 조건을 묶는 법, =와 ==의 차이까지. 유니티 예제로 배우는 C# 조건문."
 series: 유니티 C# 일주일
 series_title: "기초 Day 2: 조건문 if"
 categories: [유니티 공부]
-tags: [유니티, C#, 조건문, if, bool, 유니티 C# 일주일]
+tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
+image:
+  path: /assets/img/unitystudy/csharp_image.png
+  width: 1200
+  height: 675
 ---
 
 {% include series.html %}
@@ -20,6 +24,7 @@ tags: [유니티, C#, 조건문, if, bool, 유니티 C# 일주일]
 - `&&`, `||`, `!`로 조건을 묶을 수 있다
 
 ## 1. if: 조건이 참일 때만
+{:.briefing-heading}
 
 ```csharp
 int hp = 0;
@@ -77,6 +82,7 @@ if (isDead)          // isDead == true 와 같은 뜻
 ```
 
 ## 2. `=`와 `==`
+{:.briefing-heading}
 
 가장 많이 헷갈리는 부분이다.
 
@@ -93,6 +99,7 @@ if (coin = 10)    // X (에러)
 C#은 친절해서 `if (coin = 10)`처럼 숫자에 `=`를 쓰면 "int를 bool로 바꿀 수 없다"는 에러를 내서 바로 알려 준다. 다만 bool 변수에 `if (isDead = true)`라고 쓰면 에러 없이 경고만 뜨고, isDead에 true를 넣어 버린다. bool은 `== true`를 붙이지 말고 `if (isDead)`처럼 그대로 쓰는 습관을 들이면 이 실수를 아예 피할 수 있다.
 
 ## 3. else와 else if: 아니면, 그것도 아니면
+{:.briefing-heading}
 
 ### else: 아니면
 
@@ -143,6 +150,7 @@ else if (score >= 90)
 {: .prompt-warning }
 
 ## 4. 그리고, 또는, 아니다: `&&`, `||`, `!`
+{:.briefing-heading}
 
 조건 여러 개를 묶을 때 쓴다.
 
@@ -166,6 +174,7 @@ if (!isDead) { }
 기획서 문장을 그대로 옮기면 된다. "열쇠가 있고 문 앞에 있으면 문 열기"는 둘 다 만족해야 하니 `hasKey && nearDoor`다. 여기에 `||`를 쓰면 열쇠 없이 문 앞에만 가도 문이 열린다.
 
 ## 직접 해 보기
+{:.briefing-heading}
 
 [Day 0](/posts/csharp-week-basic-day0/)에서 만든 큐브의 `Player` 스크립트를 이렇게 바꾼다.
 
@@ -212,6 +221,7 @@ public class Player : MonoBehaviour
 - `&&`를 `||`로 바꾸면 Has Key 없이도 열리는지
 
 ## 자주 헷갈리는 것
+{:.briefing-heading}
 
 **Q. `if (hasKey & nearDoor)`처럼 `&`를 하나만 써도 되던데?**<br>
 bool끼리는 `&` 하나도 "그리고"로 동작한다. 차이는 `&&`는 왼쪽이 거짓이면 오른쪽을 아예 계산하지 않는다는 것이다. 이 성질 덕분에 `if (target != null && target.hp > 0)`처럼 "있는지 먼저 확인하고, 있을 때만 값을 본다"를 한 줄로 쓸 수 있다. 조건에는 `&&`와 `||`를 쓴다고 기억하면 된다.
@@ -228,12 +238,14 @@ if (canJump) { }
 ```
 
 ## 현업에서는
+{:.briefing-heading}
 
 - **조건에 이름을 붙인다.** `if (hp <= 0 && !isInvincible && !hasRevive)`보다 `bool shouldDie = ...; if (shouldDie)`가 훨씬 읽기 쉽다. 기획 문서의 용어를 그대로 이름으로 쓰면 기획자와 이야기하기도 편하다.
 - **"이미 했는지" 깃발을 둔다.** "보상은 한 번만", "클리어 메시지는 한 번만" 같은 규칙은 `bool isCleared`처럼 한 번 했는지 기억하는 bool로 막는다. Day 7에서 실제로 쓴다.
 - **갈래가 많아지면 다른 도구를 쓴다.** 상태가 대기·이동·공격·피격처럼 여러 개면 `if`를 길게 늘어놓기보다 `enum`과 `switch`를 쓴다. 심화 Day 4에서 배운다.
 
 ## 앱에서 연습하기
+{:.briefing-heading}
 
 이 글은 앱의 **기초 Day 2**와 같은 내용이다.
 
@@ -242,6 +254,7 @@ if (canJump) { }
 - [그리고, 또는, 아니다](https://hlcho426.github.io/unity-csharp-week/#d2l3): &&, ||, !
 
 ## 정리
+{:.briefing-heading}
 
 - `if (조건) { ... }`: 조건이 참일 때만 실행한다
 - `=`는 넣기, `==`는 같은지 묻기. 비교 결과는 항상 bool이다

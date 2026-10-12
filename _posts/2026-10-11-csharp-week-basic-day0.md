@@ -1,11 +1,15 @@
 ---
-title: "유니티 C# 기초 Day 0: 유니티 설치하고 첫 스크립트 붙이기"
+title: "<유니티 C#> 기초 Day 0: 유니티 설치하고 첫 스크립트 붙이기"
 date: 2026-10-11 22:08:00 +0900
 description: "Unity Hub로 Unity 6를 설치하고 프로젝트를 만든 뒤, 큐브에 첫 C# 스크립트를 붙여 콘솔에 글자를 띄우기까지. 비전공자를 위한 유니티 첫걸음."
 series: 유니티 C# 일주일
 series_title: "기초 Day 0: 유니티 설치와 첫 스크립트"
 categories: [유니티 공부]
-tags: [유니티, C#, 유니티 설치, 유니티 입문, 유니티 C# 일주일]
+tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
+image:
+  path: /assets/img/unitystudy/csharp_image.png
+  width: 1200
+  height: 675
 ---
 
 {% include series.html %}
@@ -15,6 +19,7 @@ tags: [유니티, C#, 유니티 설치, 유니티 입문, 유니티 C# 일주일
 이번 글의 목표는 하나다. **유니티 콘솔 창에 내가 쓴 글자 한 줄 띄우기.** 여기까지 되면 앞으로 나오는 모든 예제를 직접 돌려 볼 수 있다.
 
 ## 1. Unity Hub와 에디터 설치
+{:.briefing-heading}
 
 유니티는 두 단계로 설치한다.
 
@@ -32,10 +37,12 @@ tags: [유니티, C#, 유니티 설치, 유니티 입문, 유니티 C# 일주일
 {: .prompt-info }
 
 ## 2. 새 프로젝트 만들기
+{:.briefing-heading}
 
 Hub의 **Projects** → **New project**에서 템플릿을 고른다. 3D 템플릿이면 아무거나 괜찮다. 여기서는 **Universal 3D**를 쓴다. 프로젝트 이름과 저장 위치를 정하고 **Create project**를 누르면 몇 분 뒤 에디터가 열린다.
 
 ## 3. 에디터 화면 읽기
+{:.briefing-heading}
 
 처음 열면 창이 여러 개라 복잡해 보이지만, 지금 알아야 할 건 여섯 개다.
 
@@ -51,12 +58,14 @@ Hub의 **Projects** → **New project**에서 템플릿을 고른다. 3D 템플�
 Console 창이 안 보이면 메뉴 **Window → General → Console**로 연다. 앞으로 제일 자주 볼 창이다.
 
 ## 4. 큐브 하나 만들기
+{:.briefing-heading}
 
 Hierarchy 빈 곳을 우클릭하고 **3D Object → Cube**를 고른다. Scene 화면에 큐브가 생기고, Inspector에 `Transform`, `Mesh Filter`, `Mesh Renderer`, `Box Collider` 같은 칸이 보인다.
 
 이 칸 하나하나가 **컴포넌트**다. 유니티의 오브젝트는 컴포넌트를 조립해서 만든다. 위치는 Transform이, 모양은 Mesh Filter가, 충돌은 Collider가 맡는다. 우리가 만드는 스크립트도 이렇게 붙는 컴포넌트 중 하나가 된다.
 
 ## 5. 스크립트 만들기
+{:.briefing-heading}
 
 Project 창의 **Assets** 폴더를 우클릭하고 **Create → Scripting → MonoBehaviour Script**를 고른다. 유니티 버전에 따라 메뉴 이름이 **C# Script**로 보이기도 한다.
 
@@ -66,12 +75,14 @@ Project 창의 **Assets** 폴더를 우클릭하고 **Create → Scripting → M
 {: .prompt-warning }
 
 ## 6. 큐브에 붙이기
+{:.briefing-heading}
 
 Project 창의 `Player` 스크립트를 Hierarchy의 Cube 위로 끌어다 놓는다. Cube를 클릭해 보면 Inspector 맨 아래에 **Player (Script)** 칸이 생겨 있다. 이제 이 스크립트는 큐브의 컴포넌트다.
 
 Inspector의 **Add Component** 버튼을 누르고 `Player`를 검색해서 붙여도 된다.
 
 ## 7. 코드 한 줄 쓰기
+{:.briefing-heading}
 
 `Player` 스크립트를 더블클릭하면 코드 편집기(Visual Studio 등)가 열린다. 이런 코드가 들어 있다. 버전에 따라 주석 몇 줄이 더 있을 수 있다.
 
@@ -107,6 +118,7 @@ void Start()
 {: .prompt-tip }
 
 ## 8. 실행
+{:.briefing-heading}
 
 에디터 위쪽 가운데의 ▶ 버튼을 누른다. Console 창에 이 줄이 뜨면 성공이다.
 
@@ -122,6 +134,7 @@ void Start()
 {: .prompt-warning }
 
 ## 에러가 났다면
+{:.briefing-heading}
 
 Console에 빨간 줄이 뜨면 코드에 문제가 있다는 뜻이다. 빨간 줄을 더블클릭하면 편집기에서 그 줄로 바로 간다. 처음에 자주 만나는 건 이 세 가지다.
 
@@ -132,6 +145,7 @@ Console에 빨간 줄이 뜨면 코드에 문제가 있다는 뜻이다. 빨간 
 빨간 에러가 하나라도 있으면 ▶ 버튼을 눌러도 플레이가 시작되지 않는다. 에러부터 고친다.
 
 ## 미리 해 두면 좋은 설정: 입력 방식
+{:.briefing-heading}
 
 기초 Day 6에서 키보드 입력을 받을 때 `Input.GetKeyDown` 같은 코드를 쓴다. 그런데 Unity 6의 새 프로젝트는 **새 Input System만 켜져 있는 경우**가 있다. 그러면 이 코드를 실행할 때 `InvalidOperationException` 에러가 난다.
 
@@ -144,12 +158,14 @@ Console에 빨간 줄이 뜨면 코드에 문제가 있다는 뜻이다. 빨간 
 새 Input System은 실전 Day 6에서 따로 배운다. 그 전까지는 배우기 쉬운 기존 방식으로 연습한다.
 
 ## 현업에서는
+{:.briefing-heading}
 
 - **유니티 버전을 함부로 바꾸지 않는다.** 프로젝트는 만들 때의 버전으로 연다. 같이 작업하는 사람이 있으면 모두 같은 버전을 쓴다. Hub에 버전을 여러 개 깔아 두고 프로젝트마다 고를 수 있다.
 - **스크립트는 폴더를 정해서 모은다.** `Assets/Scripts`처럼 폴더를 만들어 두면 나중에 찾기 쉽다.
 - **처음부터 Git 같은 버전 관리를 쓴다.** 실수로 망가뜨려도 어제 상태로 되돌릴 수 있다. 유니티 프로젝트용 `.gitignore`를 같이 쓰면 `Library` 폴더 같은 큰 임시 파일은 빼고 저장한다.
 
 ## 정리
+{:.briefing-heading}
 
 - Unity Hub로 에디터(Unity 6 LTS)를 설치하고 프로젝트를 만든다.
 - 스크립트는 오브젝트에 **컴포넌트로 붙여야** 실행된다.

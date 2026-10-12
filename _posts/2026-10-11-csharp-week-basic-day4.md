@@ -1,11 +1,15 @@
 ---
-title: "유니티 C# 기초 Day 4: 함수와 void, 매개변수, return (void는 왜 쓸까?)"
+title: "<유니티 C#> 기초 Day 4: 함수와 void, 매개변수, return (void는 왜 쓸까?)"
 date: 2026-10-11 22:24:00 +0900
 description: "void는 왜 쓸까? 함수를 만들고 부르는 법, 매개변수로 값 넘기기, return으로 결과 돌려받기까지 유니티 C# 함수를 비전공자 눈높이로 정리했다."
 series: 유니티 C# 일주일
 series_title: "기초 Day 4: 함수와 void"
 categories: [유니티 공부]
-tags: [유니티, C#, 함수, void, return, 매개변수, 유니티 C# 일주일]
+tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
+image:
+  path: /assets/img/unitystudy/csharp_image.png
+  width: 1200
+  height: 675
 ---
 
 {% include series.html %}
@@ -20,6 +24,7 @@ tags: [유니티, C#, 함수, void, return, 매개변수, 유니티 C# 일주일
 - `void`가 무슨 뜻인지, 언제 쓰는지 설명할 수 있다
 
 ## 1. 함수: 코드 묶음에 이름 붙이기
+{:.briefing-heading}
 
 자주 하는 동작에 이름을 붙여 두고, 필요할 때 이름만 부르는 것이 **함수**다.
 
@@ -62,6 +67,7 @@ void Hit()
 함수를 쓰는 가장 큰 이유는 **같은 코드를 여러 번 쓰지 않으려고**다. 한 곳에 만들어 두면 여러 곳에서 부를 수 있고, 고칠 때도 한 곳만 고치면 된다.
 
 ## 2. 매개변수: 함수에 값 넘기기
+{:.briefing-heading}
 
 데미지는 매번 다르다. 10일 때도 있고 25일 때도 있다. 그때마다 함수를 새로 만들 수는 없으니, 함수가 **값을 받게** 만든다.
 
@@ -88,6 +94,7 @@ void TakeDamage(int amount)
 - 여러 개는 쉼표로: `void Move(float x, float y)`, 부를 때 `Move(1f, 2f);`
 
 ## 3. return: 결과 돌려받기
+{:.briefing-heading}
 
 지금까지의 함수는 일만 하고 끝났다. 이번에는 **계산해서 답을 돌려주는** 함수다.
 
@@ -141,6 +148,7 @@ string Check(int coin)
 `Check(15)`는 "부자"다. `return`을 만나는 순간 함수가 끝나서 아래의 `return "가난";`까지 가지 않는다.
 
 ## 4. 그래서 void는 왜 쓸까?
+{:.briefing-heading}
 
 이제 답할 수 있다. **`void`는 "돌려주는 값이 없다"는 표시**다.
 
@@ -159,6 +167,7 @@ C#은 함수를 만들 때 반드시 "이 함수가 무엇을 돌려주는지"�
 이 기준은 앞으로 계속 나온다. 예를 들어 심화 코스의 세이브 기능을 만들 때, 저장하는 `Save`는 일만 하니 `void`, 불러오는 `Load`는 꺼낸 데이터를 돌려줘야 하니 `SaveData`를 돌려주는 함수가 된다.
 
 ## 직접 해 보기
+{:.briefing-heading}
 
 ```csharp
 using UnityEngine;
@@ -205,6 +214,7 @@ public class Player : MonoBehaviour
 Start의 `TakeDamage(50)`을 `TakeDamage(200)`으로 바꿔 보자. Heal이 불려서 체력이 다시 100으로 차니 여전히 "생존!"이다. 그럼 Heal 줄을 지우면?
 
 ## 자주 헷갈리는 것
+{:.briefing-heading}
 
 **Q. 부를 때 `Jump;`라고 쓰면 안 돼?**<br>
 안 된다. 이름 뒤에 괄호가 있어야 "지금 실행해"라는 뜻이 된다. `Jump;`는 빨간 에러다. 반대로 `void`는 만들 때만 붙인다. 부를 때 `void Jump();`라고 쓰면 그것도 에러다.
@@ -216,12 +226,14 @@ Start의 `TakeDamage(50)`을 `TakeDamage(200)`으로 바꿔 보자. Heal이 불�
 누군가 불렀는지 확인한다. 내가 만든 함수는 내가 불러야 실행된다. `Start`, `Update` 같은 유니티 함수인데 안 불린다면 이름의 대소문자를 확인한다. `update()`는 유니티가 모르는 이름이라 에러도 없이 그냥 무시된다.
 
 ## 현업에서는
+{:.briefing-heading}
 
 - **함수 이름은 동사로 시작한다.** `TakeDamage`, `Jump`, `SpawnEnemy`처럼 무슨 일을 하는지 바로 보이게 짓는다. bool을 돌려주면 `IsDead`, `HasKey`, `CanJump`.
 - **함수 하나는 한 가지 일만 한다.** 함수가 길어지고 "그리고"가 여러 번 들어가면 나눌 때가 됐다는 신호다.
 - **규칙은 함수 안에 가둔다.** 체력을 직접 `hp -= 10`으로 여기저기서 깎지 않고 `TakeDamage(10)`으로 부르면, 나중에 "방어력만큼 덜 깎기", "무적 시간" 같은 규칙을 이 함수 하나에만 넣으면 된다.
 
 ## 앱에서 연습하기
+{:.briefing-heading}
 
 이 글은 앱의 **기초 Day 4**와 같은 내용이다.
 
@@ -230,6 +242,7 @@ Start의 `TakeDamage(50)`을 `TakeDamage(200)`으로 바꿔 보자. Heal이 불�
 - [return: 결과 돌려받기](https://hlcho426.github.io/unity-csharp-week/#d4l3): int, bool을 돌려주는 함수
 
 ## 정리
+{:.briefing-heading}
 
 - 함수 = 코드 묶음에 이름 붙이기. 만들기 `void 이름() { }`, 부르기 `이름();`
 - 괄호 안에 받을 값을 선언한다: `(int amount)`. 부를 때는 값만 넣는다: `TakeDamage(10);`

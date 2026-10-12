@@ -1,11 +1,15 @@
 ---
-title: "유니티 C# 기초 Day 3: 반복문과 배열 (for, 배열, foreach, List)"
+title: "<유니티 C#> 기초 Day 3: 반복문과 배열 (for, 배열, foreach, List)"
 date: 2026-10-11 22:20:00 +0900
 description: "for 반복문, 0부터 세는 배열, foreach, 늘었다 줄었다 하는 List까지. 무한 루프와 IndexOutOfRangeException을 피하는 법도 함께 정리했다."
 series: 유니티 C# 일주일
 series_title: "기초 Day 3: 반복문과 배열"
 categories: [유니티 공부]
-tags: [유니티, C#, 반복문, for, 배열, List, 유니티 C# 일주일]
+tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
+image:
+  path: /assets/img/unitystudy/csharp_image.png
+  width: 1200
+  height: 675
 ---
 
 {% include series.html %}
@@ -20,6 +24,7 @@ tags: [유니티, C#, 반복문, for, 배열, List, 유니티 C# 일주일]
 - 크기가 변하는 목록에는 `List`를 쓴다는 걸 안다
 
 ## 1. for: 정해진 횟수만큼
+{:.briefing-heading}
 
 ```csharp
 for (int i = 0; i < 3; i++)
@@ -66,6 +71,7 @@ i가 0, -1, -2… 로 작아지기만 해서 `i < 10`이 계속 참이다. 사�
 {: .prompt-warning }
 
 ## 2. 배열: 번호가 붙은 상자들
+{:.briefing-heading}
 
 ```csharp
 int[] scores = { 10, 20, 30 };
@@ -114,6 +120,7 @@ for (int i = 0; i < scores.Length; i++)
 i가 0부터 `Length - 1`까지 딱 맞게 돈다. 배열 크기가 바뀌어도 코드를 고칠 필요가 없다.
 
 ## 3. foreach: 번호 없이 하나씩
+{:.briefing-heading}
 
 번호가 필요 없으면 `foreach`가 더 편하다.
 
@@ -129,6 +136,7 @@ foreach (string member in party)
 "party 안의 각 member에 대해"라고 읽는다. 배열에 든 순서대로 하나씩 꺼내 `member`에 담고 중괄호 안을 실행한다.
 
 ## 4. List: 늘었다 줄었다 하는 목록
+{:.briefing-heading}
 
 배열은 만들 때 칸 수가 정해지고 바꿀 수 없다. 그런데 인벤토리나 살아 있는 적 목록은 계속 늘고 준다. 이럴 때 **List**를 쓴다.
 
@@ -154,6 +162,7 @@ Debug.Log(bag[0]);      // 열쇠
 List는 다지기 Day 1에서 원리까지 자세히 다시 다룬다. 지금은 "크기가 변하면 List"만 기억하면 된다.
 
 ## 직접 해 보기
+{:.briefing-heading}
 
 배열과 List는 `public`으로 만들면 Inspector에서 값을 넣을 수 있다.
 
@@ -188,6 +197,7 @@ public class Player : MonoBehaviour
 저장하고 Inspector를 보면 Scores와 Bag 칸이 목록으로 보인다. Scores의 숫자를 바꾸거나 +로 칸을 늘려 보자. Bag에도 아이템 이름을 몇 개 넣어 두면, 실행할 때 코드가 넣은 "포션"이 맨 뒤에 붙어서 같이 찍힌다.
 
 ## 자주 헷갈리는 것
+{:.briefing-heading}
 
 **Q. 왜 번호가 1이 아니라 0부터야?**<br>
 컴퓨터는 번호를 "맨 앞에서 몇 칸 떨어져 있나"로 센다. 첫 칸은 맨 앞에서 0칸 떨어져 있으니 0번이다. 익숙해지는 수밖에 없다. 대신 `for (int i = 0; i < 배열.Length; i++)` 모양을 통째로 외워 두면 헷갈릴 일이 거의 없다.
@@ -199,12 +209,14 @@ public class Player : MonoBehaviour
 번호(몇 번째인지)가 필요하면 `for`, 그냥 하나씩 다 보면 되면 `foreach`가 읽기 쉽다. 단, foreach로 도는 중에 그 목록에서 Add나 Remove를 하면 에러가 난다. 지우면서 돌아야 할 때는 다지기 Day 1에서 배우는 방법을 쓴다.
 
 ## 현업에서는
+{:.briefing-heading}
 
 - **배열 크기를 숫자로 박지 않는다.** `i < 3` 대신 `i < scores.Length`처럼 쓰면 데이터가 바뀌어도 코드는 그대로다.
 - **Inspector에서 채우는 목록이 많다.** 스폰 위치, 드랍 아이템, 대사 같은 걸 `public` 배열이나 List로 빼 두고 기획자가 직접 채우게 한다.
 - **목록을 매 프레임 새로 만들지 않는다.** `new List<...>()`를 Update 안에서 계속 하면 쓰레기 메모리가 쌓여 가끔 버벅인다. 한 번 만들어 두고 비우고(`Clear`) 다시 쓴다.
 
 ## 앱에서 연습하기
+{:.briefing-heading}
 
 이 글은 앱의 **기초 Day 3**과 같은 내용이다.
 
@@ -213,6 +225,7 @@ public class Player : MonoBehaviour
 - [foreach와 List](https://hlcho426.github.io/unity-csharp-week/#d3l3): 하나씩 꺼내기, 늘어나는 목록
 
 ## 정리
+{:.briefing-heading}
 
 - `for (시작; 계속할 조건; 매번 할 일)`. 0부터 `i < n`이면 n번
 - 배열: `자료형[] 이름 = { 값, 값, 값 };`, 번호는 0부터, 마지막 번호는 `Length - 1`

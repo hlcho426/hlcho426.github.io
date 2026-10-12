@@ -1,11 +1,15 @@
 ---
-title: "유니티 C# 기초 Day 7: 미니 프로젝트, 코인 줍기 (OnTriggerEnter, CompareTag, Destroy)"
+title: "<유니티 C#> 기초 Day 7: 미니 프로젝트, 코인 줍기 (OnTriggerEnter, CompareTag, Destroy)"
 date: 2026-10-11 22:36:00 +0900
 description: "OnTriggerEnter와 CompareTag, Destroy로 만드는 코인 줍기 미니 게임. Trigger가 안 될 때 확인할 것과 완성 스크립트 읽기까지."
 series: 유니티 C# 일주일
 series_title: "기초 Day 7: 미니 프로젝트 코인 줍기"
 categories: [유니티 공부]
-tags: [유니티, C#, OnTriggerEnter, CompareTag, Destroy, 충돌, 미니 프로젝트, 유니티 C# 일주일]
+tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
+image:
+  path: /assets/img/unitystudy/csharp_image.png
+  width: 1200
+  height: 675
 ---
 
 {% include series.html %}
@@ -20,6 +24,7 @@ tags: [유니티, C#, OnTriggerEnter, CompareTag, Destroy, 충돌, 미니 프로
 - 완성된 스크립트를 위에서부터 읽고 설명할 수 있다
 
 ## 1. 닿았다는 걸 어떻게 알까: Trigger
+{:.briefing-heading}
 
 Collider는 원래 **부딪혀서 막는** 역할을 한다. 그런데 코인은 막히면 안 되고, 지나가면서 주워져야 한다. 이럴 때 Collider의 **Is Trigger**를 체크한다. 그러면 부딪혀 막지 않고 통과하면서 "닿았다"는 신호만 보낸다.
 
@@ -47,6 +52,7 @@ Trigger 신호가 오려면 세 가지가 모두 맞아야 한다.
 플레이어 큐브에는 Day 6에서 붙인 Rigidbody가 있으니, 코인에는 Collider(Is Trigger 켬)만 있으면 된다.
 
 ## 2. 닿은 게 코인일 때만: 태그와 CompareTag
+{:.briefing-heading}
 
 플레이어는 코인 말고도 바닥, 벽, 적에 닿는다. 코인일 때만 반응하려면 코인에 **태그**를 달아 둔다.
 
@@ -70,6 +76,7 @@ void OnTriggerEnter(Collider other)
 `other`는 **Collider 컴포넌트**다. 그래서 `Destroy(other)`는 코인의 Collider 컴포넌트만 지운다. 코인은 화면에 그대로 남는다. 오브젝트를 통째로 없애려면 그 컴포넌트가 붙은 **게임 오브젝트**를 가리키는 `other.gameObject`를 넘긴다.
 
 ## 3. 점수 세고 클리어하기
+{:.briefing-heading}
 
 ```csharp
 int coin = 0;
@@ -110,6 +117,7 @@ if (coin >= goal && !isCleared)
 ```
 
 ## 4. 땅에 닿았을 때만 착지
+{:.briefing-heading}
 
 Day 6에서는 "아무거나 부딪히면 착지"였다. 코인은 Trigger라 부딪힘에 안 걸리지만, 나중에 벽이 생기면 벽에 닿아도 점프가 다시 충전된다. 바닥에 `Ground` 태그를 달고 바닥에 부딪혔을 때만 착지로 친다.
 
@@ -124,6 +132,7 @@ void OnCollisionEnter(Collision col)
 `OnCollisionEnter`는 Trigger가 아닌 **진짜 부딪힘**을 감지하는 짝꿍 함수다. 받는 값이 `Collision`이라서, 상대 오브젝트는 `col.gameObject`로 꺼낸다.
 
 ## 직접 해 보기
+{:.briefing-heading}
 
 1. Day 6의 Plane을 선택하고 Tag에 `Ground`를 새로 만들어 단다.
 2. **3D Object → Sphere**를 만들고 Scale을 0.5로 줄인다. Sphere Collider의 **Is Trigger**를 체크하고 Tag를 `Coin`으로 단다.
@@ -221,6 +230,7 @@ public class Coin : MonoBehaviour
 나머지 4개에도 일일이 붙이기 귀찮다면, 그게 바로 **프리팹**이 필요한 순간이다. 심화 Day 3에서 배운다.
 
 ## 자주 헷갈리는 것
+{:.briefing-heading}
 
 **Q. 코인을 지나가도 아무 반응이 없어.**<br>
 이 순서로 확인한다.
@@ -240,12 +250,14 @@ public class Coin : MonoBehaviour
 `Destroy`는 그 자리에서 바로 지우지 않고 이번 프레임이 끝날 때 지운다. 그래서 같은 함수의 바로 다음 줄에서는 아직 남아 있다. 하지만 다음 프레임부터는 지워진 오브젝트라 건드리면 `MissingReferenceException`이 난다. 코인의 정보가 필요하면 Destroy 전에 읽어 두는 습관이 안전하다.
 
 ## 현업에서는
+{:.briefing-heading}
 
 - **같은 오브젝트는 프리팹으로 만든다.** 코인 50개를 복사해 두면 디자인을 바꿀 때 50개를 다 고쳐야 한다. 프리팹으로 만들면 원본 하나만 고치면 된다.
 - **Debug.Log 대신 UI에 표시한다.** 실제 게임에서는 콘솔이 아니라 화면에 "코인: 3 / 5"를 띄운다. 실전 Day 5에서 텍스트와 체력바를 연결한다.
 - **주운 뒤의 일은 나눠 둔다.** 코인을 주우면 소리, 이펙트, 점수 UI, 업적이 동시에 반응해야 한다. 플레이어 스크립트가 이걸 다 직접 부르면 금방 엉킨다. 심화 Day 5의 이벤트로 깔끔하게 나눈다.
 
 ## 앱에서 연습하기
+{:.briefing-heading}
 
 이 글은 앱의 **기초 Day 7**과 같은 내용이다.
 
@@ -254,6 +266,7 @@ public class Coin : MonoBehaviour
 - [완성 코드 읽기](https://hlcho426.github.io/unity-csharp-week/#d7l3): 일주일 배운 걸 한 스크립트로
 
 ## 정리
+{:.briefing-heading}
 
 - Collider의 Is Trigger를 켜면 통과하면서 감지만 한다. 감지되면 `OnTriggerEnter(Collider other)`가 불린다
 - Trigger는 양쪽 Collider + 한쪽 Is Trigger + 한쪽 Rigidbody가 있어야 작동한다
