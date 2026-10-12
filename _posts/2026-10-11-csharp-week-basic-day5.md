@@ -194,6 +194,32 @@ transform.position = p;
 **Q. Rotation은 왜 x, y, z 세 숫자로 직접 안 넣어?**<br>
 유니티는 회전을 `Quaternion`이라는 특별한 형식으로 다룬다. 지금은 회전시키고 싶으면 `transform.Rotate(...)`를 쓴다고 알아 두면 충분하다. 심화 Day 3에서 다시 나온다.
 
+**Q. 비주얼 스튜디오 자동완성은 `[SerializeField] private float`처럼 private을 붙여 주던데?**<br>
+둘은 완전히 같은 코드다. C#에서는 앞에 아무것도 안 쓰면 자동으로 `private`이다. private을 붙이든 안 붙이든 Inspector에는 보이고, 다른 스크립트에서는 못 쓴다. 다른 스크립트에서 쓰게 하려면 `public`을 붙여야 한다.
+
+```csharp
+[SerializeField] float speed = 5f;           // private이 생략된 것
+[SerializeField] private float speed = 5f;   // private을 직접 쓴 것 (같은 뜻)
+```
+
+| 쓴 것 | Inspector | 다른 스크립트 |
+|---|---|---|
+| `public float speed` | 보인다 | 쓸 수 있다 |
+| `[SerializeField] float speed` (= private) | 보인다 | 못 쓴다 |
+| `float speed` (= private) | 안 보인다 | 못 쓴다 |
+
+비주얼 스튜디오가 private을 붙여 주는 건 코드 스타일 때문이다. C#(.NET)의 표준 스타일은 생략할 수 있어도 private을 직접 쓰는 쪽이다. 반대로 유니티의 새 스크립트 템플릿(`void Start()`)이나 유니티 공식 문서 예제는 생략하는 경우가 많고, 이 시리즈도 짧게 보이려고 생략했다. 아래 "현업에서는"의 `[SerializeField] private`도 같은 코드를 private을 써서 적은 것이다. 동작은 같으니, 내 프로젝트 안에서 한 가지로 통일하기만 하면 된다.
+
+**Q. Mover는 플레이 중에 Inspector에서 Speed를 바꾸면 바로 빨라지는데, Day 1의 Player hp는 바꿔도 아무 변화가 없었어. 왜 달라?**<br>
+플레이 중에 Inspector에서 값을 바꾸면, 두 경우 모두 변수 값 자체는 그 순간 바로 바뀐다. 차이는 **코드가 그 값을 언제 다시 읽느냐**다.
+
+- Player의 hp는 `Start()`에서만 썼다. Start는 시작할 때 딱 한 번 실행되고 끝나서, 그 뒤에 hp를 바꿔도 다시 읽어서 찍는 코드가 없다. 그래서 변화가 없어 보인다.
+- Mover의 speed, turnSpeed는 `Update()`에서 매 프레임 읽는다. 바꾼 바로 다음 프레임부터 새 값으로 계산해서 즉시 빨라지거나 느려진다.
+
+그래서 "플레이하면서 수치 맞추기"는 Update처럼 계속 읽는 값에서만 효과가 보인다. Day 1의 "코드를 고쳐도 안 바뀌던 것"과는 다른 이야기다. 그건 코드 값과 Inspector 값 중 **무엇이 이기냐**(Inspector가 이긴다)였고, 이건 바뀐 값을 **코드가 다시 읽느냐**(Update는 매번, Start는 한 번)다.
+
+그리고 플레이 중에 Inspector에서 바꾼 값은 **플레이를 멈추면 원래대로 돌아간다**(Day 0에서 본 그 주의사항). 딱 좋은 값을 찾았다면 멈추기 전에 적어 두거나, 컴포넌트 ⋮ 메뉴의 **Copy Component**로 복사해 두었다가 멈춘 뒤 **Paste Component Values**로 붙여 넣는다. 실무에서 수치를 맞출 때 자주 쓰는 방법이다.
+
 ## 현업에서는
 {:.briefing-heading}
 
