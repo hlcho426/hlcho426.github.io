@@ -6,3 +6,20 @@
 <!-- Google AdSense: 광고 코드 -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2686521959906994"
      crossorigin="anonymous"></script>
+
+<!-- 유니티 C# 강의 글: '직접 해 보기', '앱에서 연습하기' 섹션 본문을 하나로 묶어 왼쪽 세로줄을 그린다
+     (꾸미는 CSS는 assets/css/jekyll-theme-chirpy.scss의 .practice-body) -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    [['직접-해-보기', 'practice-editor'], ['앱에서-연습하기', 'practice-app']].forEach(([id, kind]) => {
+      const heading = document.getElementById(id);
+      if (!heading || heading.tagName !== 'H2' || !heading.parentElement.classList.contains('content')) return;
+      const body = document.createElement('div');
+      body.className = 'practice-body ' + kind;
+      for (let el = heading.nextElementSibling; el && el.tagName !== 'H2'; el = heading.nextElementSibling) {
+        body.appendChild(el);
+      }
+      heading.after(body);
+    });
+  });
+</script>

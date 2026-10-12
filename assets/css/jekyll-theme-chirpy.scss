@@ -161,3 +161,135 @@ html[data-mode="dark"] {
   }
 }
 {% endif %}
+
+/* 유니티 C# 강의 글의 실습 두 칸을 다른 소제목과 구분
+   - '직접 해 보기' = 유니티 에디터에서 따라 하기(주황), '앱에서 연습하기' = 학습 앱에서 문제 풀기(파랑)
+   - 소제목 글자로 자동으로 생기는 id를 보고 꾸민다. 글 파일은 고치지 않아도 되고, 새 글도 소제목만 같으면 된다
+   - 제목 위 작은 글씨와 아이콘은 CSS로만 그려서 오른쪽 목차에는 섞이지 않는다
+   - 본문 왼쪽 세로줄은 _includes/metadata-hook.html의 스크립트가 섹션 본문을 .practice-body로 묶어 준 뒤에 생긴다 */
+$practice-editor: '#직접-해-보기';
+$practice-app: '#앱에서-연습하기';
+
+.content > h2#{$practice-editor},
+.content > .practice-editor {
+  --practice-bg: var(--practice-editor-bg);
+  --practice-border: var(--practice-editor-border);
+  --practice-text: var(--practice-editor-text);
+  --practice-rail: var(--practice-editor-rail);
+}
+
+.content > h2#{$practice-app},
+.content > .practice-app {
+  --practice-bg: var(--practice-app-bg);
+  --practice-border: var(--practice-app-border);
+  --practice-text: var(--practice-app-text);
+  --practice-rail: var(--practice-app-rail);
+}
+
+.content > h2#{$practice-editor},
+.content > h2#{$practice-app} {
+  position: relative;
+  margin-top: 2.5em;
+  padding: 0.7rem 1rem 0.75rem 3.4rem;
+  color: var(--practice-text);
+  background: var(--practice-bg);
+  border: 1px solid var(--practice-border);
+  border-radius: 12px;
+
+  // 제목 위 작은 글씨: 무엇을 하는 칸인지
+  &::before {
+    display: block;
+    margin-bottom: 0.15rem;
+    font-family: 'Cafe24OhsquareAir', sans-serif;
+    font-size: 0.8rem;
+    font-weight: normal;
+  }
+
+  // 왼쪽 아이콘 (Font Awesome)
+  &::after {
+    position: absolute;
+    top: 50%;
+    left: 1.1rem;
+    transform: translateY(-50%);
+    font-family: 'Font Awesome 7 Free';
+    font-weight: 900;
+    font-size: 1.4rem;
+    line-height: 1;
+  }
+}
+
+.content > h2#{$practice-editor} {
+  &::before { content: '유니티 에디터에서 따라 하기'; }
+  &::after { content: '\f7d9'; } // screwdriver-wrench
+}
+
+.content > h2#{$practice-app} {
+  &::before { content: '학습 앱에서 문제 풀기'; }
+  &::after { content: '\f3cd'; } // mobile-screen-button
+}
+
+.content > .practice-body {
+  margin-top: 1rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--practice-rail);
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  // 폰에서 코드 상자가 화면 끝까지 붙는 Chirpy 규칙(.content > 코드)이 세로줄 안에서는 안 맞아서 되돌림
+  > div[class^='language-'] {
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 10px;
+  }
+}
+
+/* 실습 칸 색. 다크 색은 액자처럼 블로그가 다크 모드를 쓸 때만 넣는다 */
+html {
+  --practice-editor-bg: #fdf3e3;
+  --practice-editor-border: #f0cf9d;
+  --practice-editor-text: #8a4b08;
+  --practice-editor-rail: #e8b267;
+  --practice-app-bg: #e9f2fb;
+  --practice-app-border: #b4d1ee;
+  --practice-app-text: #1d5486;
+  --practice-app-rail: #86b4e0;
+}
+
+{% if site.theme_mode == 'dark' %}
+html {
+  --practice-editor-bg: #3a2d19;
+  --practice-editor-border: #6e5226;
+  --practice-editor-text: #f3cd92;
+  --practice-editor-rail: #9a7134;
+  --practice-app-bg: #1c2b3a;
+  --practice-app-border: #33506d;
+  --practice-app-text: #a8cdf1;
+  --practice-app-rail: #4d7aa6;
+}
+{% elsif site.theme_mode != 'light' %}
+html[data-mode="dark"] {
+  --practice-editor-bg: #3a2d19;
+  --practice-editor-border: #6e5226;
+  --practice-editor-text: #f3cd92;
+  --practice-editor-rail: #9a7134;
+  --practice-app-bg: #1c2b3a;
+  --practice-app-border: #33506d;
+  --practice-app-text: #a8cdf1;
+  --practice-app-rail: #4d7aa6;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not([data-mode]) {
+    --practice-editor-bg: #3a2d19;
+    --practice-editor-border: #6e5226;
+    --practice-editor-text: #f3cd92;
+    --practice-editor-rail: #9a7134;
+    --practice-app-bg: #1c2b3a;
+    --practice-app-border: #33506d;
+    --practice-app-text: #a8cdf1;
+    --practice-app-rail: #4d7aa6;
+  }
+}
+{% endif %}
