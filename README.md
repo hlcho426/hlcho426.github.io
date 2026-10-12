@@ -99,8 +99,8 @@ Codex 앱의 로컬 예약 작업으로 업계 뉴스·개발 도구 데일리�
 | `_includes/metadata-hook.html` | Chirpy가 모든 페이지 `<head>`에 넣는 자리. 애드센스 코드, 실습 소제목 아래 본문을 묶어 세로줄을 그리는 스크립트 |
 | `assets/fonts/` | 웹폰트 파일 |
 | `_includes/sidebar.html` | Chirpy v7.6.0 사이드바 복사본. 카테고리 탭 자리에 큰 카테고리와 그 아래 작은 카테고리를 펼치고, 태그·아카이브 탭은 숨김(페이지는 남아 있음) |
-| `_layouts/category.html` | Chirpy v7.6.0 카테고리 페이지 복사본. 작은 카테고리가 있는 큰 카테고리는 작은 카테고리별 최근 글 3편을 카드로 보여 줌 |
-| `_includes/post-card.html` | 카테고리 페이지의 글 카드 (홈 화면 카드와 같은 모양) |
+| `_layouts/category.html` | Chirpy v7.6.0 카테고리 페이지 복사본. 작은 카테고리가 있는 큰 카테고리는 작은 카테고리별 최신 글 2편을 작은 카드로 보여 줌 |
+| `_includes/post-card.html` | 카테고리 페이지의 작은 글 카드 (홈 카드의 절반쯤 높이: 제목·요약 1줄, 날짜, 오른쪽 작은 이미지) |
 | `_includes/sub-categories.html` | 큰 카테고리 아래 작은 카테고리 순서 계산 (사이드바와 카테고리 페이지가 같이 씀) |
 | `_includes/series.html` | 시리즈 글 목차 상자 (위 "시리즈 글" 참고) |
 | `_data/series.yml` | 시리즈별 안내 문구 (목차 상자에 표시) |

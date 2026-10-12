@@ -1,12 +1,25 @@
 {% comment %}
-  글 카드 하나 (Chirpy v7.6.0 _layouts/home.html의 카드 부분 복사본)
+  카테고리 페이지용 작은 글 카드 (Chirpy v7.6.0 _layouts/home.html 카드를 줄인 것)
+  - 홈 카드의 절반쯤 높이: 제목 1줄, 요약 1줄, 날짜, 오른쪽에 작은 대표 이미지. 크기는 jekyll-theme-chirpy.scss의 .category-groups에서 정한다
   - 카테고리 페이지는 테마의 이미지 후처리(refactor-content.html)를 거치지 않으므로, 후처리를 거친 홈 화면과 같은 이미지 HTML을 직접 쓴다
+  - 이미지를 오른쪽에 두려고 HTML도 글 → 이미지 순서로 쓴다 (테마 CSS에는 flex-row-reverse 클래스가 빠져 있다)
   - 카테고리 페이지 안이라 카테고리 표시는 빼고 날짜만 보여 준다
   - 쓰는 곳: _layouts/category.html (바깥에서 post와 lang이 정해져 있어야 한다)
 {% endcomment %}
 <article class="card-wrapper card">
-  <a href="{{ post.url | relative_url }}" class="post-preview row g-0 flex-md-row-reverse">
-    {% assign card_body_col = '12' %}
+  <a href="{{ post.url | relative_url }}" class="post-preview d-flex">
+    <div class="card-body d-flex flex-column flex-grow-1">
+      <h3 class="card-title">{{ post.title }}</h3>
+
+      <div class="card-text content">
+        <p>{% include post-summary.html %}</p>
+      </div>
+
+      <div class="post-meta">
+        <i class="far fa-calendar fa-fw me-1"></i>
+        {% include datetime.html date=post.date lang=lang %}
+      </div>
+    </div>
 
     {% if post.image %}
       {% assign src = post.image.path | default: post.image %}
@@ -24,30 +37,11 @@
 
       {% assign alt = post.image.alt | xml_escape | default: 'Preview Image' %}
 
-      <div class="col-md-5">
+      <div class="card-thumb">
         <div class="preview-img">
           <img src="{{ src | relative_url }}" alt="{{ alt }}" loading="lazy">
         </div>
       </div>
-
-      {% assign card_body_col = '7' %}
     {% endif %}
-
-    <div class="col-md-{{ card_body_col }}">
-      <div class="card-body d-flex flex-column">
-        <h3 class="card-title my-2 mt-md-0">{{ post.title }}</h3>
-
-        <div class="card-text content mt-0 mb-3">
-          <p>{% include post-summary.html %}</p>
-        </div>
-
-        <div class="post-meta flex-grow-1 d-flex align-items-end">
-          <div class="me-auto">
-            <i class="far fa-calendar fa-fw me-1"></i>
-            {% include datetime.html date=post.date lang=lang %}
-          </div>
-        </div>
-      </div>
-    </div>
   </a>
 </article>
