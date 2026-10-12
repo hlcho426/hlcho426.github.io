@@ -1,10 +1,10 @@
 ---
 title: "<유니티 C#> 발리에서 폰으로 유니티 C# 학습 앱 만들기"
 date: 2026-10-11 22:00:00 +0900
-series: 유니티 C# 공부
-series_title: "시작: 발리에서 폰으로 유니티 C# 학습 앱을 만들게 되었다."
+series: 유니티 C# 일주일
+series_title: "발리에서 폰으로 만들게 된 계기와 앱링크"
 categories: [유니티 공부]
-tags: [유니티, C#, 학습앱, 유니티 C# 일주일]
+tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
 image:
   path: /assets/img/unitystudy/csharp_image.png
   width: 1200
