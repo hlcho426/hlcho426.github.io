@@ -2,9 +2,10 @@
 title: VoxiGen 1.4.1, 캐릭터 내보내기의 메시 크기와 관절 변형을 함께 확인하자
 date: 2026-10-12 01:40:56 +0900
 categories:
-- 게임 개발 기술
+- 레퍼런스 조사
+- 개발 도구
 tags:
-- 게임 개발 기술
+- 개발 도구
 briefing_type: ai
 briefing_event: voxigen-141-character-export-20261010
 briefing_sources:

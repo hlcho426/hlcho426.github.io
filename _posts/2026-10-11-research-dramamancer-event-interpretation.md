@@ -2,9 +2,10 @@
 title: Dramamancer, 생성하는 대사와 판정하는 사건을 분리한다
 date: 2026-10-11 08:00:00 +0900
 categories:
-- 게임 디자인 연구
+- 레퍼런스 조사
+- 기획 연구
 tags:
-- 게임 디자인 연구
+- 기획 연구
 briefing_type: research
 briefing_event: arxiv-2601-18785-dramamancer-design-techniques
 briefing_sources:

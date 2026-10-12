@@ -2,9 +2,10 @@
 title: 직접 플레이하면 더 깊이 느낄까 — Fallout 4 감정 실험의 결과 표를 읽는 법
 date: 2026-10-12 02:03:30 +0900
 categories:
-- 게임 디자인 연구
+- 레퍼런스 조사
+- 기획 연구
 tags:
-- 게임 디자인 연구
+- 기획 연구
 briefing_type: research
 briefing_event: doi-10-3389-fpsyg-2026-1807290-interactivity
 briefing_sources:

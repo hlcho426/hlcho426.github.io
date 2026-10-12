@@ -2,7 +2,8 @@
 title: Google Playground 실사용 기록, 빠른 생성과 세밀한 게임 설계의 간격
 date: 2026-10-12 00:31:47 +0900
 categories:
-- 게임 개발 기술
+- 레퍼런스 조사
+- 개발 도구
 tags:
 - AI
 - 프로토타이핑

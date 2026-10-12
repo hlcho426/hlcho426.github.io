@@ -4,7 +4,7 @@ date: 2026-10-11 22:20:00 +0900
 description: "for 반복문, 0부터 세는 배열, foreach, 늘었다 줄었다 하는 List까지. 무한 루프와 IndexOutOfRangeException을 피하는 법도 함께 정리했다."
 series: 유니티 C# 일주일
 series_title: "기초 Day 3: 반복문과 배열"
-categories: [유니티 공부]
+categories: [게임 제작 공부, 유니티]
 tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
 image:
   path: /assets/img/unitystudy/csharp_image.png

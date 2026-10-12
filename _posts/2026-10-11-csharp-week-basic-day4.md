@@ -4,7 +4,7 @@ date: 2026-10-11 22:24:00 +0900
 description: "void는 왜 쓸까? 함수를 만들고 부르는 법, 매개변수로 값 넘기기, return으로 결과 돌려받기까지 유니티 C# 함수를 비전공자 눈높이로 정리했다."
 series: 유니티 C# 일주일
 series_title: "기초 Day 4: 함수와 void"
-categories: [유니티 공부]
+categories: [게임 제작 공부, 유니티]
 tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
 image:
   path: /assets/img/unitystudy/csharp_image.png

@@ -62,7 +62,7 @@
 }
 
 
-/* 게임 개발 브리핑: 본문 섹션 제목을 글 제목과 구분 */
+/* 브리핑 글: 본문 섹션 제목을 글 제목과 구분 */
 .content > h2.briefing-heading {
   margin-top: 2em;
   color: #28634f;
@@ -81,7 +81,7 @@ img[src*="/assets/img/briefing/rizomuv-logo.png"] {
   background-color: #fff;
 }
 
-/* 사이드바 카테고리 하위 목록: 들여쓰고 조금 작게 */
+/* 사이드바 작은 카테고리: 큰 카테고리 아래에 들여쓰고 조금 작게 */
 #sidebar ul li.nav-item.sidebar-category {
   margin-top: 0;
 
@@ -101,7 +101,7 @@ img[src*="/assets/img/briefing/rizomuv-logo.png"] {
   }
 }
 
-/* 유니티 공부 캡처 이미지(assets/img/unitystudy/): 이미지와 아래 캡션을 초록 액자 하나로 감싸 본문과 구분
+/* 유니티 캡처 이미지(assets/img/unitystudy/): 이미지와 아래 캡션을 초록 액자 하나로 감싸 본문과 구분
    - 이미지(a.img-link)가 액자 윗부분, 바로 뒤 캡션(_..._ → em)이 액자 아랫부분이 되어 이어 붙는다
    - 캡션이 없으면 이미지만 액자로 감싼다 */
 $capture: 'img[src*="/assets/img/unitystudy/"]';

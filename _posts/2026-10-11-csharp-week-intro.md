@@ -4,7 +4,7 @@ date: 2026-10-11 22:00:00 +0900
 description: "발리 여행 일주일 동안 폰 하나로 유니티 C#을 공부하고 싶어서 Claude에게 학습 앱을 만들어 달라고 했다. 앱을 만든 계기와 앱 링크, 앞으로 올라올 강의를 소개한다."
 series: 유니티 C# 일주일
 series_title: "발리에서 폰으로 만들게 된 계기와 앱링크"
-categories: [유니티 공부]
+categories: [게임 제작 공부, 유니티]
 tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
 image:
   path: /assets/img/unitystudy/csharp_image.png

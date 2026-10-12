@@ -4,7 +4,7 @@ date: 2026-10-11 22:12:00 +0900
 description: "유니티 스크립트의 Start와 Update, 변수와 자료형(int, float, bool, string), 계산과 public까지. 비전공자 눈높이로 한 줄씩 읽는 유니티 C# 기초."
 series: 유니티 C# 일주일
 series_title: "기초 Day 1: 스크립트와 변수"
-categories: [유니티 공부]
+categories: [게임 제작 공부, 유니티]
 tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
 image:
   path: /assets/img/unitystudy/csharp_image.png

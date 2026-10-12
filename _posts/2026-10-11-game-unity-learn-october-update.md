@@ -2,9 +2,10 @@
 title: Unity Learn, 짧은 영상과 글을 나눠 학습 경로를 넓힌다
 date: 2026-10-11 08:00:00 +0900
 categories:
-- 게임 개발 브리핑
+- 레퍼런스 조사
+- 업계 뉴스
 tags:
-- 게임 개발 브리핑
+- 업계 뉴스
 briefing_type: game
 briefing_event: unity-learn-october-2026-articles-update
 briefing_sources:

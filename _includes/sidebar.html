@@ -1,5 +1,5 @@
 <!-- The Side Bar -->
-<!-- Chirpy v7.6.0 _includes/sidebar.html 복사본: 카테고리 탭 아래에 카테고리 목록을 추가함 -->
+<!-- Chirpy v7.6.0 _includes/sidebar.html 복사본: 카테고리 탭 자리에 큰·작은 카테고리 목록을 펼치고, 태그·아카이브 탭은 숨김 -->
 
 <aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end">
   <header class="profile-wrapper">
@@ -28,6 +28,91 @@
       </li>
       <!-- the real tabs -->
       {% for tab in site.tabs %}
+        <!-- 태그·아카이브 탭은 사이드바에서 숨김 (페이지는 남아 있어서 글 안의 태그 링크는 그대로 열린다) -->
+        {% if tab.layout == 'tags' or tab.layout == 'archives' %}
+          {% continue %}
+        {% endif %}
+
+        <!-- 카테고리 탭 자리에 큰 카테고리를 놓고, 그 아래에 작은 카테고리를 펼치기 -->
+        {% if tab.layout == 'categories' %}
+          {% assign sb_tops = '' | split: '' %}
+          {% assign sb_pairs = '' | split: '' %}
+          {% for post in site.posts %}
+            {% if post.categories.size > 0 %}
+              {% assign sb_tops = sb_tops | push: post.categories[0] %}
+            {% endif %}
+            {% if post.categories.size > 1 %}
+              {% capture sb_pair %}{{ post.categories[0] }}::{{ post.categories[1] }}{% endcapture %}
+              {% assign sb_pairs = sb_pairs | push: sb_pair %}
+            {% endif %}
+          {% endfor %}
+          {% assign sb_tops = sb_tops | uniq %}
+          {% assign sb_pairs = sb_pairs | uniq %}
+          {% assign sb_groups = site.data.sidebar_categories %}
+          {% assign sb_names = sb_groups | map: 'name' %}
+
+          <!-- _data/sidebar_categories.yml 순서를 먼저, 거기 없는 카테고리는 가나다순으로 뒤에 -->
+          {% assign sb_ordered = '' | split: '' %}
+          {% for sb_name in sb_names %}
+            {% if sb_tops contains sb_name %}
+              {% assign sb_ordered = sb_ordered | push: sb_name %}
+            {% endif %}
+          {% endfor %}
+          {% assign sb_rest = '' | split: '' %}
+          {% for sb_name in sb_tops %}
+            {% unless sb_names contains sb_name %}
+              {% assign sb_rest = sb_rest | push: sb_name %}
+            {% endunless %}
+          {% endfor %}
+          {% assign sb_rest = sb_rest | sort %}
+          {% assign sb_ordered = sb_ordered | concat: sb_rest %}
+
+          {% for top in sb_ordered %}
+            {% assign sb_group = sb_groups | where: 'name', top | first %}
+            {% capture category_url %}/categories/{{ top | slugify | url_encode }}/{% endcapture %}
+            <li class="nav-item{% if page.layout == 'category' and page.title == top %}{{ " active" }}{% endif %}">
+              <a href="{{ category_url | relative_url }}" class="nav-link">
+                <i class="fa-fw {{ sb_group.icon | default: 'fas fa-folder' }}"></i>
+                <span>{{ top }}</span>
+              </a>
+            </li>
+
+            <!-- 작은 카테고리도 같은 방식: children 순서를 먼저, 나머지는 가나다순 -->
+            {% assign sb_subs = '' | split: '' %}
+            {% for sb_pair in sb_pairs %}
+              {% assign sb_parts = sb_pair | split: '::' %}
+              {% if sb_parts[0] == top %}
+                {% assign sb_subs = sb_subs | push: sb_parts[1] %}
+              {% endif %}
+            {% endfor %}
+            {% assign sb_sub_ordered = '' | split: '' %}
+            {% for sb_name in sb_group.children %}
+              {% if sb_subs contains sb_name %}
+                {% assign sb_sub_ordered = sb_sub_ordered | push: sb_name %}
+              {% endif %}
+            {% endfor %}
+            {% assign sb_rest = '' | split: '' %}
+            {% for sb_name in sb_subs %}
+              {% unless sb_group.children contains sb_name %}
+                {% assign sb_rest = sb_rest | push: sb_name %}
+              {% endunless %}
+            {% endfor %}
+            {% assign sb_rest = sb_rest | sort %}
+            {% assign sb_sub_ordered = sb_sub_ordered | concat: sb_rest %}
+
+            {% for sub in sb_sub_ordered %}
+              {% capture category_url %}/categories/{{ sub | slugify | url_encode }}/{% endcapture %}
+              <li class="nav-item sidebar-category{% if page.layout == 'category' and page.title == sub %}{{ " active" }}{% endif %}">
+                <a href="{{ category_url | relative_url }}" class="nav-link">
+                  <i class="fa-fw far fa-folder"></i>
+                  <span>{{ sub }}</span>
+                </a>
+              </li>
+            {% endfor %}
+          {% endfor %}
+          {% continue %}
+        {% endif %}
+
         <li class="nav-item{% if tab.url == page.url %}{{ " active" }}{% endif %}">
           <a href="{{ tab.url | relative_url }}" class="nav-link">
             <i class="fa-fw {{ tab.icon }}"></i>
@@ -37,43 +122,6 @@
           </a>
         </li>
         <!-- .nav-item -->
-
-        <!-- 카테고리 탭 아래에 상위 카테고리 목록 펼치기 -->
-        {% if tab.layout == 'categories' %}
-          {% assign sb_categories = '' | split: '' %}
-          {% for post in site.posts %}
-            {% if post.categories.size > 0 %}
-              {% assign sb_categories = sb_categories | push: post.categories.first %}
-            {% endif %}
-          {% endfor %}
-          {% assign sb_categories = sb_categories | uniq %}
-
-          <!-- _data/sidebar_categories.yml 순서를 먼저, 거기 없는 카테고리는 가나다순으로 뒤에 -->
-          {% assign sb_ordered = '' | split: '' %}
-          {% for category_name in site.data.sidebar_categories %}
-            {% if sb_categories contains category_name %}
-              {% assign sb_ordered = sb_ordered | push: category_name %}
-            {% endif %}
-          {% endfor %}
-          {% assign sb_rest = '' | split: '' %}
-          {% for category_name in sb_categories %}
-            {% unless site.data.sidebar_categories contains category_name %}
-              {% assign sb_rest = sb_rest | push: category_name %}
-            {% endunless %}
-          {% endfor %}
-          {% assign sb_rest = sb_rest | sort %}
-          {% assign sb_ordered = sb_ordered | concat: sb_rest %}
-
-          {% for category_name in sb_ordered %}
-            {% capture category_url %}/categories/{{ category_name | slugify | url_encode }}/{% endcapture %}
-            <li class="nav-item sidebar-category{% if page.layout == 'category' and page.title == category_name %}{{ " active" }}{% endif %}">
-              <a href="{{ category_url | relative_url }}" class="nav-link">
-                <i class="fa-fw far fa-folder"></i>
-                <span>{{ category_name }}</span>
-              </a>
-            </li>
-          {% endfor %}
-        {% endif %}
       {% endfor %}
     </ul>
   </nav>

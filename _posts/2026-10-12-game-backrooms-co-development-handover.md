@@ -5,9 +5,10 @@ description: 혼자 만든 게임을 여러 사람이 이어 개발하려면 무
   일과 협업 가능
 date: 2026-10-12 08:31:18 +0900
 categories:
-- 게임 개발 브리핑
+- 레퍼런스 조사
+- 업계 뉴스
 tags:
-- 게임 개발 브리핑
+- 업계 뉴스
 briefing_type: game
 briefing_event: escape-backrooms-bbi-co-development-retrospective-20261006
 briefing_sources:

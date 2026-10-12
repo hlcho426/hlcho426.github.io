@@ -2,8 +2,8 @@
 title: NPC와 자유롭게 대화하면 더 재미있을까? 130명 실험이 보여 준 자유와 부담
 description: 선택지 NPC와 자유 입력 NPC를 비교한 연구를 목적부터 실험 과정, 결과와 한계까지 풀어 읽는다. 자유롭게 말하는 느낌이 커져도 전체 경험이 좋아지는 것은 아니었다.
 date: 2026-10-12 02:03:30 +0900
-categories: [게임 디자인 연구]
-tags: [게임 디자인 연구, NPC, 대화 설계, 플레이어 경험]
+categories: [레퍼런스 조사, 기획 연구]
+tags: [기획 연구, NPC, 대화 설계, 플레이어 경험]
 briefing_type: research
 briefing_format: research-v2
 briefing_event: arxiv-2604-10107-llm-npc-cognitive-load

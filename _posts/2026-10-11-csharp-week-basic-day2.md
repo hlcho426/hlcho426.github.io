@@ -4,7 +4,7 @@ date: 2026-10-11 22:16:00 +0900
 description: "if, else, else if와 비교 연산자, &&와 ||로 조건을 묶는 법, =와 ==의 차이까지. 유니티 예제로 배우는 C# 조건문."
 series: 유니티 C# 일주일
 series_title: "기초 Day 2: 조건문 if"
-categories: [유니티 공부]
+categories: [게임 제작 공부, 유니티]
 tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
 image:
   path: /assets/img/unitystudy/csharp_image.png

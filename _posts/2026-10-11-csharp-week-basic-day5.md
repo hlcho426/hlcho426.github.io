@@ -4,7 +4,7 @@ date: 2026-10-11 22:28:00 +0900
 description: "Transform과 Vector3로 오브젝트를 옮기고, Time.deltaTime으로 컴퓨터 성능과 상관없이 같은 속도로 움직이기. GetComponent와 SerializeField까지."
 series: 유니티 C# 일주일
 series_title: "기초 Day 5: Transform과 컴포넌트"
-categories: [유니티 공부]
+categories: [게임 제작 공부, 유니티]
 tags: [유니티, C#, 학습앱, Claude, 유니티 C# 공부]
 image:
   path: /assets/img/unitystudy/csharp_image.png
