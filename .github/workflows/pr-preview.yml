@@ -40,6 +40,12 @@ jobs:
             enabled: false
           comments:
             provider:
+          # 공개 미리보기 방문이 GoatCounter 통계에 섞이지 않게 끈다 (빈 값 nil은 덮어쓰지 못해서 "")
+          analytics:
+            goatcounter:
+              id: ""
+          pageviews:
+            provider: ""
           YAML
       - name: Build the actual Chirpy layout
         env:
