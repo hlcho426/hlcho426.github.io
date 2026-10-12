@@ -34,6 +34,8 @@ PC 전원·인터넷·Codex 앱 실행·ChatGPT 로그인이 필요하다. 실�
 
 ## 무료 수동 시험
 
+주간 연구는 뉴스형 목차 대신 연구 정보·목적과 질문·방법·결과·발견과 한계·설계 적용·원문 확인 범위의 7개 섹션을 생성한다. 연구 정보에는 원제·저자·발표 정보·원문 링크와 확인된 이용 조건을 표시한다. `research_info`와 문단별 `research_section`을 작성해야 하며, 없는 서지·결과·재사용 허가를 추정하지 않는다. 새 출력은 `briefing_format: research-v2`로 검사하고 기존 연구 글의 4개 섹션은 계속 허용한다. 구체적인 작성 기준은 editorial.md의 연구 전용 형식을 따른다.
+
 ```sh
 python -m pip install -r tools/briefing/requirements.txt
 python -m unittest discover -s tools/briefing -p 'test_*.py' -v
