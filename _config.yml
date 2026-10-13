@@ -75,7 +75,7 @@ analytics:
 
 # Page views settings
 pageviews:
-  provider: goatcounter # 글마다 조회수 표시 (GoatCounter 설정에서 visitor counts 허용 필요)
+  provider: # 비워 둠: 글마다 조회수를 블로그에 보이지 않고 통계는 GoatCounter에서만 본다 (보이려면 goatcounter)
 
 # Prefer color scheme setting.
 #
