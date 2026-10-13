@@ -225,10 +225,10 @@ Sun의 체력: 100
 ```
 
 이제 Inspector에서 Hp를 50으로, Nickname을 내 이름으로 바꾸고 다시 실행해 보자. 코드는 그대로인데 결과가 바뀐다.<br>
-![인스펙터바꾸기](/assets/img/unitystudy/csharp_basic_day1_01.png){: w="1159" h="832" }
+![인스펙터바꾸기](/assets/img/unitystudy/csharp_basic_day1_01.png){: w="1694" h="919" }
 
 {: .prompt-warning }
-![콘솔결과](/assets/img/unitystudy/csharp_basic_day1_02.png){: w="1159" h="832" }
+![콘솔결과](/assets/img/unitystudy/csharp_basic_day1_02.png){: w="688" h="214" }
 
 주의사항! <br>
 값은 코드가 아니라 **Inspector에서** 바꿔야 한다. `public` 변수는 스크립트를 처음 붙일 때만 코드의 값을 가져오고, 그다음부터는 Inspector에 저장된 값을 쓴다. 그래서 코드에서 `100`을 `50`으로 고쳐도 결과는 그대로다. 나도 처음에 코드를 고쳤다가 결과가 안 바뀌어서 한참 헤맸다. 자세한 내용은 아래 [자주 헷갈리는 것](#자주-헷갈리는-것)에 있다.

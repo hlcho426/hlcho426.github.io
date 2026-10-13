@@ -49,7 +49,7 @@ image:
 - **다지기**: List, Dictionary, null, 실행 순서를 원리부터 다시
 - **시스템**: Addressables와 외부 데이터 테이블
 
-![Claude가 만들어준 유니티 공부 앱](/assets/img/unitystudy/csharp_make_image02.png){: w="1174" h="957" }
+![Claude가 만들어준 유니티 공부 앱](/assets/img/unitystudy/csharp_make_image02.png){: w="1080" h="2340" }
 
 지금 앱을 다시 보면 코스마다 조금씩 다르다.<br>
 처음 만든 기초·심화 레슨에는 힌트 버튼이 없고, 실전부터 생긴다.<br>
@@ -57,7 +57,7 @@ image:
 
 재미있었던 건, 내가 중간에 따로 물어본 질문이 다음 레슨에 그대로 들어갔다는 것이다.<br>
 void는 왜 쓰는지 물어봤고<br>
-![Claude에게 void 질문](/assets/img/unitystudy/csharp_make_image03.png){: w="1174" h="957" }
+![Claude에게 void 질문](/assets/img/unitystudy/csharp_make_image03.png){: w="1192" h="1369" }
 나중에 세이브 레슨에서 이렇게 나왔다.<br>
 
 > Save는 일만 하니 void, Load는 꺼내서 돌려주니 SaveData.
@@ -75,7 +75,7 @@ void는 왜 쓰는지 물어봤고<br>
 ![Claude에게 듀오링고의 블록 조립 기능 요청](/assets/img/unitystudy/csharp_make_image04.png){: w="1146" h="843" }
 
 블록 조립은 다지기 코스부터 들어갔다.<br>
-![Claude에게 듀오링고의 블록 조립 기능 요청](/assets/img/unitystudy/csharp_make_image05.png){: w="1146" h="843" }
+![Claude에게 듀오링고의 블록 조립 기능 요청](/assets/img/unitystudy/csharp_make_image05.png){: w="1080" h="2340" }
 
 ```
 [ rb ]  [ = ]  [ GetComponent<Rigidbody>(); ]  [ Rigidbody ]  [ new ]

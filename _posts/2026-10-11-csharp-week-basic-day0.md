@@ -40,7 +40,7 @@ image:
 {:.briefing-heading}
 
 Hub의 **Projects** → **New project**에서 템플릿을 고른다. 3D 템플릿이면 아무거나 괜찮다. 여기서는 **Universal 3D**를 쓴다. 프로젝트 이름과 저장 위치를 정하고 **Create project**를 누르면 몇 분 뒤 에디터가 열린다.
-![유니티허브새프로젝트만들기](/assets/img/unitystudy/csharp_basic_day0_02.png){: w="1159" h="832" }
+![유니티허브새프로젝트만들기](/assets/img/unitystudy/csharp_basic_day0_02.png){: w="1926" h="1078" }
 
 ## 3. 에디터 화면 읽기
 {:.briefing-heading}
@@ -57,13 +57,13 @@ Hub의 **Projects** → **New project**에서 템플릿을 고른다. 3D 템플�
 | **Console** | 로그와 에러가 뜨는 곳 |
 
 Console 창이 안 보이면 메뉴 **Window → General → Console**로 연다. 앞으로 제일 자주 볼 창이다.
-![유니티창살펴보기](/assets/img/unitystudy/csharp_basic_day0_03.png){: w="1159" h="832" }
+![유니티창살펴보기](/assets/img/unitystudy/csharp_basic_day0_03.png){: w="2557" h="1393" }
 
 ## 4. 큐브 하나 만들기
 {:.briefing-heading}
 
 Hierarchy 빈 곳을 우클릭하고 **3D Object → Cube**를 고른다.<br> 
-![큐브만들기](/assets/img/unitystudy/csharp_basic_day0_04.png){: w="1159" h="832" }
+![큐브만들기](/assets/img/unitystudy/csharp_basic_day0_04.png){: w="925" h="906" }
 
 Scene 화면에 큐브가 생기고, Inspector에 `Transform`, `Mesh Filter`, `Mesh Renderer`, `Box Collider` 같은 칸이 보인다.
 
@@ -73,7 +73,7 @@ Scene 화면에 큐브가 생기고, Inspector에 `Transform`, `Mesh Filter`, `M
 {:.briefing-heading}
 
 Project 창의 **Assets** 폴더를 우클릭하고 **Create → Scripting → MonoBehaviour Script**를 고른다. 유니티 버전에 따라 메뉴 이름이 **C# Script**로 보이기도 한다.
-![스크립트만들기](/assets/img/unitystudy/csharp_basic_day0_05.png){: w="1159" h="832" }
+![스크립트만들기](/assets/img/unitystudy/csharp_basic_day0_05.png){: w="1102" h="781" }
 
 파일 이름을 `Player`로 바꾸고 엔터를 친다. 이 이름이 중요하다. 유니티는 **파일 이름과 스크립트 안의 클래스 이름이 같아야** 스크립트를 오브젝트에 붙일 수 있다. 파일을 만들 때 정한 이름이 클래스 이름으로 들어가니까, 처음에 제대로 지어 두는 게 편하다.
 
@@ -86,7 +86,7 @@ Project 창의 **Assets** 폴더를 우클릭하고 **Create → Scripting → M
 Project 창의 `Player` 스크립트를 Hierarchy의 Cube 위로 끌어다 놓는다. Cube를 클릭해 보면 Inspector 맨 아래에 **Player (Script)** 칸이 생겨 있다. 이제 이 스크립트는 큐브의 컴포넌트다.
 
 Inspector의 **Add Component** 버튼을 누르고 `Player`를 검색해서 붙여도 된다.
-![스크립트만들기](/assets/img/unitystudy/csharp_basic_day0_06.png){: w="1159" h="832" }
+![스크립트만들기](/assets/img/unitystudy/csharp_basic_day0_06.png){: w="1704" h="1087" }
 
 ## 7. 코드 한 줄 쓰기
 {:.briefing-heading}
@@ -133,12 +133,12 @@ void Start()
 안녕, 유니티!
 ```
 
-![start에넣고실행](/assets/img/unitystudy/csharp_basic_day0_07.png){: w="1159" h="832" }
+![start에넣고실행](/assets/img/unitystudy/csharp_basic_day0_07.png){: w="1032" h="234" }
 
 한 번 더 ▶을 누르면 플레이가 멈춘다.
 
 이번엔 같은 줄을 `Start`가 아니라 `Update` 안에 넣고 실행해 보자. Console이 순식간에 같은 글자로 가득 찬다. `Start`는 시작할 때 한 번, `Update`는 매 프레임 실행되기 때문이다.<br>
-![update에넣고실행](/assets/img/unitystudy/csharp_basic_day0_08.png){: w="1159" h="832" }
+![update에넣고실행](/assets/img/unitystudy/csharp_basic_day0_08.png){: w="1039" h="414" }
 
 이 차이가 [기초 Day 1](/posts/csharp-week-basic-day1/)의 첫 내용이다. Console 위쪽의 **Collapse**를 켜면 같은 줄을 하나로 묶고 몇 번 찍혔는지 숫자로 보여 준다.
 

@@ -131,6 +131,22 @@ void OnCollisionEnter(Collision col)
 
 `OnCollisionEnter`는 Trigger가 아닌 **진짜 부딪힘**을 감지하는 짝꿍 함수다. 받는 값이 `Collision`이라서, 상대 오브젝트는 `col.gameObject`로 꺼낸다.
 
+`Ground`도 Coin처럼 유니티에 기본으로 있는 태그가 아니라서, 직접 만들어 바닥에 달아야 한다(아래 "직접 해 보기" 1번). 태그를 만들지 않고 `CompareTag("Ground")`를 쓰면 "그런 태그는 없다"는 에러가 나고, 만들었는데 바닥에 안 붙이면 에러 없이 점프가 한 번만 된다.
+
+> 현업에서는: 태그도 완벽하지는 않다. 태그는 **무엇에** 부딪혔는지만 보고 **어디에** 닿았는지는 안 본다. 그래서 Ground 태그가 붙은 상자의 옆면에 공중에서 부딪혀도 착지로 처리된다. 그래서 실무에서는 발밑으로 짧은 광선을 쏴서(**Raycast**) 바로 아래에 땅이 있는지 확인하는 방법을 많이 쓴다.
+>
+> ```csharp
+> bool IsGrounded()
+> {
+>     // 큐브 중심에서 아래로 0.6m 광선을 쏴서 무언가 맞으면 땅 위다
+>     // (높이 1인 큐브라 중심에서 바닥까지 0.5m + 여유 0.1m)
+>     return Physics.Raycast(transform.position, Vector3.down, 0.6f);
+> }
+> ```
+>
+> 지금은 태그 방식으로 충분하고, 캐릭터 조작을 다듬을 때 이 방식으로 바꾸면 된다.
+{: .prompt-tip }
+
 ## 직접 해 보기
 {:.briefing-heading}
 
