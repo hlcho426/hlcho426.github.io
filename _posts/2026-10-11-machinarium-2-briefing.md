@@ -8,6 +8,8 @@ image: "https://lh3.googleusercontent.com/d/1pdxriGarlXkWYNquY9F8pyGAcxpIWvBX=w1
 
 17년 만에 돌아온 《Machinarium》은 무엇을 바꾸고, 무엇을 남겼을까? 후속작은 손그림 아트와 대사 없는 스토리텔링을 이어가면서, 조세프와 베르타의 능력을 조합하는 퍼즐과 게임패드로 캐릭터를 직접 움직이는 조작을 더했다. 이번 발표에서 확인된 변화와 게임 디자인 관점에서 주목할 점을 살펴본다.
 
+{% include official-video.html id="ZqcglWA1pDo" title="Machinarium 2 | Announcement Trailer" publisher="Amanita Design" source="https://amanita-design.net/games/machinarium2.html" %}
+
 ## 무슨 일이 있었나
 {:.briefing-heading}
 

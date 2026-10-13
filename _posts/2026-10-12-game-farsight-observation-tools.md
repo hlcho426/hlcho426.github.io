@@ -19,6 +19,8 @@ briefing_sources:
 
 공포 게임에서 정보를 더 얻는 행동 자체를 불안하게 만들 수 있을까? Studio Noori의 Farsight는 시력 검사 기계 속 집으로 들어간 아이에게 열쇠구멍, 쌍안경, 휴대용 카메라를 쥐여 준다. 10월 10일 공개 소개는 같은 공간을 서로 다른 도구로 확인하는 설계에 주목하게 한다.
 
+{% include official-video.html id="LnydjhGRH1s" title="Farsight - Official Reveal Trailer | The Horror Game Awards Showcase 2026" publisher="Studio Noori 공식 홈페이지 연결 · IGN 업로드" source="https://farsightgame.com/" %}
+
 ## 무슨 일이 있었나
 {:.briefing-heading}
 

@@ -14,6 +14,8 @@ image:
 
 *대표 이미지: Silver Pines 공식 보도용 스크린샷. 출처 Team17의 Silver Pines Press Kit 2026, `Screenshots/Screen 7.jpg`. 게임 이미지 권리는 Wych Elm / Team17 등 해당 권리자에게 있다.*
 
+{% include official-video.html id="y_PVwrQivKE" title="Silver Pines | Announce Trailer" publisher="Team17" source="https://www.team17.com/news/announcing-silver-pines" %}
+
 ## 무슨 일이 있었나
 {:.briefing-heading}
 
