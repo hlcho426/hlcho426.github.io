@@ -105,6 +105,6 @@ Codex 앱의 로컬 예약 작업으로 업계 뉴스·개발 도구 데일리�
 | `_includes/series.html` | 시리즈 글 목차 상자 (위 "시리즈 글" 참고) |
 | `_data/series.yml` | 시리즈별 안내 문구 (목차 상자에 표시) |
 | `_data/sidebar_categories.yml` | 사이드바 카테고리 순서와 큰 카테고리 아이콘 |
-| `_config.yml` | 방문 통계 GoatCounter(`analytics.goatcounter.id`, 글마다 조회수 `pageviews.provider`). 통계는 <https://hlcho426.goatcounter.com>. PR 미리보기(`.github/workflows/pr-preview.yml`)에서는 꺼 둔다 |
+| `_config.yml` | 방문 통계 GoatCounter(`analytics.goatcounter.id`). 통계는 <https://hlcho426.goatcounter.com>에서 나만 본다. 글마다 조회수 표시(`pageviews.provider`)는 꺼 둠. PR 미리보기(`.github/workflows/pr-preview.yml`)에서는 통계 자체를 끈다 |
 | `_data/contact.yml` | 사이드바 아래 아이콘 (트위터 숨김) |
 | `_tabs/about.md` | 정보 페이지 |
