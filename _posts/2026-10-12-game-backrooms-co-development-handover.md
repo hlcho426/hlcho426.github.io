@@ -19,6 +19,8 @@ briefing_sources:
 
 혼자 만든 게임을 여러 사람이 이어 개발하려면 무엇부터 정리해야 할까? Blackbird Interactive의 10월 6일 회고는 Escape the Backrooms의 인수인계에서 개발 환경 재현, 빌드 과정, 콘솔 네트워크 문제가 드러났다고 설명한다. 인원을 늘리는 일과 협업 가능한 프로젝트로 바꾸는 일은 따로 살펴볼 필요가 있다.
 
+{% include official-video.html id="ypDh7l1tCm0" title="I Turned the Backrooms into a CONSOLE Game..." publisher="개발자 Fancy" source="https://www.gamedeveloper.com/production/co-dev-case-study-how-blackbird-interactive-and-secret-mode-helped-escape-the-backrooms-ride-the-backrooms-hype-wave" %}
+
 ## 무슨 일이 있었나
 {:.briefing-heading}
 

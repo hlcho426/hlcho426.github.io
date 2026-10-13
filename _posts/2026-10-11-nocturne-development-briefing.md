@@ -14,6 +14,8 @@ image:
 
 *대표 이미지: 인터뷰 내용을 바탕으로 이 브리핑용으로 직접 제작한 설명도. 실제 Nocturne 게임 화면이나 공식 아트가 아니다.*
 
+{% include official-video.html id="Q3XgpLhpGuc" title="Nocturne: Orchestra Trailer" publisher="Pracy Studios / Pracy" source="https://pracystudios.com/" %}
+
 ## 무슨 일이 있었나
 {:.briefing-heading}
 

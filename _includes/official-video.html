@@ -1,0 +1,19 @@
+<figure class="official-video my-3">
+  <div style="aspect-ratio: 16 / 9; width: 100%;">
+    <iframe
+      src="https://www.youtube-nocookie.com/embed/{{ include.id | escape }}"
+      title="{{ include.title | escape }}"
+      width="560"
+      height="315"
+      style="width: 100%; height: 100%; border: 0;"
+      loading="lazy"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allow="encrypted-media; picture-in-picture; fullscreen"
+      allowfullscreen>
+    </iframe>
+  </div>
+  <figcaption class="small mt-2">
+    영상: <a href="https://www.youtube.com/watch?v={{ include.id | escape }}">{{ include.title | escape }}</a>
+    — {{ include.publisher | escape }} · <a href="{{ include.source | escape }}">공식 출처</a>
+  </figcaption>
+</figure>

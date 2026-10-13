@@ -18,6 +18,8 @@ briefing_sources:
 
 Car Park Capital은 집과 공원을 밀어 주차장을 늘리고 시민을 자동차 생활로 설득하게 한다. 10월 12일 소개와 공식 Steam 설명은 경영 게임의 성장 목표에 풍자를 담는 방식을 보여 준다.
 
+{% include official-video.html id="5U5B4BLsuT8" title="Car Park Capital | Launch Trailer | Out Now in Early Access" publisher="MicroProse" source="https://steamcommunity.com/groups/microprose" %}
+
 ## 무슨 일이 있었나
 {:.briefing-heading}
 

@@ -29,23 +29,29 @@ permalink: /privacy/
 - 쿠키 등 브라우저에 정보를 저장하지 않고, IP 주소를 저장하지 않습니다. 같은 방문자의 중복 방문을 가려내는 데 쓰는 임시 값은 최대 8시간 동안만 메모리에 두었다가 버립니다.
 - 모은 통계는 방문자 개인과 연결되지 않으며, GoatCounter는 이를 제3자와 공유하지 않는다고 밝히고 있습니다. 자세한 내용은 [GoatCounter 개인정보 안내](https://www.goatcounter.com/help/privacy)를 참고해 주세요.
 
-## 4. 호스팅
+## 4. YouTube 삽입 영상
+
+일부 글은 YouTube 영상을 페이지 안에서 재생할 수 있도록 제공합니다. 플레이어를 불러오거나 영상을 재생하면 방문자의 브라우저가 YouTube·Google 서버에 연결됩니다.
+
+삽입 영상에는 YouTube의 **개인 정보 보호 강화 모드**(`youtube-nocookie.com`)를 사용합니다. YouTube는 이 모드의 삽입 영상 조회를 시청자의 이후 YouTube 탐색 환경을 맞춤설정하는 데 사용하지 않는다고 안내합니다. 이 모드가 모든 정보 수집이나 외부 연결을 없애는 것은 아닙니다. 자세한 내용은 [YouTube 삽입 영상 안내](https://support.google.com/youtube/answer/171780?hl=ko)와 [Google 개인정보처리방침](https://policies.google.com/privacy)을 참고해 주세요.
+
+## 5. 호스팅
 
 이 블로그는 GitHub Pages에서 운영됩니다. GitHub는 보안과 서비스 운영을 위해 방문자의 IP 주소 등 접속 기록을 남길 수 있습니다. 자세한 내용은 [GitHub 개인정보처리방침](https://docs.github.com/ko/site-policy/privacy-policies/github-general-privacy-statement)을 참고해 주세요.
 
-## 5. 쿠키를 거부하는 방법
+## 6. 쿠키를 거부하는 방법
 
 브라우저 설정에서 쿠키 저장을 거부하거나 삭제할 수 있습니다. 쿠키를 거부해도 이 블로그의 글을 읽는 데에는 문제가 없습니다.
 
-## 6. 문의
+## 7. 문의
 
 개인정보와 관련된 문의는 아래 이메일로 보내 주세요.
 
 - 이메일: <hlcho426@gmail.com>
 
-## 7. 변경 안내
+## 8. 변경 안내
 
 이 방침이 바뀌면 이 페이지에 알립니다.
 
 - 시행일: 2026년 10월 11일
-- 변경일: 2026년 10월 12일 (3. 방문 통계 추가)
+- 변경일: 2026년 10월 14일 (4. YouTube 삽입 영상 안내 추가)
