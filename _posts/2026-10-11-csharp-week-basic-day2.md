@@ -262,7 +262,7 @@ if (canJump) { }
 
 - **조건에 이름을 붙인다.** `if (hp <= 0 && !isInvincible && !hasRevive)`보다 `bool shouldDie = ...; if (shouldDie)`가 훨씬 읽기 쉽다. 기획 문서의 용어를 그대로 이름으로 쓰면 기획자와 이야기하기도 편하다.
 - **"이미 했는지" 깃발을 둔다.** "보상은 한 번만", "클리어 메시지는 한 번만" 같은 규칙은 `bool isCleared`처럼 한 번 했는지 기억하는 bool로 막는다. Day 7에서 실제로 쓴다.
-- **갈래가 많아지면 다른 도구를 쓴다.** 상태가 대기·이동·공격·피격처럼 여러 개면 `if`를 길게 늘어놓기보다 `enum`과 `switch`를 쓴다. 심화 Day 4에서 배운다.
+- **갈래가 많아지면 다른 도구를 쓴다.** 상태가 대기·이동·공격·피격처럼 여러 개면 `if`를 길게 늘어놓기보다 `enum`과 `switch`를 쓴다. [심화 Day 4](/posts/csharp-week-adv-day4/)에서 배운다.
 
 ## 앱에서 연습하기
 {:.briefing-heading}

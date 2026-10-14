@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
 | `void Start()` | 게임이 시작될 때 **딱 한 번** 실행되는 곳 |
 | `void Update()` | **매 프레임** 계속 실행되는 곳 |
 
-`class`가 정확히 무엇인지, `void`가 왜 붙는지는 뒤에서 제대로 다룬다. 지금은 "유니티가 정해 둔 자리"라고만 알아 두면 된다. 함수와 `void`는 기초 Day 4, 클래스는 심화 Day 1에서 배운다.
+`class`가 정확히 무엇인지, `void`가 왜 붙는지는 뒤에서 제대로 다룬다. 지금은 "유니티가 정해 둔 자리"라고만 알아 두면 된다. 함수와 `void`는 기초 Day 4, 클래스는 [심화 Day 1](/posts/csharp-week-adv-day1/)에서 배운다.
 
 ### Start와 Update는 내가 부르지 않는다
 

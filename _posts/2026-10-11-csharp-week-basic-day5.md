@@ -186,13 +186,13 @@ p.x = 5f;
 transform.position = p;
 ```
 
-왜 복사본이 나오는지는 심화 Day 8 "값 형식과 참조 형식"에서 다룬다.
+왜 복사본이 나오는지는 [심화 Day 8 "값 형식과 참조 형식"](/posts/csharp-week-adv-day8/)에서 다룬다.
 
 **Q. `Transform`이랑 `transform`은 뭐가 달라?**<br>
 대문자 `Transform`은 컴포넌트의 **종류(자료형)** 이름이고, 소문자 `transform`은 **이 오브젝트의** Transform을 가리키는 변수다. `Rigidbody`(종류)와 `rb`(내가 만든 변수)의 관계와 같다.
 
 **Q. Rotation은 왜 x, y, z 세 숫자로 직접 안 넣어?**<br>
-유니티는 회전을 `Quaternion`이라는 특별한 형식으로 다룬다. 지금은 회전시키고 싶으면 `transform.Rotate(...)`를 쓴다고 알아 두면 충분하다. 심화 Day 3에서 다시 나온다.
+유니티는 회전을 `Quaternion`이라는 특별한 형식으로 다룬다. 지금은 회전시키고 싶으면 `transform.Rotate(...)`를 쓴다고 알아 두면 충분하다. [심화 Day 3](/posts/csharp-week-adv-day3/)에서 다시 나온다.
 
 **Q. 비주얼 스튜디오 자동완성은 `[SerializeField] private float`처럼 private을 붙여 주던데?**<br>
 둘은 완전히 같은 코드다. C#에서는 앞에 아무것도 안 쓰면 자동으로 `private`이다. private을 붙이든 안 붙이든 Inspector에는 보이고, 다른 스크립트에서는 못 쓴다. 다른 스크립트에서 쓰게 하려면 `public`을 붙여야 한다.
