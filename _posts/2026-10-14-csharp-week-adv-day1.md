@@ -169,6 +169,43 @@ public class Monster { }                 // 순수 데이터용 클래스
 
 MonoBehaviour를 `new Player()`로 만들면 안 된다. 유니티가 "MonoBehaviour는 new로 만들 수 없다"는 경고를 띄우고, 만들어진 것도 오브젝트에 붙어 있지 않아 제대로 동작하지 않는다. 컴포넌트는 Inspector의 **Add Component**나 코드의 `AddComponent<Player>()`로 붙인다.
 
+### 순수 클래스를 Inspector에 묶음으로 보여 주기
+
+순수 클래스는 오브젝트에 직접 붙일 수 없다. 하지만 MonoBehaviour **안의 칸**으로는 넣을 수 있고, 클래스 위에 `[System.Serializable]`을 붙이면 그 칸이 Inspector에 묶음으로 보인다.
+
+예를 들어 다음 글(심화 Day 2)에서 대시를 만들면 대시 속도, 대시 시간, 쿨타임 칸이 세 개 생긴다. 이렇게 서로 관련된 값들을 하나로 묶을 때 쓴다.
+
+```csharp
+using UnityEngine;
+
+[System.Serializable]
+public class DashSettings
+{
+    public float speed = 15f;
+    public float time = 0.2f;
+    public float cooldown = 2f;
+}
+
+public class PlayerController : MonoBehaviour
+{
+    [SerializeField] DashSettings dash;
+
+    void Start()
+    {
+        Debug.Log("대시 속도: " + dash.speed);
+    }
+}
+```
+
+이러면 Inspector의 PlayerController 칸에 **Dash**라는 줄이 하나 생기고, 왼쪽 ▶를 누르면 Speed, Time, Cooldown이 펼쳐진다. 칸이 많은 스크립트를 정리할 때 좋다.
+
+- `[System.Serializable]`은 "유니티가 이 클래스의 값을 저장할 수 있다"는 표시다. 빼면 에러는 안 나지만 Dash 줄이 Inspector에서 사라진다. 심화 Day 7의 세이브 데이터에도 같은 표시를 붙인다.
+- 칸(`dash`)은 `public`이나 `[SerializeField]`여야 보이고, 묶음 안의 변수(`speed` 등)도 `public`이어야 보인다.
+- `new DashSettings()`를 안 썼는데도 dash가 비어 있지 않다. Inspector에 보이는 칸이라 유니티가 알아서 만들어 채워 준다. Inspector에 안 보이는 칸이라면 앞의 Monster처럼 직접 `new` 해야 한다.
+- 순수 클래스는 파일 이름과 맞출 필요가 없어서, 이렇게 `PlayerController.cs` 안에 같이 써도 된다.
+
+이 예제는 맛보기라 따라 하지 않아도 된다. 심화 Day 2의 대시 코드는 칸 세 개를 그대로 쓴다.
+
 ## 5. 다른 스크립트와 대화하기
 {:.briefing-heading}
 

@@ -364,6 +364,30 @@ Day 5에서 클리어하면 적을 멈추게 한 **On Cleared ()** 칸에는 처
 ## 자주 헷갈리는 것
 {:.briefing-heading}
 
+**Q. ScriptableObject를 상속하게 바꾸면 .cs 파일이 .asset 파일로 바뀌는 거야?**<br>
+아니다. `.cs` 파일은 그대로 있고, 그 `.cs`를 틀로 써서 **새 `.asset` 파일을 찍어내는** 것이다. Day 1의 "클래스는 설계도, 객체는 실물"과 같은 관계다. 직접 해 보기를 마치면 Project 창에는 이렇게 있다.
+
+| 파일 | 무엇 | 몇 개 |
+|---|---|---|
+| `EnemyData.cs` | 틀(설계도). "적 데이터에는 이름, 속도, 공격력 칸이 있다" | 1개 |
+| `Slime.asset`, `Goblin.asset` | 틀로 찍어낸 실물. 칸마다 실제 숫자가 들어 있다 | 필요한 만큼 |
+
+**Create → Game → Enemy Data**를 누를 때마다 `.asset`이 하나씩 늘고, `.cs`는 늘 하나다. 그래서 `.cs`에 칸을 하나 추가하면 모든 `.asset`에 그 칸이 같이 생긴다. 반대로 `.cs`를 지우면 틀을 잃은 `.asset`들은 "연결된 스크립트를 불러올 수 없다"는 빈 껍데기가 된다.
+
+MonoBehaviour도 사실 같은 구조다. `PlayerHealth.cs`는 하나지만, 그걸 붙인 오브젝트마다 PlayerHealth 컴포넌트가 따로 하나씩 생긴다. 찍어낸 실물이 씬의 오브젝트에 붙느냐, 프로젝트에 파일로 생기느냐만 다르다.
+
+**Q. Day 1의 `[System.Serializable]` 묶음도 Inspector에서 값을 넣던데, ScriptableObject와 언제 뭘 써?**<br>
+값이 **어디에 저장되느냐**가 다르다.
+
+| | `[System.Serializable]` 묶음 | ScriptableObject |
+|---|---|---|
+| 값이 사는 곳 | 그 컴포넌트 안(씬의 오브젝트나 프리팹) | 프로젝트의 `.asset` 파일 |
+| 여러 오브젝트가 쓰면 | 오브젝트마다 **따로** 값을 가진다 | 모두 **같은 파일 하나**를 가리킨다 |
+| 고칠 때 | 오브젝트마다 고친다 | 파일 하나만 고치면 다 바뀐다 |
+| 잘 맞는 것 | 그 오브젝트만의 설정(이 플레이어의 대시 값) | 여럿이 같이 쓰는 기획 데이터(슬라임 표, 아이템 목록) |
+
+슬라임 열 마리의 속도를 Serializable 묶음으로 넣으면 열 마리를 다 고쳐야 한다(프리팹이면 원본 하나). ScriptableObject면 `Slime.asset` 하나만 고친다. 반대로 플레이어처럼 하나뿐인 오브젝트의 설정을 굳이 파일로 뺄 필요는 없다. 둘을 같이 쓰기도 한다. Serializable 묶음을 ScriptableObject 안의 칸으로 넣으면 에셋의 Inspector에서도 접히는 묶음으로 보인다.
+
 **Q. Create 메뉴에 Game이 안 보여.**<br>
 세 가지를 본다. 콘솔에 빨간 컴파일 에러가 있으면 새 코드가 반영되지 않는다. `[CreateAssetMenu]` 줄이 클래스 바로 위에 있는지 본다. 그리고 파일 이름과 클래스 이름(`EnemyData`)이 같은지 본다. ScriptableObject도 MonoBehaviour처럼 이름이 같아야 한다.
 
