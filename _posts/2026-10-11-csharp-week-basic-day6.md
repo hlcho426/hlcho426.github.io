@@ -75,7 +75,7 @@ float v = Input.GetAxis("Vertical");     // ↓: -1, ↑: 1
 이 숫자를 방향으로 만들어 Day 5의 이동 공식에 넣으면 끝이다.
 
 ```csharp
-public class PlayerMove : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] float speed = 5f;
 
