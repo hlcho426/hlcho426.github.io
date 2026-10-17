@@ -56,6 +56,8 @@ Trigger 신호가 오려면 세 가지가 모두 맞아야 한다.
 
 플레이어는 코인 말고도 바닥, 벽, 적에 닿는다. 코인일 때만 반응하려면 코인에 **태그**를 달아 둔다.
 
+왜 이름이 아니라 태그일까? 코인을 Ctrl + D로 복제하면 이름이 Sphere, Sphere (1), Sphere (2)…처럼 하나하나 달라진다. 이름은 **물체 하나하나의 이름**이라 "코인인가?"를 묻기 어렵다. 태그는 **같은 종류에 똑같이 붙이는 분류표**다. 코인마다 `Coin` 태그를 달아 두면 어느 코인에 닿든 같은 방법으로 확인할 수 있다. 적이 생기면 적마다 `Enemy`를 다는 식이다.
+
 - 코인을 선택하고 Inspector 맨 위의 **Tag** 드롭다운 → **Add Tag...** → +로 `Coin`을 만든다
 - 다시 코인을 선택하고 Tag를 `Coin`으로 고른다
 
@@ -74,6 +76,8 @@ void OnTriggerEnter(Collider other)
 ### Destroy(other)와 Destroy(other.gameObject)
 
 `other`는 **Collider 컴포넌트**다. 그래서 `Destroy(other)`는 코인의 Collider 컴포넌트만 지운다. 코인은 화면에 그대로 남는다. 오브젝트를 통째로 없애려면 그 컴포넌트가 붙은 **게임 오브젝트**를 가리키는 `other.gameObject`를 넘긴다.
+
+사람에 비유하면 `other`는 **명찰**이고, `other.gameObject`는 그 명찰을 단 **사람 전체**다. `Destroy(other)`는 명찰만 떼어 낸 것이라 사람(코인)은 그대로 서 있다. 게다가 명찰(Collider)이 없어졌으니 더는 닿지도 않아서, 지나가도 아무 반응 없는 코인이 남는다.
 
 ## 3. 점수 세고 클리어하기
 {:.briefing-heading}

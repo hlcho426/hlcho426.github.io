@@ -56,7 +56,7 @@ void Update()
 
 키 이름은 `KeyCode.Space`, `KeyCode.E`, `KeyCode.LeftShift`처럼 쓴다. `Input.GetKeyDown("E")`처럼 글자로 넣는 방식보다 `KeyCode`를 쓰는 게 오타가 없다.
 
-입력은 **Update 안에서** 검사한다. 키는 언제 눌릴지 모르니 매 프레임 확인해야 한다. Start에 넣으면 게임 시작 순간에 딱 한 번만 확인하고 끝난다.
+입력은 **Update 안에서** 검사한다. 키는 언제 눌릴지 모르니 매 프레임 확인해야 한다. Start에 넣으면 큐브가 처음 나타나는 순간에 딱 한 번만 확인하고 끝난다. 그 순간 키를 누르고 있지 않았다면 그걸로 끝이다.
 
 점프를 `GetKey`로 만들면 스페이스를 누르고 있는 동안 매 프레임 점프해서 로켓처럼 날아간다. "한 번"은 `GetKeyDown`이다.
 
@@ -144,6 +144,20 @@ void OnCollisionEnter(Collision collision)
 ```
 
 Day 2의 `&&`가 여기서 나온다. "스페이스를 눌렀고 **그리고** 땅에 있으면". `OnCollisionEnter`는 무언가와 부딪힌 순간 유니티가 불러 주는 함수다.
+
+### isGrounded가 바뀌는 세 순간
+
+`isGrounded`는 "지금 땅에 있나?"를 기억하는 깃발이다. 딱 세 순간에만 바뀐다.
+
+| 순간 | isGrounded | 바꾸는 줄 |
+|---|---|---|
+| 처음 | true | 함수 밖의 `bool isGrounded = true;` (처음 값, 한 번만) |
+| 점프하는 순간 | false | Update의 `isGrounded = false;` |
+| 착지하는 순간 | true | OnCollisionEnter의 `isGrounded = true;` |
+
+그래서 땅에서 뛰어 공중에 떴다가 착지하면 true → false → true 순서로 바뀐다. 이 세 곳 말고 다른 데서 바꾸면 깃발이 거짓말을 하게 된다.
+
+흔한 실수가 Update 안에 `isGrounded = true;`를 넣는 것이다. 맨 위의 `bool isGrounded = true;`는 처음 값을 정하는 줄이라 한 번만 실행되지만, Update 안에 쓰면 **매 프레임** "땅에 있음"이 된다. 점프해서 false로 바꿔도 다음 프레임에 바로 true가 되니, 공중에서도 계속 점프할 수 있다. true는 착지할 때만 넣는다.
 
 그럼 "땅"은 어떻게 판단할까? 지금 코드는 **무엇에 부딪혔든 땅으로 친다.** 부딪힌 상대가 바닥인지는 따지지 않는다. 이 씬에서 큐브가 부딪힐 수 있는 게 바닥(Plane) 하나뿐이라, 지금은 "부딪힘 = 착지"가 맞아떨어진다.
 
