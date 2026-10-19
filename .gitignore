@@ -35,3 +35,4 @@ Thumbs.db
 tools/briefing/.deps/
 __pycache__/
 output/briefing/
+output/font-preview/
