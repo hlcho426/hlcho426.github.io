@@ -3,8 +3,8 @@
 
 @use 'abstracts/variables' with (
   $theme: '{{ site.theme_mode }}',
-  $font-family-base: ('Cafe24OhsquareAir', 'Source Sans Pro', sans-serif),
-  $font-family-heading: ('Cafe24Ohsquare', Lato, sans-serif)
+  $font-family-base: ('Noto Sans KR', sans-serif),
+  $font-family-heading: ('Noto Sans KR', sans-serif)
 );
 
 /* prettier-ignore */
@@ -16,25 +16,53 @@
 
 /* append your custom style below */
 
-/* 한글 글꼴: 본문은 카페24 오스퀘어 에어(얇음), 제목은 카페24 오스퀘어(굵음) */
+/* 한글·영문 공통: 제목은 Noto Sans KR Bold, 나머지 텍스트는 Regular */
 @font-face {
-  font-family: 'Cafe24OhsquareAir';
-  src:
-    url('{{ "/assets/fonts/Cafe24OhsquareAir-v2.0.woff2" | relative_url }}') format('woff2'),
-    url('{{ "/assets/fonts/Cafe24OhsquareAir-v2.0.woff" | relative_url }}') format('woff');
-  font-weight: normal;
+  font-family: 'Noto Sans KR';
+  src: url('{{ "/assets/fonts/noto-sans-kr/NotoSansKR-Regular.woff2" | relative_url }}') format('woff2');
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Cafe24Ohsquare';
-  src:
-    url('{{ "/assets/fonts/Cafe24Ohsquare-v2.0.woff2" | relative_url }}') format('woff2'),
-    url('{{ "/assets/fonts/Cafe24Ohsquare-v2.0.woff" | relative_url }}') format('woff');
-  font-weight: normal;
+  font-family: 'Noto Sans KR';
+  src: url('{{ "/assets/fonts/noto-sans-kr/NotoSansKR-Bold.woff2" | relative_url }}') format('woff2');
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+
+/* 테마의 600/900 굵기와 Bootstrap 강조 클래스도 요청한 400/700으로 통일한다.
+   코드용 고정폭 글꼴과 Font Awesome 아이콘의 글꼴·굵기는 유지한다. */
+body {
+  font-weight: 400;
+}
+
+:where(body) :where(a, p, span, b, strong, em, time, small, th, td, dt, dd, li, label, summary,
+  button, input, select, textarea, .lead, .fw-bold, .fw-semibold, .fw-medium) {
+  font-weight: 400 !important;
+}
+
+#topbar-title,
+.pagination,
+#archives .date,
+#tags span,
+kbd {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+#sidebar .site-title,
+#topbar-title,
+.panel-heading,
+#archives a {
+  font-weight: 700 !important;
+
+  :where(a, span, b, strong, em) {
+    font-weight: inherit !important;
+  }
 }
 
 /* 사이드바: 딥그린 텍스처 배경 + 흰 글자 */
@@ -293,7 +321,7 @@ $practice-app: '#앱에서-연습하기';
   &::before {
     display: block;
     margin-bottom: 0.15rem;
-    font-family: 'Cafe24OhsquareAir', sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 0.8rem;
     font-weight: normal;
   }
