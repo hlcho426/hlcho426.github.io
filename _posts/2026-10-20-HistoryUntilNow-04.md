@@ -2,8 +2,13 @@
 title: 지금까지의 이야기 - 네 번째 회사
 date: 2026-10-20 20:00:00 +0900
 categories: [일상]
-tags: [블로그]
+tags: [블로그, 퇴사]
+series: 퇴사 이야기
+series_title: "4번째 회사, 4번째 퇴사"
 ---
+
+{% include series.html %}
+
 <br>
 세 번째 회사를 퇴사하고 쉬었다.<br>
 다음에는 PC·콘솔 게임을 만들고 싶었다.<br>
