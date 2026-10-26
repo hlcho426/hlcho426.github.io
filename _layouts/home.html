@@ -1,0 +1,54 @@
+---
+layout: default
+---
+
+{% include lang.html %}
+{% comment %}홈에서 공개 글을 큰 카테고리별로 묶어 보여 준다.{% endcomment %}
+{% assign visible_posts = site.posts | where_exp: 'item', 'item.hidden != true' %}
+
+<div id="home-categories" class="px-xl-1">
+  <header class="home-intro">
+    <h1>공부하고, 만들고, 기록합니다.</h1>
+    <p>홀로 게임을 만들며 배운 것과 시행착오, 참고한 자료를 모았습니다.</p>
+    <a href="{{ '/archives/' | relative_url }}">날짜순으로 모든 글 보기 <i class="fas fa-angle-right ms-1" aria-hidden="true"></i></a>
+  </header>
+
+  <div id="post-list" class="category-groups">
+    {% for category_name in page.home_category_order %}
+      {% assign category_posts = visible_posts | where_exp: 'item', 'item.categories[0] == category_name' %}
+      {% if category_posts.size > 0 %}
+        {% assign category_info = site.data.sidebar_categories | where: 'name', category_name | first %}
+        {% capture category_url %}/categories/{{ category_name | slugify | url_encode }}/{% endcapture %}
+        <section class="category-group" aria-labelledby="home-category-{{ forloop.index }}">
+          <h2 id="home-category-{{ forloop.index }}" class="category-group-title">
+            <a href="{{ category_url | relative_url }}">
+              <i class="{{ category_info.icon | default: 'far fa-folder-open' }} fa-fw me-1" aria-hidden="true"></i>
+              {{ category_name }}
+            </a>
+            <span class="text-muted">{{ category_posts.size }}</span>
+            <a class="category-group-more" href="{{ category_url | relative_url }}" aria-label="{{ category_name }} 전체 글 보기">
+              전체 보기 <i class="fas fa-angle-right ms-1" aria-hidden="true"></i>
+            </a>
+          </h2>
+
+          {% include sub-categories.html top=category_name %}
+          {% if sub_categories.size > 0 %}
+            <nav class="home-subcategories" aria-label="{{ category_name }} 작은 카테고리">
+              {% for sub in sub_categories %}
+                {% assign sub_posts = category_posts | where_exp: 'item', 'item.categories contains sub' %}
+                {% if sub_posts.size > 0 %}
+                  {% capture sub_url %}/categories/{{ sub | slugify | url_encode }}/{% endcapture %}
+                  <a href="{{ sub_url | relative_url }}">{{ sub }} <span>{{ sub_posts.size }}</span></a>
+                {% endif %}
+              {% endfor %}
+            </nav>
+          {% endif %}
+
+          {% for post in category_posts limit: page.home_group_limit %}
+            {% include post-card.html %}
+          {% endfor %}
+        </section>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
